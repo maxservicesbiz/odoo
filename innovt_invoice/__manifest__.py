@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
 {
-    'name': "Innov invoice 3.3",
+    'name': "Innov Invoice",
 
     'summary': """
         This module use  guidelines or rules 
@@ -13,41 +12,42 @@
     # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
     # for the full list
     'category': 'Accounting',
-    'version': '0.1',
+    'version': '1.2',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'contacts', 'product'],
+    'depends': ['base', 'contacts', 'product','innovt_client', 'account_invoicing'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         # Catalog Sat
-        'views/country.xml',
-        'views/municipality.xml',
-        #'data/res.country.municipality.csv',
-        'views/locality.xml',
-        #'data/res.country.locality.csv',
-        'views/suburb.xml',
-        ##'data/res.country.suburb.csv',
-        'data/res.bank.csv',
-        'views/product_code.xml',
-        #this operation is slow 'data/product.code.csv',
-        'views/product_unit.xml',
-        'data/product.unit.csv',
-        'views/merchandise_use.xml',
-        'data/merchandise.use.csv',
-        'views/way_pay.xml',
-        'data/way.pay.csv',
-        'views/type_document.xml',
-        'data/type.document.csv',
-        'views/type_relationship.xml',
-        'data/type.relationship.csv',
+        'views/catalogs/country.xml',
+        'views/catalogs/municipality.xml',
+        #'data/catalogs/res.country.municipality.csv',
+        'views/catalogs/locality.xml',
+        #'data/catalogs/res.country.locality.csv',
+        'views/catalogs/suburb.xml',
+        ##'data/catalogs/res.country.suburb.csv',
+        'data/catalogs/res.bank.csv',
+        'views/catalogs/product_code.xml',
+        #this operation is slow 'data/catalogs/product.code.csv',
+        'views/catalogs/product_unit.xml',
+        'data/catalogs/product.unit.csv',
+        'views/catalogs/merchandise_use.xml',
+        'data/catalogs/merchandise.use.csv',
+        'views/catalogs/way_pay.xml',
+        'data/catalogs/way.pay.csv',
+        'views/catalogs/type_document.xml',
+        'data/catalogs/type.document.csv',
+        'views/catalogs/type_relationship.xml',
+        'data/catalogs/type.relationship.csv',
+        'views/catalogs/account_tax.xml',
+        'data/catalogs/type.factor.csv',
+        'data/catalogs/type.tax.csv',
+        'data/catalogs/payment.method.csv',
+
         'views/res_company.xml',
         'views/res_partner.xml',
-        'views/account_tax.xml',
-        'data/type.tax.csv',
-        'data/type.factor.csv',
-        'data/payment.method.csv',
         'views/account_invoice.xml',
 
         # Inherits and switch catalog SAT
@@ -60,3 +60,4 @@
      #   'demo/demo.xml',
     ],
 }
+# -*- coding: utf-8 -*-

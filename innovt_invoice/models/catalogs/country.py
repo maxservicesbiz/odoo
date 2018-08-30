@@ -2,7 +2,7 @@
 # Copyright 2018 Yonn Xyz. All rights reserved.
 
 
-from odoo import models, fields, api, _
+from odoo import models, fields, _
 
 
 class Country(models.Model):
