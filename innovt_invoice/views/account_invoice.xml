@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2018 Yonn Xyz. All rights reserved. -->
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="msc_iuv_account_invoice_settings_form">
+            <field name="name">Account invoice settings from</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='other_info']/group" position="after">
+                    <page string="Settings">
+                        <group>
+                            <group string="Payment">
+                                <field name="way_pay_id"/>
+                                <field name="payment_method_id"/>
+                                <field name="merchandise_use_id"/>
+                            </group>
+                            <group string="Invoice">
+                                <field name="state_invoice"/>
+                                <field name="type_document_id"/>
+                                <field name="uuid"/>
+                                <field name="datetime_invoice"/>
+                                <field name="version"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Relationship">
+                                <field name="type_relationship_id"/>
+                                <field name="uuid_relationship"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//header/button[@name='action_invoice_open']" position="before">
+                    <button type="object" name="invoice_stamp" string="Stamp"/>
+                    <button type="object" name="invoice_stamp_cancel" string="Stamp cancel"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

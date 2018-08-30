@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2018 Yonn Xyz. All rights reserved. -->
+
+<odoo>
+    <data>
+        <record model='ir.ui.view' id='msc_iuv_type_document_tree'>
+            <field name='name'>type.document.tree</field>
+            <field name='model'>type.document</field>
+            <field name='arch' type='xml'>
+                <tree>
+                    <field name='code'/>
+                    <field name='name'/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="msc_iuv_type_document_form">
+            <field name="name">type.document.form</field>
+            <field name="model">type.document</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header/>
+                    <sheet>
+                        <group>
+                            <field name='code'/>
+                            <field name='name'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="msc_iac_type_document_action" model="ir.actions.act_window">
+            <field name="name">Type of document</field>
+            <field name="res_model">type.document</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="msc_mi_type_document" name="Type of document" sequence="10" parent="account.account_management_menu"
+                  action="msc_iac_type_document_action"/>
+
+    </data>
+</odoo>

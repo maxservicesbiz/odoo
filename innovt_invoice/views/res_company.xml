@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- © Yonn, Xyz. All rights reserved. -->
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="msc_iuv_res_company_page_settings_form">
+            <field name="name">Res company page settings from</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Invoice">
+                        <group>
+                            <group>
+                                <field name="fiscal_name"/>
+                                <field name="invoice_series"/>
+                                <field name="voucher_series"/>
+                                <field name="property_account_position_id"/>
+                            </group>
+                            <group>
+                                <field name="file_cer"/>
+                                <field name="file_key"/>
+                                <field name="password"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <!--field name="api_key"/-->
+                                <field name="test_mode"/>
+                                <button name="sync_csd_files" type="object" string="Sync Csd" confirm="Are you secure Sync files?"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

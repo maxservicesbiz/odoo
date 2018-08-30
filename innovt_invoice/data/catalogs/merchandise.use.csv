@@ -1,0 +1,20 @@
+id,code,name
+merchandiseuse1,G01, Adquisición de mercancías
+merchandiseuse2,G02, Devoluciones, descuentos o bonificaciones
+merchandiseuse3,G03, Gastos en general
+merchandiseuse4,I01, Construcciones
+merchandiseuse5,I02, Mobiliario y equipo de oficina por inversiones
+merchandiseuse6,I03, Equipo de transporte
+merchandiseuse7,I04, Equipo de cómputo y accesorios
+merchandiseuse8,I05, Dados, troqueles, moldes, matrices y herramental
+merchandiseuse9,I06, Comunicacion telefónica
+merchandiseuse10,I07, Comunicación Satelital
+merchandiseuse11,I08, Otra maquinaria y equipo
+merchandiseuse12,D01, Honorarios médicos, dentales y gastos hospitalarios
+merchandiseuse13,D02, Gastos médicos por incapacidad o discapacidad
+merchandiseuse15,D03, Gastos funerales
+merchandiseuse16,D04, Donativos
+merchandiseuse17,D07, Primas por seguros de gastos médicos
+merchandiseuse18,D08, Gastos de transportación escolar obligatoria
+merchandiseuse19,D10, Pagos por servicios educativos (colegiaturas)
+merchandiseuse20,P01,Por definir
