@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2017 Google Inc. All rights reserved. -->
+
+<odoo>
+    <data>
+        <record model='ir.ui.view' id='msc_iuv_product_code_tree'>
+            <field name='name'>product.code.tree</field>
+            <field name='model'>product.code</field>
+            <field name='arch' type='xml'>
+                <tree>
+                    <field name='code'/>
+                    <field name='name'/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="msc_iuv_product_code_form">
+            <field name="name">product.code.form</field>
+            <field name="model">product.code</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header/>
+                    <sheet>
+                        <group>
+                            <field name='code'/>
+                            <field name='name'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="msc_iac_product_code_action" model="ir.actions.act_window">
+            <field name="name">Product code</field>
+            <field name="res_model">product.code</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="msc_mi_product_code" name="Product code" sequence="7" parent="account.account_management_menu"
+                  action="msc_iac_product_code_action"/>
+
+    </data>
+</odoo>

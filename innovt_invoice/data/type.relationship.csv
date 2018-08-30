@@ -1,0 +1,8 @@
+id,code,name
+typerelationship1,01, Nota de crédito de los documentos relacionados
+typerelationship2,02, Nota de débito de los documentos relacionados
+typerelationship3,03, Devolución de mercancía sobre facturas o traslados previos
+typerelationship4,04, Sustitución de los CFDI previos
+typerelationship5,05, Traslados de mercancías facturados previamente
+typerelationship6,06, Factura generada por los traslados previos
+typerelationship7,07, CFDI por aplicación de anticipo

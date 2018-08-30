@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2018 Yonn Xyz. All rights reserved. -->
+
+<odoo>
+    <data>
+        <record model='ir.ui.view' id='msc_iuv_way_pay_tree'>
+            <field name='name'>way.pay.tree</field>
+            <field name='model'>way.pay</field>
+            <field name='arch' type='xml'>
+                <tree>
+                    <field name='code'/>
+                    <field name='name'/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="msc_iuv_way_pay_form">
+            <field name="name">way.pay.form</field>
+            <field name="model">way.pay</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header/>
+                    <sheet>
+                        <group>
+                            <field name='code'/>
+                            <field name='name'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="msc_iac_way_pay_action" model="ir.actions.act_window">
+            <field name="name">Way to pay</field>
+            <field name="res_model">way.pay</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="msc_mi_way_pay" name="Way to pay" sequence="9" parent="account.account_management_menu"
+                  action="msc_iac_way_pay_action"/>
+
+    </data>
+</odoo>

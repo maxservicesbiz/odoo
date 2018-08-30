@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2018 Yonn Xyz. All rights reserved. -->
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="msc_iuv_account_tax_type_tax_and_factor_form">
+            <field name="name">Account tax type tax and factor from</field>
+            <field name="model">account.tax</field>
+            <field name="inherit_id" ref="account.view_tax_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount_type']" position="after">
+                    <field name="type_tax_id"/>
+                    <field name="type_factor_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
