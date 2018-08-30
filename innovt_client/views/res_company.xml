@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- © Yonn, Xyz. All rights reserved. -->
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="iuv_it_innovt_client_innov_biz_settings_form">
+            <field name="name">Innov biz settings from</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Innov Biz">
+                        <group>
+                            <group>
+                                <field name="client_id"/>
+                            </group>
+                            <group>
+                                <field name="client_secret"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="token"/>
+                        </group>
+                        <group>
+
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
