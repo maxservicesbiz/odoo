@@ -3,9 +3,9 @@
 
 <odoo>
     <data>
-        <record model='ir.ui.view' id='msc_iuv_way_pay_tree'>
-            <field name='name'>way.pay.tree</field>
-            <field name='model'>way.pay</field>
+        <record model='ir.ui.view' id='msc_iuv_merchandise_use_tree'>
+            <field name='name'>cfdi.use.tree</field>
+            <field name='model'>cfdi.use</field>
             <field name='arch' type='xml'>
                 <tree>
                     <field name='code'/>
@@ -14,9 +14,9 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="msc_iuv_way_pay_form">
-            <field name="name">way.pay.form</field>
-            <field name="model">way.pay</field>
+        <record model="ir.ui.view" id="msc_iuv_merchandise_use_form">
+            <field name="name">cfdi.use.form</field>
+            <field name="model">cfdi.use</field>
             <field name="arch" type="xml">
                 <form>
                     <header/>
@@ -30,15 +30,15 @@
             </field>
         </record>
 
-        <record id="msc_iac_way_pay_action" model="ir.actions.act_window">
-            <field name="name">Way to pay</field>
-            <field name="res_model">way.pay</field>
+        <record id="msc_iac_merchandise_use_action" model="ir.actions.act_window">
+            <field name="name">Cfdi use</field>
+            <field name="res_model">cfdi.use</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem id="msc_mi_way_pay" name="Way to pay" sequence="9" parent="account.account_management_menu"
-                  action="msc_iac_way_pay_action"/>
+        <menuitem id="msc_mi_merchandise_use" name="Cfdi use" sequence="8" parent="account.account_management_menu"
+                  action="msc_iac_merchandise_use_action"/>
 
     </data>
 </odoo>

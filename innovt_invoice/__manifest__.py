@@ -15,7 +15,14 @@
     'version': '1.2',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'contacts', 'product','innovt_client', 'account_invoicing'],
+    'depends': [
+        'base',
+        'contacts',
+        'product',
+        'innovt_client',
+        'account_invoicing',
+        'l10n_mx'
+    ],
 
     # always loaded
     'data': [
@@ -32,13 +39,13 @@
         'views/catalogs/product_code.xml',
         #this operation is slow 'data/catalogs/product.code.csv',
         'views/catalogs/product_unit.xml',
-        'data/catalogs/product.unit.csv',
-        'views/catalogs/merchandise_use.xml',
-        'data/catalogs/merchandise.use.csv',
-        'views/catalogs/way_pay.xml',
-        'data/catalogs/way.pay.csv',
-        'views/catalogs/type_document.xml',
-        'data/catalogs/type.document.csv',
+        #'data/catalogs/product.unit.csv',
+        'views/catalogs/cfdi_use.xml',
+        'data/catalogs/cfdi.use.csv',
+        'views/catalogs/payment_form.xml',
+        'data/catalogs/payment.form.csv',
+        #'views/catalogs/type_document.xml',
+        #'data/catalogs/type.document.csv',
         'views/catalogs/type_relationship.xml',
         'data/catalogs/type.relationship.csv',
         'views/catalogs/account_tax.xml',

@@ -10,6 +10,6 @@ class ResPartner(models.Model):
 
     fiscal_residence = fields.Char(string=_("Fiscal residence"))
     tax_registration = fields.Char(string=_("Tax registration"))
-    merchandise_use_id = fields.Many2one(comodel_name='merchandise.use', string=_("Merchandise use"))
+    cfdi_use_id = fields.Many2one(comodel_name='cfdi.use', string=_("Merchandise use"))
 
 
