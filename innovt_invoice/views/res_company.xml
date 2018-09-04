@@ -13,22 +13,30 @@
                         <group>
                             <group>
                                 <field name="fiscal_name"/>
-                                <field name="invoice_series"/>
-                                <field name="voucher_series"/>
                                 <field name="property_account_position_id"/>
                             </group>
                             <group>
-                                <field name="file_cer"/>
-                                <field name="file_key"/>
-                                <field name="password"/>
+                                <field name="invoice_series"/>
+                                <field name="voucher_series"/>
                             </group>
                         </group>
                         <group>
                             <group>
-                                <!--field name="api_key"/-->
-                                <field name="test_mode"/>
-                                <button name="sync_csd_files" type="object" string="Sync Csd" confirm="Are you secure Sync files?"/>
+                                <field name="file_cer"/>
+                                <field name="password" password="True"/>
                             </group>
+                            <group>
+                                <field name="file_key"/>
+                                <button name="sync_csd_files" type="object" string="Sync Csd"
+                                        confirm="Are you secure Sync files?"/>
+                            </group>
+                        </group>
+                        <group string="Dangerous zone">
+                            <field name="mode"/>
+                            <div attrs="{'invisible':[('mode','=',False)]}">
+                                Create account on https://sandbox.innov.biz and
+                                ensure sync CSDs.
+                            </div>
                         </group>
                     </page>
                 </xpath>

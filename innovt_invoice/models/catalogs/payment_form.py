@@ -5,12 +5,12 @@
 from odoo import models, fields, api, _
 
 
-class MerchandiseUse(models.Model):
-    _name = 'merchandise.use'
+class WayPay(models.Model):
+    _name = 'payment.form'
     _rec_name = 'display_name'
 
-    code = fields.Char(string=_("Code merchandise use"), help=_("Code provided by SAT"), required=True)
-    name = fields.Char(string=_("Name merchandise use"), required=True)
+    code = fields.Char(string=_("Code way to pay"), help=_("Code provided by SAT"), required=True)
+    name = fields.Char(string=_("Name way to pay"), required=True)
     display_name = fields.Char(string=_("Display name"), compute="_compute_display_name")
 
     @api.multi

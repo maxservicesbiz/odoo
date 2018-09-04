@@ -3,9 +3,9 @@
 
 <odoo>
     <data>
-        <record model='ir.ui.view' id='msc_iuv_merchandise_use_tree'>
-            <field name='name'>merchandise.use.tree</field>
-            <field name='model'>merchandise.use</field>
+        <record model='ir.ui.view' id='msc_iuv_way_pay_tree'>
+            <field name='name'>payment.from.tree</field>
+            <field name='model'>payment.form</field>
             <field name='arch' type='xml'>
                 <tree>
                     <field name='code'/>
@@ -14,9 +14,9 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="msc_iuv_merchandise_use_form">
-            <field name="name">merchandise.use.form</field>
-            <field name="model">merchandise.use</field>
+        <record model="ir.ui.view" id="msc_iuv_way_pay_form">
+            <field name="name">payment.form.form</field>
+            <field name="model">payment.form</field>
             <field name="arch" type="xml">
                 <form>
                     <header/>
@@ -30,15 +30,15 @@
             </field>
         </record>
 
-        <record id="msc_iac_merchandise_use_action" model="ir.actions.act_window">
-            <field name="name">Merchandise use</field>
-            <field name="res_model">merchandise.use</field>
+        <record id="msc_iac_way_pay_action" model="ir.actions.act_window">
+            <field name="name">Payment form</field>
+            <field name="res_model">payment.form</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem id="msc_mi_merchandise_use" name="Merchandise use" sequence="8" parent="account.account_management_menu"
-                  action="msc_iac_merchandise_use_action"/>
+        <menuitem id="msc_mi_way_pay" name="Payment form" sequence="9" parent="account.account_management_menu"
+                  action="msc_iac_way_pay_action"/>
 
     </data>
 </odoo>

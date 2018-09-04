@@ -5,21 +5,42 @@ from odoo.exceptions import MissingError
 from odoo import models, fields, api, _
 import random
 
+DOCUMENT_TYPE = [
+    ('I', _("Incoming")),
+    ('E', _("Outgoing")),
+    ('T', _("Transfer"))
+]
+
 
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
-    way_pay_id = fields.Many2one(comodel_name='way.pay', string=_("Way to pay"))
+    @api.model
+    def _default_document_type(self):
+        print(self._context)
+        inv_type = self._context.get('type', '')
+        if inv_type in ['out_invoice', 'in_invoice']:
+            document_type = 'I'
+        elif inv_type in ['out_refund', 'in_refund']:
+            document_type = 'E'
+        return document_type or ''
+
+    uuid = fields.Char(string=_("Uuid"), readonly=True)
+
+    payment_form_id = fields.Many2one(comodel_name='payment.form', string=_("Payment form"))
     payment_method_id = fields.Many2one(comodel_name='payment.method', string=_("Payment method"))
-    merchandise_use_id = fields.Many2one(comodel_name='merchandise.use', string=_("Merchandise use"))
+    cfdi_use_id = fields.Many2one(comodel_name='cfdi.use', string=_("Cfdi use"))
+
+    datetime_stamp = fields.Datetime(string=_("Datetime stamp"), readonly=True)
+    datetime_stamp_cancelled = fields.Datetime(string=_("Datetime stamp cancelled"), readonly=True)
 
     state_invoice = fields.Selection(
-        selection=[('signed', _("Signed")), ('canceled', _("Canceled"))],
-        string=_("State invoice"))
-    type_document_id = fields.Many2one(comodel_name='type.document', string=_("Type document"))
-    uuid = fields.Char(string=_("Uuid"))
-    datetime_invoice = fields.Datetime(string=_("Amount Datetime invoice"))
-    version = fields.Char(string=_("Version"))
+        selection=[('signed', _("Signed")), ('cancelled', _("Cancelled"))],
+        string=_("State invoice"), readonly=True)
+    # Is replaced by document_type type selection
+    # type_document_id = fields.Many2one(comodel_name='type.document', string=_("Type document"))
+    document_type = fields.Selection(selection=DOCUMENT_TYPE, default=_default_document_type, readonly=True, store=True)
+    version = fields.Char(string=_("Version"), default='3.3', readonly=True, store=True)
 
     type_relationship_id = fields.Many2one(comodel_name='type.relationship', string=_("Type of relationship"))
     uuid_relationship = fields.Char(string=_("Uuid relationship"))
