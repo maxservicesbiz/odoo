@@ -11,18 +11,20 @@
                 <xpath expr="//notebook" position="inside">
                     <page string="Innov Biz">
                         <group>
-                            <group>
-                                <field name="client_id"/>
-                            </group>
-                            <group>
-                                <field name="client_secret"/>
-                            </group>
+                            <field name="client_id"/>
                         </group>
                         <group>
+                            <field name="client_secret"/>
+                        </group>
+                        <!--group>
                             <field name="token"/>
-                        </group>
+                        </group-->
                         <group>
-
+                            <field name="mode"/>
+                            <div attrs="{'invisible':[('mode','=',False)]}">
+                                Create account on https://sandbox.innov.biz and
+                                ensure sync CSDs.
+                            </div>
                         </group>
                     </page>
                 </xpath>
