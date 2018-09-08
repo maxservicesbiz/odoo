@@ -9,4 +9,5 @@ class ResCompany(models.Model):
 
     client_id = fields.Char(string=_("Client Id"))
     client_secret = fields.Char(string=_("Client secret"))
-    token = fields.Text(string=_("Infinity token"))
+   #token = fields.Text(string=_("Infinity token"))
+    mode = fields.Boolean(string=_("Test mode"))
