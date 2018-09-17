@@ -38,10 +38,10 @@
         'data/catalogs/res.bank.csv',
         'views/catalogs/product_code.xml',
         #this operation is slow
-        #'data/catalogs/product.code.csv',
+        'data/catalogs/product.code.csv',
         'views/catalogs/product_unit.xml',
         #this operation is slow
-        #'data/catalogs/product.unit.csv',
+        'data/catalogs/product.unit.csv',
         'views/catalogs/cfdi_use.xml',
         'data/catalogs/cfdi.use.csv',
         'views/catalogs/payment_form.xml',
