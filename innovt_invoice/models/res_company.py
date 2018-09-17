@@ -18,8 +18,6 @@ class ResCompany(models.Model):
     file_key = fields.Binary(string=_("File .key"))
     file_cer = fields.Binary(string=_("File .cer"))
     password = fields.Char(string=_("Password"))
-    # api_key = fields.Char(string=_("API key"))
-    mode = fields.Boolean(string=_("Test mode"))
 
     @api.multi
     def sync_csd_files(self):

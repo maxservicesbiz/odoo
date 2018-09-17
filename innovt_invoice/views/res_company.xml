@@ -31,13 +31,7 @@
                                         confirm="Are you secure Sync files?"/>
                             </group>
                         </group>
-                        <group string="Dangerous zone">
-                            <field name="mode"/>
-                            <div attrs="{'invisible':[('mode','=',False)]}">
-                                Create account on https://sandbox.innov.biz and
-                                ensure sync CSDs.
-                            </div>
-                        </group>
+
                     </page>
                 </xpath>
             </field>

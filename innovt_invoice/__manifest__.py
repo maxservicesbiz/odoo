@@ -21,12 +21,12 @@
         'product',
         'innovt_client',
         'account_invoicing',
-        'l10n_mx'
+        'l10n_mx',
     ],
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         # Catalog Sat
         'views/catalogs/country.xml',
         'views/catalogs/municipality.xml',
@@ -37,9 +37,11 @@
         ##'data/catalogs/res.country.suburb.csv',
         'data/catalogs/res.bank.csv',
         'views/catalogs/product_code.xml',
-        #this operation is slow 'data/catalogs/product.code.csv',
+        #this operation is slow
+        'data/catalogs/product.code.csv',
         'views/catalogs/product_unit.xml',
-        #'data/catalogs/product.unit.csv',
+        #this operation is slow
+        'data/catalogs/product.unit.csv',
         'views/catalogs/cfdi_use.xml',
         'data/catalogs/cfdi.use.csv',
         'views/catalogs/payment_form.xml',
@@ -53,13 +55,14 @@
         'data/catalogs/type.tax.csv',
         'data/catalogs/payment.method.csv',
 
+        # Inherits and switch catalog SAT
         'views/res_company.xml',
         'views/res_partner.xml',
         'views/account_invoice.xml',
-
-        # Inherits and switch catalog SAT
         'views/product_template.xml',
         'views/account_fiscal_position.xml',
+
+        'views/reports/cfdi.xml',
 
     ],
     # only loaded in demonstration mode
