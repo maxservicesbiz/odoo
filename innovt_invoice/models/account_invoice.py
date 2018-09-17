@@ -46,7 +46,7 @@ class AccountInvoice(models.Model):
     # Is replaced by document_type type selection
     # type_document_id = fields.Many2one(comodel_name='type.document', string=_("Type document"))
     document_type = fields.Selection(selection=DOCUMENT_TYPE, default=_default_document_type, readonly=True, store=True,
-                                     copy=False)
+                                     copy=False, string=_("Document type"))
     version = fields.Char(string=_("Version"), default='3.3', readonly=True, store=True, copy=False)
 
     type_relationship_id = fields.Many2one(comodel_name='type.relationship', string=_("Type of relationship"), copy=False)
@@ -76,7 +76,7 @@ class AccountInvoice(models.Model):
     def invoice_stamp(self):
         self.ensure_one()
         if self.datetime_stamp:
-            raise MissingError(_("This document it is stamped!"))
+            raise MissingError(_("This document has already been stamped!"))
         try:
             self.configure_innov()
             date_invoice = fields.Datetime.now()
@@ -111,7 +111,7 @@ class AccountInvoice(models.Model):
                 # })
                 ##self.doc_pdf_id = doc_pdf_id
                 self.datetime_stamp = date_invoice
-                self.message_post(body=_("Is stamped OK"), attachment_ids=[self.doc_xml_id.id])
+                self.message_post(body=_("This document was stamped correctly."), attachment_ids=[self.doc_xml_id.id])
             else:
                 raise MissingError(cfdi_stamped.get('Message'))
         except Exception as e:
@@ -131,15 +131,15 @@ class AccountInvoice(models.Model):
         if company.invoice_series or False:
             cfdi.update(dict(Serie=company.invoice_series))
         else:
-            raise Exception(_("Is necessary catch Invoice Series."))
+            raise Exception(_("It's necessary to write the series of the invoice."))
         if company.currency_id or False:
             cfdi.update(dict(Currency=company.currency_id.name))
         else:
-            raise Exception(_("Is necessary define one currency at company."))
+            raise Exception(_("It's necessary to define the currency of the company."))
         if company.zip or False:
             cfdi.update(dict(ExpeditionPlace=company.zip))
         else:
-            raise Exception(_("Is necessary catch company zip for Expedition Place"))
+            raise Exception(_("Is necessary to write the zip of the company for Expedition Place"))
         if self.payment_term_id or False:
             cfdi.update(dict(PaymentConditions=self.payment_term_id.name))
         else:
@@ -151,11 +151,11 @@ class AccountInvoice(models.Model):
         if self.payment_form_id or False:
             cfdi.update(dict(PaymentForm=self.payment_form_id.code))
         else:
-            raise Exception(_("Is necessary select one Payment form"))
+            raise Exception(_("It's mandatory select a Payment form"))
         if self.payment_method_id or False:
             cfdi.update(dict(PaymentMethod=self.payment_method_id.code))
         else:
-            raise Exception(_("Is necessary select one Payment method"))
+            raise Exception(_("It's mandatory select a Payment method"))
 
         if self.uuid_relationship and self.type_relationship_id:
             cfdi.update(dict(CfdiRelated=dict(
@@ -169,7 +169,7 @@ class AccountInvoice(models.Model):
         if self.partner_id.vat or False:
             receiver.update(dict(Rfc=self.partner_id.vat[2:]))
         else:
-            raise Exception(_("Is necessary catch RFC customer"))
+            raise Exception(_("The customer's RFC has not been captured."))
         if self.partner_id.name or False:
             receiver.update(dict(Name=self.partner_id.name))
         else:
@@ -177,18 +177,18 @@ class AccountInvoice(models.Model):
         if self.cfdi_use_id or False:
             receiver.update(dict(CfdiUse=self.cfdi_use_id.code))
         else:
-            raise Exception(_("Is necessary select Use CFDI"))
+            raise Exception(_("It's mandatory select Use CFDI"))
 
         if self.partner_id.fiscal_residence.code3:
             if self.partner_id.fiscal_residence.code == '':
-                raise Exception(_("Is necessary add code country for fiscal residence."))
+                raise Exception(_("It's necessary add code country for fiscal residence."))
             if self.partner_id.fiscal_residence.code3 != 'MEX':
                 receiver.update(dict(FiscalResidence=self.partner_id.fiscal_residence.code3))
                 if self.partner.tax_identity_registration_number:
                     receiver.update(
                         dict(TaxIdentityRegistrationNumber=self.partner_id.tax_identity_registration_number))
                 else:
-                    raise Exception(_("It is necessary to write tax identity registration number of partner"))
+                    raise Exception(_("It's necessary to write tax identity registration number of customer"))
         return receiver
 
     def get_issuer(self):
@@ -197,15 +197,15 @@ class AccountInvoice(models.Model):
         if company.property_account_position_id.code or False:
             issuer.update(dict(FiscalRegime=company.property_account_position_id.code))
         else:
-            raise Exception(_("Is necessary define Fiscal regime company"))
+            raise Exception(_("The company has not been defined its Fiscal regime"))
         if company.fiscal_name or False:
             issuer.update(dict(Name=company.fiscal_name))
         else:
-            raise Exception(_("Is necessary define fiscal name company"))
+            raise Exception(_("The fiscal name of the company, please write."))
         if company.vat or False:
             issuer.update(dict(Rfc=company.vat))
         else:
-            raise Exception(_("Is necessary catch RFC company"))
+            raise Exception(_("The company's RFC has not been captured."))
         return issuer
 
     def get_items(self):
@@ -220,38 +220,38 @@ class AccountInvoice(models.Model):
                         product_code = '84111506'
                     product.update(dict(ProductCode=product_code))
                 else:
-                    raise Exception(_("Is necessary define product code {}".format(p.name)))
+                    raise Exception(_("The product code is not defined. Please configure (%s)" % p.name))
                 if p.default_code:
                     product.update(dict(IdentificationNumber=p.default_code))
                 else:
-                    raise Exception(_("Is necessary define product internal code {}".format(p.name)))
+                    raise Exception(_("Generate the product internal code (SKU) %s " % p.name))
                 if line.name:
                     product.update(dict(Description=line.name))
                 else:
-                    raise Exception(_("Is necessary define product description"))
+                    raise Exception(_("Write the product description"))
                 if line.uom_id:
                     product.update(dict(Unit=line.uom_id.name))
                 else:
-                    raise Exception(_("Is necessary define product unit of measure"))
+                    raise Exception(_("The  unit of measure to the product is not defined."))
                 if p.product_unit_id:
                     unit_code = p.product_unit_id.code
                     if self.document_type == 'E':
                         unit_code = 'ACT'
                     product.update(dict(UnitCode=unit_code))
                 else:
-                    raise Exception(_("Is necessary define product unit"))
+                    raise Exception(_("The  unit of measure to the product SAT is not defined."))
                 if line.price_unit:
                     product.update(dict(UnitPrice=line.price_unit))
                 else:
-                    raise Exception(_("Is necessary define product price unit"))
+                    raise Exception(_("The price unit to the product it has to be greater zero"))
                 if line.quantity:
                     product.update(dict(Quantity=line.quantity))
                 else:
-                    raise Exception(_("Is necessary define product quantity"))
+                    raise Exception(_("The product quantity it has to be greater zero"))
                 if line.price_subtotal:
                     product.update(dict(Subtotal=line.price_subtotal))
                 else:
-                    raise Exception(_("Is necessary define product price subtotal"))
+                    raise Exception(_("The price subtotal of the product it has to be greater zero."))
                 # if line.discount:
                 product.update(dict(Discount=line.discount))
                 # else:
@@ -275,11 +275,11 @@ class AccountInvoice(models.Model):
                         })
                         product.update(dict(Taxes=taxes))
                 else:
-                    raise Exception(_("Is necessary define taxes"))
+                    raise Exception(_("Define taxes of the product."))
                 if line.price_total:
                     product.update(dict(Total=line.price_total))
                 else:
-                    raise Exception(_("Is necessary define product price total"))
+                    raise Exception(_("The price total of the product it has to be greater zero."))
                 items.append(product)
         else:
             raise Exception(_("Invoice lines is required"))
@@ -289,7 +289,7 @@ class AccountInvoice(models.Model):
     def invoice_stamp_cancel(self):
         self.ensure_one()
         if self.datetime_stamp_cancelled:
-            raise MissingError(_("This document it is cancelled!"))
+            raise MissingError(_("This document was cancelled correctly!"))
         try:
             self.configure_innov()
             date_invoice = fields.Datetime.now()
