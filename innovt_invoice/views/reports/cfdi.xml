@@ -135,26 +135,26 @@
         <template id="templ_it_innovt_invoice_cfdi_document">
             <t t-call="innovt_invoice.templ_it_innovt_invoice_cfdi_document_external_layout">
                 <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
-<style>
+                <style>
                     .bg-div--header-color{
-                color: white;
-                background-color: black;
-                }
-                .bg-div--header-spacing{
-                text-transform: uppercase;
-                letter-spacing: 3px;
-                }
-                .bg-div--header{
+                    color: white;
+                    background-color: black;
+                    }
+                    .bg-div--header-spacing{
+                    text-transform: uppercase;
+                    letter-spacing: 3px;
+                    }
+                    .bg-div--header{
 
-                color: white;
-                background-color: black;
-                text-transform: uppercase;
-                letter-spacing: 3px;
-                }
-                .field-main{
-                font-weight: bold;
-                }
-</style>
+                    color: white;
+                    background-color: black;
+                    text-transform: uppercase;
+                    letter-spacing: 3px;
+                    }
+                    .field-main{
+                    font-weight: bold;
+                    }
+                </style>
 
                 <div class="page">
                     <t t-set="doc_xml" t-value="o.get_xml()"/>
@@ -375,15 +375,29 @@
                         </div>
                     </div>
 
-                    <!--p t-if="o.comment">
-                        <span t-field="o.comment"/>
-                    </p>
-                    <p t-if="o.payment_term_id">
-                        <span t-field="o.payment_term_id.note"/>
-                    </p>
-                    <p t-if="o.fiscal_position_id.note">
-                        <span t-field="o.fiscal_position_id.note"/>
-                    </p-->
+                    <t t-set="cfdi_related" t-value="doc_xml.get('{http://www.sat.gob.mx/cfd/3}CfdiRelacionados', False)"/>
+                    <table t-if="cfdi_related" class="table table-condensed" name="cfdi-related">
+                        <thead class="bg-div--header-color">
+                            <tr>
+                                <th>
+                                    Tipo de relación
+                                </th>
+                                <th>
+                                    Uuid
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <tr>
+                                <td>
+                                    <span t-esc="cfdi_related.get('TipoRelacion')"/>
+                                </td>
+                                <td>
+                                    <span t-esc="cfdi_related.get('{http://www.sat.gob.mx/cfd/3}CfdiRelacionado').get('UUID')"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <t t-set="stamp"
                        t-value="doc_xml.get('{http://www.sat.gob.mx/cfd/3}Complemento').get('{http://www.sat.gob.mx/TimbreFiscalDigital}TimbreFiscalDigital')"/>
                     <div class="row">
