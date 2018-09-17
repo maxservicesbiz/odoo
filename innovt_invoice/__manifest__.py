@@ -26,7 +26,7 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         # Catalog Sat
         'views/catalogs/country.xml',
         'views/catalogs/municipality.xml',
