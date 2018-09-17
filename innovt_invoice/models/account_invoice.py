@@ -24,11 +24,12 @@ class AccountInvoice(models.Model):
     @api.model
     def _default_document_type(self):
         inv_type = self._context.get('type', '')
-        if inv_type in ['out_invoice', 'in_invoice']:
+        document_type = ''
+        if inv_type in ['out_invoice']:
             document_type = 'I'
-        elif inv_type in ['out_refund', 'in_refund']:
+        elif inv_type in ['out_refund']:
             document_type = 'E'
-        return document_type or ''
+        return document_type
 
     uuid = fields.Char(string=_("Uuid"), readonly=True, copy=False)
 
@@ -48,8 +49,8 @@ class AccountInvoice(models.Model):
                                      copy=False)
     version = fields.Char(string=_("Version"), default='3.3', readonly=True, store=True, copy=False)
 
-    type_relationship_id = fields.Many2one(comodel_name='type.relationship', string=_("Type of relationship"))
-    uuid_relationship = fields.Char(string=_("Uuid relationship"))
+    type_relationship_id = fields.Many2one(comodel_name='type.relationship', string=_("Type of relationship"), copy=False)
+    uuid_relationship = fields.Char(string=_("Uuid relationship"), copy=False)
 
     doc_pdf_id = fields.Many2one(comodel_name='ir.attachment', copy=False)
     doc_xml_id = fields.Many2one(comodel_name='ir.attachment', copy=False)
@@ -125,11 +126,6 @@ class AccountInvoice(models.Model):
             "Issuer": False,
             "Items": False,
             # "Confirmation": ''
-            # "CfdiRelated": {
-            #    "Uuid": '',
-            #    "TypeRelationship": ''
-            # },
-            #
         }
         company = self.company_id
         if company.invoice_series or False:
@@ -161,6 +157,11 @@ class AccountInvoice(models.Model):
         else:
             raise Exception(_("Is necessary select one Payment method"))
 
+        if self.uuid_relationship and self.type_relationship_id:
+            cfdi.update(dict(CfdiRelated=dict(
+                Uuid=self.uuid_relationship,
+                TypeRelationship=self.type_relationship_id.code
+            )))
         return cfdi
 
     def get_receiver(self):
@@ -184,7 +185,8 @@ class AccountInvoice(models.Model):
             if self.partner_id.fiscal_residence.code3 != 'MEX':
                 receiver.update(dict(FiscalResidence=self.partner_id.fiscal_residence.code3))
                 if self.partner.tax_identity_registration_number:
-                    receiver.update(dict(TaxIdentityRegistrationNumber=self.partner_id.tax_identity_registration_number))
+                    receiver.update(
+                        dict(TaxIdentityRegistrationNumber=self.partner_id.tax_identity_registration_number))
                 else:
                     raise Exception(_("It is necessary to write tax identity registration number of partner"))
         return receiver
@@ -213,7 +215,10 @@ class AccountInvoice(models.Model):
                 product = {}
                 p = line.product_id
                 if p.product_code_id:
-                    product.update(dict(ProductCode=p.product_code_id.code))
+                    product_code = p.product_code_id.code
+                    if self.document_type == 'E':
+                        product_code = '84111506'
+                    product.update(dict(ProductCode=product_code))
                 else:
                     raise Exception(_("Is necessary define product code {}".format(p.name)))
                 if p.default_code:
@@ -229,7 +234,10 @@ class AccountInvoice(models.Model):
                 else:
                     raise Exception(_("Is necessary define product unit of measure"))
                 if p.product_unit_id:
-                    product.update(dict(UnitCode=p.product_unit_id.code))
+                    unit_code = p.product_unit_id.code
+                    if self.document_type == 'E':
+                        unit_code = 'ACT'
+                    product.update(dict(UnitCode=unit_code))
                 else:
                     raise Exception(_("Is necessary define product unit"))
                 if line.price_unit:
@@ -395,3 +403,19 @@ class AccountInvoice(models.Model):
             elif isinstance(product, list):
                 products_list = product
         return products_list
+
+    # Ncc / out_refund
+    @api.model
+    def _prepare_refund(self, invoice, date_invoice=None, date=None, description=None, journal_id=None):
+        result = super(AccountInvoice, self)._prepare_refund(invoice, date_invoice=date_invoice, date=date,
+                                                             description=description, journal_id=journal_id)
+        if self.state_invoice == 'signed' and isinstance(result, dict):
+            result.update(dict(
+                payment_form_id=self.payment_form_id.id,
+                payment_method_id=self.payment_method_id.id,
+                cfdi_use_id=self.env['cfdi.use'].search([('code', '=', 'G02')], limit=1).id or False,
+                uuid_relationship=self.uuid,
+                type_relationship_id=self.env['type.relationship'].search([('code', '=', '01')], limit=1).id or False,
+                document_type='E'
+            ))
+        return result
