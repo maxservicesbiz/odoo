@@ -11,7 +11,7 @@
                 <xpath expr="//group[@name='fiscal_information']" position="inside">
                     <field name="cfdi_use_id"/>
                     <field name="fiscal_residence"/>
-                    <field name="tax_registration"/>
+                    <field name="tax_identity_registration_number"/>
                 </xpath>
             </field>
         </record>

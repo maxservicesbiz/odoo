@@ -44,7 +44,8 @@ class AccountInvoice(models.Model):
         string=_("State invoice"), readonly=True, copy=False)
     # Is replaced by document_type type selection
     # type_document_id = fields.Many2one(comodel_name='type.document', string=_("Type document"))
-    document_type = fields.Selection(selection=DOCUMENT_TYPE, default=_default_document_type, readonly=True, store=True, copy=False)
+    document_type = fields.Selection(selection=DOCUMENT_TYPE, default=_default_document_type, readonly=True, store=True,
+                                     copy=False)
     version = fields.Char(string=_("Version"), default='3.3', readonly=True, store=True, copy=False)
 
     type_relationship_id = fields.Many2one(comodel_name='type.relationship', string=_("Type of relationship"))
@@ -177,10 +178,15 @@ class AccountInvoice(models.Model):
         else:
             raise Exception(_("Is necessary select Use CFDI"))
 
-        #
-        # "FiscalResidence":'',
-        # "TaxIdentityRegistrationNumber":''
-        #
+        if self.partner_id.fiscal_residence.code3:
+            if self.partner_id.fiscal_residence.code == '':
+                raise Exception(_("Is necessary add code country for fiscal residence."))
+            if self.partner_id.fiscal_residence.code3 != 'MEX':
+                receiver.update(dict(FiscalResidence=self.partner_id.fiscal_residence.code3))
+                if self.partner.tax_identity_registration_number:
+                    receiver.update(dict(TaxIdentityRegistrationNumber=self.partner_id.tax_identity_registration_number))
+                else:
+                    raise Exception(_("It is necessary to write tax identity registration number of partner"))
         return receiver
 
     def get_issuer(self):
@@ -296,11 +302,11 @@ class AccountInvoice(models.Model):
         self.ensure_one()
         doc, doc_type = self.env.ref('innovt_invoice.templ_it_innovt_invoice_cfdi_report').render_qweb_pdf(self.ids)
         doc_pdf_id = self.env['ir.attachment'].create({
-               'name': '{}.pdf'.format(self.uuid),
-               'type': 'binary',
-               'datas': base64.encodebytes(doc),
-               'mimetype': 'application/html'
-           })
+            'name': '{}.pdf'.format(self.uuid),
+            'type': 'binary',
+            'datas': base64.encodebytes(doc),
+            'mimetype': 'application/html'
+        })
         self.message_post(body=_("Pdf Ok"), attachment_ids=[doc_pdf_id.id])
 
     @api.model
