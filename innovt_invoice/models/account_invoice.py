@@ -49,14 +49,17 @@ class AccountInvoice(models.Model):
                                      copy=False, string=_("Document type"))
     version = fields.Char(string=_("Version"), default='3.3', readonly=True, store=True, copy=False)
 
-    type_relationship_id = fields.Many2one(comodel_name='type.relationship', string=_("Type of relationship"), copy=False)
+    type_relationship_id = fields.Many2one(comodel_name='type.relationship', string=_("Type of relationship"),
+                                           copy=False)
     uuid_relationship = fields.Char(string=_("Uuid relationship"), copy=False)
 
     doc_pdf_id = fields.Many2one(comodel_name='ir.attachment', copy=False)
     doc_xml_id = fields.Many2one(comodel_name='ir.attachment', copy=False)
 
-    # certificate_number = fields.Char(string=_("Certificate number"))
-    # origin_string = fields.Char(string=_("Origin string"))
+    chain_tfd = fields.Text(string=_("Original chain tdf"))
+
+    # chian_cfid = fields.Text(string=_("Original chain cfdi"))
+
     # digital_stamp = fields.Char(string=_("Digital stamp"))
     # sat_stamp = fields.Char(string=_("Sat stamp"))
     # currency_rate_alter = fields.Float(_("Currency rate alter"))
@@ -103,13 +106,6 @@ class AccountInvoice(models.Model):
                     # 'res_id': self.id,
                     'mimetype': 'application/xml'
                 })
-                # doc_pdf_id = self.env['ir.attachment'].create({
-                #    'name': '{}.pdf'.format(self.uuid),
-                #    'type': 'binary',
-                #    'datas': xml,
-                #    'minetype': 'application/pdf'
-                # })
-                ##self.doc_pdf_id = doc_pdf_id
                 self.datetime_stamp = date_invoice
                 self.message_post(body=_("This document was stamped correctly."), attachment_ids=[self.doc_xml_id.id])
             else:
@@ -328,30 +324,23 @@ class AccountInvoice(models.Model):
         xml2json = yahoo.data(fromstring(xml2decode.decode('utf-8')))
         doc = xml2json.get('{http://www.sat.gob.mx/cfd/3}Comprobante')
         doc = json.dumps(doc)
-        print(doc)
         doc = json.loads(doc)
         return doc
 
     @api.model
-    def get_qr(self, doc):
-        rfc_issuer = doc.get('{http://www.sat.gob.mx/cfd/3}Emisor').get('Rfc')
-        rfc_receiver = doc.get('{http://www.sat.gob.mx/cfd/3}Receptor').get('Rfc')
-        stamp = doc.get('{http://www.sat.gob.mx/cfd/3}Complemento').get(
-            '{http://www.sat.gob.mx/TimbreFiscalDigital}TimbreFiscalDigital')
+    def get_url_qr(self, doc):
+        data = self.get_params_cfdi_validate(doc=doc)
         url = "https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx?&id={}&re={}&rr={}&tt={}&fe={}".format(
-            stamp.get('UUID'),
-            rfc_issuer,
-            rfc_receiver,
-            doc.get('Total'),
-            stamp.get('SelloCFD')[-8:]
+            data.get('uuid'), data.get('rfc-issuer'), data.get('rfc-receiver'), data.get('amount'),
+            data.get('stamp-cfd')[-8:]
         )
         return quote(url)
 
     @api.model
     def get_product_taxes(self, taxes):
         if not taxes:
-            return ''
-        tax_str = ''
+            return []
+        list_taxes = []
         for tax_type_key in taxes.keys():
             tax_list = []
             tax_dict_or_list = taxes.get(tax_type_key)
@@ -367,14 +356,16 @@ class AccountInvoice(models.Model):
                         tax_record_type_list.append(tax_record_type)
                     elif isinstance(tax_record_type, list):
                         tax_record_type_list = tax_record_type
-                    tax_str += ', '.join(map(
-                        lambda tax: tax.get('Impuesto') + ' ' + tax.get('TipoFactor') + ' % ' + str(
-                            float(tax.get('TasaOCuota', 0)) * 100) + ' $ ' + tax.get('Importe'), tax_record_type_list))
-        return tax_str
+                    for tax in tax_record_type_list:
+                        tax_str = tax.get('Impuesto') + ' ' + str(float(tax.get('TasaOCuota', 0)) * 100) + ' % ' \
+                                  + tax.get('TipoFactor') + ' $ ' + tax.get('Importe')
+                        list_taxes.append(tax_str)
+        return list_taxes
 
     @api.model
     def get_taxes(self, taxes):
-        taxes_list = []
+        taxes_retencion = []
+        taxes_traslados = []
         for taxes_key in taxes:
             tax_type = taxes.get(taxes_key)
             if isinstance(tax_type, dict):
@@ -390,8 +381,13 @@ class AccountInvoice(models.Model):
                         tax_type_record_list = tax_type_records
                     for row in tax_type_record_list:
                         row.update({'Importe': (float(row.get('Importe')) * sign)})
-                        taxes_list.append(row)
-        return taxes_list
+                        label = self.get_invoice_taxes(row.get('Impuesto'), row.get('Importe'))
+                        row.update({'Etiqueta': label})
+                        if 'Retencion' in tax_type_key:
+                            taxes_retencion.append(row)
+                        elif 'Traslado' in tax_type_key:
+                            taxes_traslados.append(row)
+        return taxes_traslados + taxes_retencion
 
     @api.model
     def get_products(self, products):
@@ -403,6 +399,13 @@ class AccountInvoice(models.Model):
             elif isinstance(product, list):
                 products_list = product
         return products_list
+
+    @api.model
+    def get_invoice_taxes(self, tax, amount):
+        for row in self.tax_line_ids:
+            if row.amount == amount:
+                return row.name
+        return False
 
     # Ncc / out_refund
     @api.model
@@ -419,3 +422,34 @@ class AccountInvoice(models.Model):
                 document_type='E'
             ))
         return result
+
+    @api.model
+    def get_chain_tfd(self):
+        if not self.chain_tfd:
+            self.configure_innov()
+            data = {'ContentXml': self.doc_xml_id.datas.decode('utf-8')}
+            result = innov.Cfdi.chain_tfd(data=data)
+            print(result)
+            if result.get('Success'):
+                self.chain_tfd = result.get('Payload').get('ChainTfd')
+        return self.chain_tfd
+
+    @api.model
+    def get_url_validate_uuid(self, doc):
+        data = self.get_params_cfdi_validate(doc=doc)
+        url = "https://innov.biz/cfdi-validate-uuid?uuid={}&rfc_issuer={}&rfc_receiver={}&amount={}".format(
+            data.get('uuid'), data.get('rfc-issuer'), data.get('rfc-receiver'), data.get('amount')
+        )
+        return url
+
+    @api.model
+    def get_params_cfdi_validate(self, doc):
+        stamp = doc.get('{http://www.sat.gob.mx/cfd/3}Complemento').get(
+            '{http://www.sat.gob.mx/TimbreFiscalDigital}TimbreFiscalDigital')
+        return {
+            'rfc-issuer': doc.get('{http://www.sat.gob.mx/cfd/3}Emisor').get('Rfc'),
+            'rfc-receiver': doc.get('{http://www.sat.gob.mx/cfd/3}Receptor').get('Rfc'),
+            'uuid': stamp.get('UUID'),
+            'amount': doc.get('Total'),
+            'stamp-cfd': stamp.get('SelloCFD')
+        }
