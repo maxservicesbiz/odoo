@@ -57,7 +57,8 @@ class AccountInvoice(models.Model):
     doc_xml_id = fields.Many2one(comodel_name='ir.attachment', copy=False)
 
     chain_tfd = fields.Text(string=_("Original chain tdf"))
-    #chian_cfid = fields.Text(string=_("Original chain cfdi"))
+
+    # chian_cfid = fields.Text(string=_("Original chain cfdi"))
 
     # digital_stamp = fields.Char(string=_("Digital stamp"))
     # sat_stamp = fields.Char(string=_("Sat stamp"))
@@ -327,17 +328,11 @@ class AccountInvoice(models.Model):
         return doc
 
     @api.model
-    def get_qr(self, doc):
-        rfc_issuer = doc.get('{http://www.sat.gob.mx/cfd/3}Emisor').get('Rfc')
-        rfc_receiver = doc.get('{http://www.sat.gob.mx/cfd/3}Receptor').get('Rfc')
-        stamp = doc.get('{http://www.sat.gob.mx/cfd/3}Complemento').get(
-            '{http://www.sat.gob.mx/TimbreFiscalDigital}TimbreFiscalDigital')
+    def get_url_qr(self, doc):
+        data = self.get_params_cfdi_validate(doc=doc)
         url = "https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx?&id={}&re={}&rr={}&tt={}&fe={}".format(
-            stamp.get('UUID'),
-            rfc_issuer,
-            rfc_receiver,
-            doc.get('Total'),
-            stamp.get('SelloCFD')[-8:]
+            data.get('uuid'), data.get('rfc-issuer'), data.get('rfc-receiver'), data.get('amount'),
+            data.get('stamp-cfd')[-8:]
         )
         return quote(url)
 
@@ -362,7 +357,7 @@ class AccountInvoice(models.Model):
                     elif isinstance(tax_record_type, list):
                         tax_record_type_list = tax_record_type
                     for tax in tax_record_type_list:
-                        tax_str = tax.get('Impuesto') + ' ' + str(float(tax.get('TasaOCuota', 0)) * 100) + ' % '\
+                        tax_str = tax.get('Impuesto') + ' ' + str(float(tax.get('TasaOCuota', 0)) * 100) + ' % ' \
                                   + tax.get('TipoFactor') + ' $ ' + tax.get('Importe')
                         list_taxes.append(tax_str)
         return list_taxes
@@ -411,6 +406,7 @@ class AccountInvoice(models.Model):
             if row.amount == amount:
                 return row.name
         return False
+
     # Ncc / out_refund
     @api.model
     def _prepare_refund(self, invoice, date_invoice=None, date=None, description=None, journal_id=None):
@@ -437,3 +433,23 @@ class AccountInvoice(models.Model):
             if result.get('Success'):
                 self.chain_tfd = result.get('Payload').get('ChainTfd')
         return self.chain_tfd
+
+    @api.model
+    def get_url_validate_uuid(self, doc):
+        data = self.get_params_cfdi_validate(doc=doc)
+        url = "https://innov.biz/cfdi-validate-uuid?uuid={}&rfc_issuer={}&rfc_receiver={}&amount={}".format(
+            data.get('uuid'), data.get('rfc-issuer'), data.get('rfc-receiver'), data.get('amount')
+        )
+        return url
+
+    @api.model
+    def get_params_cfdi_validate(self, doc):
+        stamp = doc.get('{http://www.sat.gob.mx/cfd/3}Complemento').get(
+            '{http://www.sat.gob.mx/TimbreFiscalDigital}TimbreFiscalDigital')
+        return {
+            'rfc-issuer': doc.get('{http://www.sat.gob.mx/cfd/3}Emisor').get('Rfc'),
+            'rfc-receiver': doc.get('{http://www.sat.gob.mx/cfd/3}Receptor').get('Rfc'),
+            'uuid': stamp.get('UUID'),
+            'amount': doc.get('Total'),
+            'stamp-cfd': stamp.get('SelloCFD')
+        }
