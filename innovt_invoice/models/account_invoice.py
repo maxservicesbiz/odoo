@@ -292,6 +292,7 @@ class AccountInvoice(models.Model):
             rq = innov.Cfdi.cancel(rfc_issuer=self.env.user.company_id.vat, uuid=self.uuid)
             if rq.get('Success'):
                 self.datetime_stamp_cancelled = date_invoice
+                self.state_invoice = 'cancelled'
             else:
                 raise MissingError(rq.get('Message'))
         except Exception as e:
