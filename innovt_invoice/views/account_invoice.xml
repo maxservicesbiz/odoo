@@ -41,8 +41,12 @@
                     </page>
                 </xpath>
                 <xpath expr="//header/button[@name='action_invoice_open']" position="after">
-                    <button type="object" class="oe_highlight" name="invoice_stamp" string="Stamp"/>
-                    <button type="object" class="oe_highlight" name="invoice_stamp_cancel" string="Stamp cancel"/>
+                    <button type="object" class="oe_highlight"
+                            attrs="{'invisible':[ '|',('state','in',['draft','cancel']),('state_invoice','!=',False) ]}"
+                            name="invoice_stamp" string="Stamp"/>
+                    <button type="object" class="oe_highlight"
+                            attrs="{'invisible':['|',('state_invoice','=','cancelled'),('uuid','=',False)]}"
+                            name="invoice_stamp_cancel" string="Stamp cancel"/>
                 </xpath>
             </field>
         </record>
