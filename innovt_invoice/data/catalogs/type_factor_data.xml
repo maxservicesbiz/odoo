@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- © Yonn, Xyz. All rights reserved. -->
+<odoo>
+    <data noupdate="1">
+
+        <record id="type_factor_Tasa" model="type.factor">
+            <field name="name">Tasa</field>
+            <field name="code">Tasa</field>
+        </record>
+
+        <record id="type_factor_Cuota" model="type.factor">
+            <field name="name">Cuota</field>
+            <field name="code">Cuota</field>
+        </record>
+
+        <record id="type_factor_Exento" model="type.factor">
+            <field name="name">Exento</field>
+            <field name="code">Exento</field>
+        </record>
+
+    </data>
+</odoo>
+    

@@ -9,6 +9,6 @@ class ResCountryMunicipality(models.Model):
     _name = 'res.country.municipality'
     _rec_name = 'name'
 
-    code = fields.Char(string=_("Code municipality"), help=_("Code provided by SAT"), required=True)
-    name = fields.Char(string=_("Name municipality"), required=True)
+    code = fields.Char(string=_("Code"), required=True)
+    name = fields.Char(string=_("Name"), required=True)
     state_id = fields.Many2one(comodel_name='res.country.state', string=_("State"), required=True)

@@ -16,11 +16,12 @@ class TypeTax(models.Model):
     _name = 'type.tax'
     _rec_name = 'display_name'
 
-    code = fields.Char(string=_("Code type of tax"))
-    name = fields.Char(string=_("Name type of tax"))
-    display_name = fields.Char(string=_("Display name"), compute="_compute_display_name")
+    code = fields.Char(string=_("Code"))
+    name = fields.Char(string=_("Name"))
+    display_name = fields.Char(string=_("Display name"), compute="_compute_display_name", store=True)
 
     @api.multi
+    @api.depends('code', 'name')
     def _compute_display_name(self):
         for row in self:
             row.display_name = row.code + ' - ' + row.name
@@ -30,11 +31,12 @@ class TypeFactor(models.Model):
     _name = 'type.factor'
     _rec_name = 'display_name'
 
-    code = fields.Char(string=_("Code type of factor"))
-    name = fields.Char(string=_("Name type of factor"))
-    display_name = fields.Char(string=_("Display name"), compute="_compute_display_name")
+    code = fields.Char(string=_("Code"))
+    name = fields.Char(string=_("Name"))
+    display_name = fields.Char(string=_("Display name"), compute="_compute_display_name", store=True)
 
     @api.multi
+    @api.depends('code', 'name')
     def _compute_display_name(self):
         for row in self:
             row.display_name = row.code + ' - ' + row.name
