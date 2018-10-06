@@ -16,10 +16,7 @@
                         <group>
                             <field name="client_secret"/>
                         </group>
-                        <!--group>
-                            <field name="token"/>
-                        </group-->
-                        <group>
+                        <group string="Dangerous zone">
                             <field name="mode"/>
                             <div attrs="{'invisible':[('mode','=',False)]}">
                                 Create account on https://sandbox.innov.biz and
