@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-06 05:17+0000\n"
+"PO-Revision-Date: 2018-10-06 05:18+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Invalid\n"
+"Language: zxx\n"
+"Plural-Forms: nplurals=2; plural=n!=1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"X-Loco-Source-Locale: es_MX\n"
+"X-Loco-Parser: loco_parse_po\n"
+"X-Generator: Loco https://localise.biz/"
+
+#. module: innovt_client
+#: code:addons/innovt_client/models/res_company.py:10 
+#: model:ir.model.fields,field_description:innovt_client.field_res_company_client_id
+#, python-format
+msgid "Client Id"
+msgstr "Client Id"
+
+#. module: innovt_client
+#: code:addons/innovt_client/models/res_company.py:11 
+#: model:ir.model.fields,field_description:innovt_client.field_res_company_client_secret
+#, python-format
+msgid "Client secret"
+msgstr "Client secret"
+
+#. module: innovt_client
+#: model:ir.model,name:innovt_client.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: innovt_client
+#: model:ir.ui.view,arch_db:innovt_client.iuv_it_innovt_client_innov_biz_settings_form
+msgid "Create account on https://innov.biz and ensure sync CSDs."
+msgstr ""
+"Cree una cuenta en https://innov.biz y asegúrese de sincronizar los CSD."
+
+#. module: innovt_client
+#: model:ir.ui.view,arch_db:innovt_client.iuv_it_innovt_client_innov_biz_settings_form
+msgid "Create account on https://sandbox.innov.biz and ensure sync CSDs."
+msgstr ""
+"Cree una cuenta en https://sandbox.innov.biz y asegúrese de sincronizar los "
+"CSD."
+
+#. module: innovt_client
+#: model:ir.ui.view,arch_db:innovt_client.iuv_it_innovt_client_innov_biz_settings_form
+msgid "Dangerous zone"
+msgstr "Zona peligrosa"
+
+#. module: innovt_client
+#: model:ir.ui.view,arch_db:innovt_client.iuv_it_innovt_client_innov_biz_settings_form
+msgid "Innov Biz"
+msgstr "Innov Biz"
+
+#. module: innovt_client
+#: code:addons/innovt_client/models/res_company.py:12 
+#: model:ir.model.fields,field_description:innovt_client.field_res_company_mode
+#, python-format
+msgid "Test mode"
+msgstr "Modo de prueba"
