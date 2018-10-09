@@ -9,13 +9,13 @@ class ProductCode(models.Model):
     _name = 'product.code'
     _rec_name = 'display_name'
 
-    code = fields.Char(string=_("Code product code"), help=_("Code provided by SAT"), required=True)
-    name = fields.Char(string=_("Name product code"), required=True)
+    code = fields.Char(string=_("Code"), required=True)
+    name = fields.Char(string=_("Name"), required=True)
 
-    display_name = fields.Char(string=_("Rec name product code"), compute="_compute_display_name")
+    display_name = fields.Char(string=_("Display name"), compute="_compute_display_name", store=True)
 
-    @api.depends('code','name')
     @api.multi
+    @api.depends('code', 'name')
     def _compute_display_name(self):
         for row in self:
             row.display_name = row.code + " - " + row.name

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- © Yonn, Xyz. All rights reserved. -->
+<odoo>
+    <data noupdate="1">
+
+        <record id="type_tax_002" model="type.tax">
+            <field name="name">IVA</field>
+            <field name="code">002</field>
+        </record>
+
+        <record id="type_tax_003" model="type.tax">
+            <field name="name">IEPS</field>
+            <field name="code">003</field>
+        </record>
+
+        <record id="type_tax_001" model="type.tax">
+            <field name="name">ISR</field>
+            <field name="code">001</field>
+        </record>
+
+        <record id="type_tax_004" model="type.tax">
+            <field name="name">ISH</field>
+            <field name="code">004</field>
+        </record>
+
+    </data>
+</odoo>
+    

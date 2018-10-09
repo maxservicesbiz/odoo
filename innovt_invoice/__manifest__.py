@@ -38,22 +38,22 @@
         'data/catalogs/res.bank.csv',
         'views/catalogs/product_code.xml',
         #this operation is slow
-        'data/catalogs/product.code.csv',
+       'data/catalogs/product_code_data.xml',
         'views/catalogs/product_unit.xml',
         #this operation is slow
-        'data/catalogs/product.unit.csv',
+        'data/catalogs/product_unit_data.xml',
         'views/catalogs/cfdi_use.xml',
-        'data/catalogs/cfdi.use.csv',
+        'data/catalogs/cfdi_use_data.xml',
         'views/catalogs/payment_form.xml',
-        'data/catalogs/payment.form.csv',
+        'data/catalogs/payment_form_data.xml',
         #'views/catalogs/type_document.xml',
         #'data/catalogs/type.document.csv',
         'views/catalogs/type_relationship.xml',
-        'data/catalogs/type.relationship.csv',
+        'data/catalogs/type_relationship_data.xml',
         'views/catalogs/account_tax.xml',
-        'data/catalogs/type.factor.csv',
-        'data/catalogs/type.tax.csv',
-        'data/catalogs/payment.method.csv',
+        'data/catalogs/type_factor_data.xml',
+        'data/catalogs/type_tax_data.xml',
+        'data/catalogs/payment_method_data.xml',
 
         # Inherits and switch catalog SAT
         'views/res_company.xml',
@@ -61,7 +61,7 @@
         'views/account_invoice.xml',
         'views/product_template.xml',
         'views/account_fiscal_position.xml',
-
+        'data/catalogs/account_fiscal_position_data.xml',
         'views/reports/cfdi.xml',
 
     ],

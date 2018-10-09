@@ -9,8 +9,8 @@ class TypeDocument(models.Model):
     _name = 'type.document'
     _rec_name = 'display_name'
 
-    code = fields.Char(string=_("Code type of document"), help=_("Code provided by SAT"), required=True)
-    name = fields.Char(string=_("Name type of document"), required=True)
+    code = fields.Char(string=_("Code"), required=True)
+    name = fields.Char(string=_("Name"), required=True)
     display_name = fields.Char(string=_("Display name"), compute="_compute_display_name")
 
     @api.multi

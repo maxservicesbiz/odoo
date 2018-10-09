@@ -16,15 +16,20 @@
                         <group>
                             <field name="client_secret"/>
                         </group>
-                        <!--group>
-                            <field name="token"/>
-                        </group-->
-                        <group>
-                            <field name="mode"/>
-                            <div attrs="{'invisible':[('mode','=',False)]}">
-                                Create account on https://sandbox.innov.biz and
-                                ensure sync CSDs.
-                            </div>
+                        <group string="Dangerous zone">
+                            <group>
+                                <field name="mode"/>
+                            </group>
+                            <group attrs="{'invisible':[('mode','=',False)]}">
+                                <div>
+                                    Create account on https://sandbox.innov.biz and ensure sync CSDs.
+                                </div>
+                            </group>
+                            <group attrs="{'invisible':[('mode','=',True)]}">
+                                <div>
+                                    Create account on https://innov.biz and ensure sync CSDs.
+                                </div>
+                            </group>
                         </group>
                     </page>
                 </xpath>
