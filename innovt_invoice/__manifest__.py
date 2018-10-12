@@ -61,7 +61,7 @@
         'views/account_invoice.xml',
         'views/product_template.xml',
         'views/account_fiscal_position.xml',
-        'data/catalogs/account_fiscal_position_data.xml',
+        #'data/catalogs/account_fiscal_position_data.xml',
         'views/reports/cfdi.xml',
 
     ],
