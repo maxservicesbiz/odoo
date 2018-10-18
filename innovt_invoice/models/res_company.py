@@ -12,7 +12,7 @@ class ResCompany(models.Model):
 
     fiscal_name = fields.Char(string=_("Fiscal name"))
     invoice_series = fields.Char(string=_("Invoice series"))
-    voucher_series = fields.Char(string=_("Voucher series"))
+    #voucher_series = fields.Char(string=_("Voucher series"))
     property_account_position_id = fields.Many2one(comodel_name='account.fiscal.position', string=_("Position fiscal"))
 
     file_key = fields.Binary(string=_("File .key"))
