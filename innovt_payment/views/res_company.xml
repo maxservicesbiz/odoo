@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- © Yonn, Xyz. All rights reserved. -->
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="it_innovt_payment_iuv_settings_form">
+            <field name="name">Res company payment CFDI 3.3</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="innovt_invoice.msc_iuv_res_company_page_settings_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_series']" position="after">
+                    <field name="payment_series"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
