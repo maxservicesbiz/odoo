@@ -77,6 +77,11 @@ class AccountPayment(models.Model):
                 payment.update(dict(Issuer=self.get_issuer()))
                 payment.update(dict(Items=self.get_items()))
                 payment.update(dict(ItemPayments=self.get_item_payments()))
+                if self.uuid_relationship and self.type_relationship_id:
+                    payment.update(dict(CfdiRelated=dict(
+                        Uuid=self.uuid_relationship,
+                        TypeRelationship=self.type_relationship_id.code
+                    )))
                 cfdi_stamped = innov.CfdiPayment.stamp(data=payment)
                 if cfdi_stamped.get('Success'):
                     self.uuid = cfdi_stamped.get('Payload').get('Uuid')
