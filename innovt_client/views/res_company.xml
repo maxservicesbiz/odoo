@@ -11,10 +11,10 @@
                 <xpath expr="//notebook" position="inside">
                     <page string="Innov Biz">
                         <group>
-                            <field name="client_id"/>
+                            <field name="client_id" password="True"/>
                         </group>
                         <group>
-                            <field name="client_secret"/>
+                            <field name="client_secret" password="True"/>
                         </group>
                         <group string="Dangerous zone">
                             <group>
