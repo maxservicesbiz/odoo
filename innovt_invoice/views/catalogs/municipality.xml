@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2017 Google Inc. All rights reserved. -->
+
+<odoo>
+    <data>
+        <record model='ir.ui.view' id='msc_iuv_municipality_tree'>
+            <field name='name'>res.country.municipality.tree</field>
+            <field name='model'>res.country.municipality</field>
+            <field name='arch' type='xml'>
+                <tree>
+                    <field name='code'/>
+                    <field name='name'/>
+                    <field name='state_id'/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="msc_iuv_municipality_form">
+            <field name="name">res.country.municipality.form</field>
+            <field name="model">res.country.municipality</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header/>
+                    <sheet>
+                        <group>
+                            <field name='code'/>
+                            <field name='name'/>
+                            <field name='state_id'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="msc_iac_municipality_action" model="ir.actions.act_window">
+            <field name="name">Municipality</field>
+            <field name="res_model">res.country.municipality</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="msc_mi_municipality" name="Municipality" parent="contacts.menu_localisation"
+                  action="msc_iac_municipality_action"/>
+
+    </data>
+</odoo>

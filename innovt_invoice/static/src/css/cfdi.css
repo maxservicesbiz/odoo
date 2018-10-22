@@ -1,0 +1,18 @@
+                .bg-div--header-color{
+                color: white;
+                background-color: black;
+                }
+                .bg-div--header-spacing{
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                }
+                .bg-div--header{
+
+                color: white;
+                background-color: black;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                }
+                .field-main{
+                font-weight: bold;
+                }

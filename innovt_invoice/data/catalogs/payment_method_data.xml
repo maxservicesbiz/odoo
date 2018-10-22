@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- © Yonn, Xyz. All rights reserved. -->
+<odoo>
+    <data noupdate="1">
+
+        <record id="payment_method_PUE" model="payment.method">
+            <field name="name">Pago en una sola exhibición</field>
+            <field name="code">PUE</field>
+        </record>
+
+        <record id="payment_method_PPD" model="payment.method">
+            <field name="name">Pago en parcialidades o diferido</field>
+            <field name="code">PPD</field>
+        </record>
+
+    </data>
+</odoo>
+    

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- © Yonn, Xyz. All rights reserved. -->
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="iuv_it_innovt_payment_account_payment_cfdi33_form">
+            <field name="name">Account Payment CFDI 3.3</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <button name="post" position="after">
+                        <button name="payment_stamp" class="oe_highlight" states="posted"
+                                confirm="Are you sure you want to do this?"
+                                attrs="{'invisible':['|',('state_payment','=','signed')]}"
+                                string="Stamp" type="object"/>
+                        <!--
+                        <button name="send_payment" class="oe_highlight"
+                                attrs="{'invisible':[('estado_pago','!=','pago_correcto')]}" string="Send by Email"
+                                type="object"/>-->
+
+                    </button>
+                    <xpath expr="//sheet" position="inside">
+                        <notebook>
+                            <page name="other-info" string="Other information">
+                                <group>
+                                    <group>
+                                        <field name="document_type"/>
+                                        <field name="payment_form_id"
+                                               attrs="{'readonly': [('state_payment','!=',False)]}"
+                                               domain="[('code','not in', ['99'])]"/>
+                                        <field name="payment_form_code" invisible="True"/>
+                                    </group>
+                                    <group>
+                                        <field name="state_payment"/>
+                                        <field name="uuid"/>
+                                        <field name="confirmation"
+                                               attrs="{'readonly': [('state_payment','!=',False)]}"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <group string="Issuer">
+                                        <field name="deposit_date"
+                                               attrs="{'readonly': [('state_payment','!=',False)]}"/>
+                                        <field name="issuer_bank_id"
+                                               attrs="{'invisible':[('payment_form_code','!=','03')],'readonly': [('state_payment','!=',False)]}"/>
+                                        <field name="issuer_bank_account_id"
+                                               domain="[('partner_id','=', partner_id)]"
+                                               attrs="{'invisible':[('payment_form_code','!=','03')],'readonly': [('state_payment','!=',False)]}"/>
+                                        <field name="issuer_bank_vat"
+                                               attrs="{'invisible':[('payment_form_code','!=','03')],'readonly': [('state_payment','!=',False)]}"/>
+
+                                    </group>
+                                    <group string="Receiver">
+                                        <field name="operation_number" attrs="{'readonly': [('state_payment','!=',False)]}"/>
+                                        <field name="receiver_bank_id"
+                                               attrs="{'invisible':[('payment_form_code','!=','03')],'readonly': [('state_payment','!=',False)]}"/>
+                                        <field name="receiver_bank_account_id"
+                                               attrs="{'invisible':[('payment_form_code','!=','03')],'readonly': [('state_payment','!=',False)]}"/>
+                                        <field name="receiver_bank_vat"
+                                               attrs="{'invisible':[('payment_form_code','!=','03')],'readonly': [('state_payment','!=',False)]}"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <!--group string="Amount">
+                                        <field name="outstanding_balance"/>
+                                        <field name="amount_payable"/>
+                                        <field name="remaining_balance"/>
+                                    </group-->
+                                    <group string="Relationship">
+                                        <field name="type_relationship_id" attrs="{'readonly': [('state_payment','!=',False)]}"/>
+                                        <field name="uuid_relationship" attrsattrs="{'readonly': [('state_payment','!=',False)]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

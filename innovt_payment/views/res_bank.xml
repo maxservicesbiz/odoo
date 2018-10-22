@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- © Yonn, Xyz. All rights reserved. -->
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="iuv_it_innovt_payment_res_bank_cfdi33_form">
+            <field name="name">Res Bank CFDI 3.3</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//div[@class='o_address_format']" position="after">
+                        <field name="vat"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

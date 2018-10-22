@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2018 Yonn Xyz. All rights reserved. -->
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="msc_iuv_res_partner_invoice_form">
+            <field name="name">Res partner invoice from</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='fiscal_information']" position="inside">
+                    <field name="cfdi_use_id"/>
+                    <field name="fiscal_residence"/>
+                    <field name="tax_identity_registration_number"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

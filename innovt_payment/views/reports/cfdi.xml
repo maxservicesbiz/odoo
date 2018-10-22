@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--template id="templ_it_innovt_invoice_cfdi_document_css" inherit_id="report.assets_common">
+            <xpath expr="." position="inside">
+                <link href="/innovt_invoice/static/src/css/cfdi.css" rel="stylesheet"/>
+            </xpath>
+        </template-->
+
+        <template id="templ_it_innovt_payment_cfdi_document_external_layout">
+            <!-- Multicompany -->
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <t t-set="doc_xml" t-value="o.get_xml()"/>
+            <div class="header">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img style="height: 100px; width: 150px;" class="img img-responsive" t-if="company.logo"
+                             t-att-src="'data:image/png;base64,%s' % to_text(company.logo)"/>
+                        <!--<img  t-att-src="'data:image/png;base64,%s' %company.logo"
+                             >
+                        -->
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <div style="text-transform: uppercase;letter-spacing: 3px;">
+                            <span t-esc="company.name"/>
+                        </div>
+                        <div>
+                            <span t-field="company.street"/>,
+                            <span t-field="company.city"/>,
+                            <span t-if="company.state_id" t-field="company.state_id.name"/>,
+                            <span t-field="company.zip"/>
+                            <span t-if="company.country_id" t-field="company.country_id.name"/>
+                        </div>
+                        <div>
+                            <span t-esc="company.vat"/>
+                        </div>
+                        <div>
+                            <span t-esc="doc_xml.get('{http://www.sat.gob.mx/cfd/3}Emisor').get('RegimenFiscal')"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <div style="color: white;background-color: black;text-transform: uppercase;letter-spacing: 3px;">
+                            <span t-if="o.payment_type == 'inbound' and o.state_payment == 'signed'">
+                                Complemento de pago
+                            </span>
+                            <span t-if="o.payment_type == 'outbound' and o.state_payment == 'signed'">
+                                Complemento de pago
+                            </span>
+                        </div>
+                        <div>
+                            <span class="field-main">Tipo de comprobate:</span>
+                            <span t-esc="doc_xml.get('TipoDeComprobante')"/>
+                        </div>
+                        <div>
+                            <span class="field-main">Lugar de expedición:</span>
+                            <span t-esc="doc_xml.get('LugarExpedicion')"/>
+                        </div>
+                        <div>
+                            <span class="field-main">Serie:</span>
+                            <span t-esc="doc_xml.get('Serie')"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-9 text-left" style="margin-top:10px;"
+                         t-field="company.report_header"/>
+
+                </div>
+                <div class="row zero_min_height">
+                    <div class="col-xs-12">
+                        <div style="border-bottom: 1px solid black;"></div>
+                    </div>
+                </div>
+                <t t-if="o.state_payment == 'cancelled'">
+                    <div style="position:absolute;opacity:0.25;z-index:1000;transform:rotate(300deg);-webkit-transform:rotate(300deg);width:150%;">
+                        <p style="font-size:140px;">CANCELADO</p>
+                    </div>
+                </t>
+            </div>
+
+            <div class="article o_report_layout_standard">
+                <t t-raw="0"/>
+            </div>
+
+            <div class="footer">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <ul class="list-inline mb4">
+                        <li t-if="company.phone">
+                            <i class='fa fa-phone fa-fw'/>
+                            <span t-field="company.phone"/>
+                        </li>
+                        <li t-if="company.email">
+                            <i class='fa fa-envelope fa-fw'/>
+                            <span t-field="company.email"/>
+                        </li>
+                        <li t-if="company.website">
+                            <i class='fa fa-globe fa-fw'/>
+                            <span t-field="company.website"/>
+                        </li>
+                    </ul>
+                    <div>
+                        <span style="text-transform: uppercase">
+                            Este documento es una representación impresa de un cfdi
+                        </span>
+                        <span t-esc="doc_xml.get('Version')"/>
+                    </div>
+                    <div class="text-muted">
+                        Página:
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="templ_it_innovt_payment_cfdi_document">
+            <t t-call="innovt_payment.templ_it_innovt_payment_cfdi_document_external_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+                <style>
+                    .bg-div--header-color{
+                    color: white;
+                    background-color: black;
+                    }
+                    .bg-div--header-spacing{
+                    text-transform: uppercase;
+                    letter-spacing: 3px;
+                    }
+                    .bg-div--header{
+
+                    color: white;
+                    background-color: black;
+                    text-transform: uppercase;
+                    letter-spacing: 3px;
+                    }
+                    .field-main{
+                    font-weight: bold;
+                    }
+                </style>
+
+                <div class="page">
+                    <t t-set="doc_xml" t-value="o.get_xml()"/>
+
+                    <div class="row">
+                        <div class="col-xs-12 bg-div--header">
+                            Datos del cliente
+                        </div>
+                        <div name="invoice-customer-address" class="col-xs-6">
+                            <div>
+                                <span class="field-main">Cliente:</span>
+                                <span t-esc="doc_xml.get('{http://www.sat.gob.mx/cfd/3}Receptor').get('Nombre')"/>
+                            </div>
+                            <div>
+                                <!--<span class="field-main">Dirección:</span>-->
+                                <span t-field="o.partner_id"
+                                      t-field-options='{"widget": "contact", "fields": ["address"]}'/>
+                                <!--
+                                <span t-field="o.partner_id.street"/>,
+                                <span t-field="o.partner_id.city"/>,
+                                <div t-if="o.partner_id.state_id">
+                                    <span t-field="o.partner_id.state_id.name"/>
+                                </div>
+                                <span t-field="o.partner_id.zip"/>
+                                <div t-if="o.partner_id.country_id">
+                                    <span t-field="o.partner_id.country_id.name"/>
+                                </div>
+                                -->
+                            </div>
+
+                        </div>
+                        <div name="invoice-customer-data" class="col-xs-6">
+                            <div t-if="o.partner_id.vat">
+                                <span class="field-main">R.F.C:</span>
+                                <span t-esc="doc_xml.get('{http://www.sat.gob.mx/cfd/3}Receptor').get('Rfc')"/>
+                            </div>
+                            <div>
+                                <span class="field-main">Uso CFDI:</span>
+                                <span t-esc="doc_xml.get('{http://www.sat.gob.mx/cfd/3}Receptor').get('UsoCFDI')"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row ">
+                        <!--  refund and invoice
+                        <div name="invoice-general-data" class="col-xs-6">
+                            <div>
+                                <span class="field-main">Forma de pago:</span>
+                                <span t-esc="doc_xml.get('FormaPago')"/>
+                            </div>
+                            <div>
+                                <span class="field-main">Método de pago:</span>
+                                <span t-esc="doc_xml.get('MetodoPago')"/>
+                            </div>
+                            <div>
+                                <span class="field-main">Moneda:</span>
+                                <span t-esc="doc_xml.get('Moneda')"/>
+                            </div>
+                        </div>
+
+                        <div name="invoice-general-data2" class="col-xs-6">
+                            <div>
+                                <span class="field-main">Folio:</span>
+                                <span t-esc="doc_xml.get('Folio')"/>
+                            </div>
+                            <div>
+                                <span class="field-main">Fecha:</span>
+                                <span t-esc="doc_xml.get('Fecha')"/>
+                            </div>
+                            <div>
+                                <span class="field-main">Tipo de cambio:</span>
+                                <span t-esc="doc_xml.get('TipoCambio')"/>
+                            </div>
+                        </div>
+                        -->
+                        <!-- payment details-->
+                        <t t-set="payments" t-value="o.get_payments(doc_xml)"/>
+                        <div name="invoice-general-data" class="col-xs-6">
+                            <div>
+                                <span class="field-main">Forma de pago:</span>
+                                <span t-esc="payments.get('FormaDePagoP')"/>
+                            </div>
+                            <div>
+                                <span class="field-main">Monto:</span>
+                                <span t-esc="payments.get('Monto')"/>
+                            </div>
+                            <div>
+                                <span class="field-main">Moneda:</span>
+                                <span t-esc="payments.get('MonedaP')"/>
+                            </div>
+                            <div t-if="payments.get('NomBancoOrdExt', False)">
+                                <span class="field-main">Banco ordenante:</span>
+                                <span t-esc="payments.get('NomBancoOrdExt')"/>
+                            </div>
+                            <div t-if="payments.get('RfcEmisorCtaOrd', False)">
+                                <span class="field-main">RFC Banco ordenante:</span>
+                                <span t-esc="payments.get('RfcEmisorCtaOrd')"/>
+                            </div>
+                            <div t-if="payments.get('CtaOrdenante', False)">
+                                <span class="field-main">Cuenta ordenante:</span>
+                                <span t-esc="payments.get('CtaOrdenante')"/>
+                            </div>
+                        </div>
+                        <div name="invoice-general-data2" class="col-xs-6">
+                            <div>
+                                <span class="field-main">Folio:</span>
+                                <span t-esc="doc_xml.get('Folio')"/>
+                            </div>
+                            <div>
+                                <span class="field-main">Fecha:</span>
+                                <span t-esc="payments.get('FechaPago')"/>
+                            </div>
+                            <div>
+                                <span class="field-main">Número de operación:</span>
+                                <span t-esc="payments.get('NumOperacion')"/>
+                            </div>
+                            <div t-if="payments.get('RfcEmisorCtaBen', False)">
+                                <span class="field-main">RFC Banco beneficiario:</span>
+                                <span t-esc="payments.get('RfcEmisorCtaBen')"/>
+                            </div>
+                            <div t-if="payments.get('CtaBeneficiario', False)">
+                                <span class="field-main">Cuenta beneficiario:</span>
+                                <span t-esc="payments.get('CtaBeneficiario')"/>
+                            </div>
+                        </div>
+
+                        <!-- end payment details -->
+                    </div>
+                    <!--h2>
+                        <span t-if="o.type == 'out_invoice' and o.state_invoice == 'stamped'">Invoice</span>
+                        <span t-if="o.type == 'out_invoice' and o.state_invoice == 'cancelled'">Cancelled Invoice</span>
+                        <span t-if="o.type == 'out_refund' and o.state_invoice == 'stamped'">Credit Note</span>
+                        <span t-if="o.type == 'out_refund' and o.state_invoice == 'cancelled'">Cancelled Credit Note
+                        </span>
+                        <span t-field="o.number"/>
+                    </h2>
+                    <div class="row mt32 mb32">
+                        <div class="col-xs-2" t-if="o.name">
+                            <strong>Description:</strong>
+                            <p t-field="o.name"/>
+                        </div>
+                        <div class="col-xs-2" t-if="o.date_invoice">
+                            <strong>Invoice Date:</strong>
+                            <p t-field="o.date_invoice"/>
+                        </div>
+                        <div class="col-xs-2"
+                             t-if="o.date_due and o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid')">
+                            <strong>Due Date:</strong>
+                            <p t-field="o.date_due"/>
+                        </div>
+                        <div class="col-xs-2" t-if="o.origin">
+                            <strong>Source:</strong>
+                            <p t-field="o.origin"/>
+                        </div>
+                        <div class="col-xs-2" t-if="o.partner_id.ref">
+                            <strong>Customer Code:</strong>
+                            <p t-field="o.partner_id.ref"/>
+                        </div>
+                        <div name="reference" class="col-xs-2" t-if="o.reference">
+                            <strong>Reference:</strong>
+                            <p t-field="o.reference"/>
+                        </div>
+                    </div-->
+
+                    <!-- Is there a discount on at least one line? -->
+                    <!--t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/-->
+                    <br/>
+                    <table class="table table-condensed" name="invoice_line_table">
+                        <thead class="bg-div--header-color">
+                            <tr>
+                                <th>Descripción</th>
+                                <!--th class="hidden">Source Document</th-->
+                                <th class="text-right">Cantidad</th>
+                                <th class="text-right">Precio unitario</th>
+                                <!--<th t-if="display_discount" class="text-right">Disc.(%)</th>-->
+                                <th class="text-right">Impuesto</th>
+                                <th class="text-right">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <t t-set="concepts"
+                               t-value="o.get_products(doc_xml.get('{http://www.sat.gob.mx/cfd/3}Conceptos'))"/>
+                            <tr t-foreach="concepts" t-as="concept">
+                                <td>
+                                    <span t-esc="concept.get('NoIdentificacion')"/>
+                                    -
+                                    <span t-esc="concept.get('Descripcion')"/>
+                                    <p>
+                                        <span class="field-main">Clave producto:</span>
+                                        <span t-esc="concept.get('ClaveProdServ')"/>
+                                    </p>
+                                </td>
+                                <!--<td class="hidden">
+                                    <span t-field="l.origin"/>
+                                </td-->
+                                <td class="text-right">
+                                    <span t-esc="concept.get('Cantidad')"/>
+                                    <span t-esc="concept.get('Unidad')"/>
+                                    <p>
+                                        <span class="field-main">Clave unidad:</span>
+                                        <span t-esc="concept.get('ClaveUnidad')"/>
+                                    </p>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="float(concept.get('ValorUnitario'))"
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+
+                                <!--td t-if="display_discount" class="text-right">
+                                    <span t-field="l.discount"/>
+                                </td>-->
+                                <td class="text-right">
+                                    <t t-set="product_taxes"
+                                       t-value="o.get_product_taxes(concept.get('{http://www.sat.gob.mx/cfd/3}Impuestos', False))"/>
+                                    <t t-foreach="product_taxes" t-as="row">
+                                        <span t-esc="row"/>
+                                        <br/>
+                                    </t>
+                                </td>
+                                <td class="text-right" id="subtotal">
+                                    <span t-esc="float(concept.get('Importe'))"
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                            <!--tr t-foreach="range(max(5-len(concepts),0))" t-as="l">
+                                <td t-translation="off">&amp;nbsp;</td>
+                                <td class="hidden"></td>
+                                <td></td>
+                                <td></td>
+                                <td t-if="display_discount"></td>
+                                <td></td>
+                                <td></td>
+                            </tr-->
+                        </tbody>
+                    </table>
+
+                    <div class="clearfix">
+                        <div id="total" class="row">
+                            <div class="col-xs-4 pull-right">
+                                <table class="table table-condensed" style="min-width: 250px;max-width: 400px;">
+                                    <tr class="border-black" style="border-bottom:1px solid #dddddd;">
+                                        <td>
+                                            <strong>Subtotal</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="float(doc_xml.get('SubTotal'))"
+                                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="taxes"
+                                       t-value="o.get_taxes(doc_xml.get('{http://www.sat.gob.mx/cfd/3}Impuestos'))"/>
+
+                                    <t t-foreach="taxes" t-as="row">
+                                        <tr style="border-bottom:1px solid #dddddd;">
+                                            <td t-if="row.get('Etiqueta') == False">
+                                                <span t-esc="row.get('Impuesto')"/>&amp;nbsp;
+                                                <span t-esc="row.get('TipoFactor','')"/>
+                                                <span>
+                                                    <span>%</span>
+                                                    <t t-esc="(float(row.get('TasaOCuota',0)) *100 )"/>
+                                                </span>
+                                            </td>
+                                            <td t-else="">
+                                                <span t-esc="row.get('Etiqueta')"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="row.get('Importe')"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <tr class="border-black">
+                                        <td>
+                                            <strong>Total</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="float(doc_xml.get('Total'))"
+                                                  t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- payment details -->
+                    <t t-set="related_documents" t-value="o.get_related_documents(doc_xml)"/>
+                    <table class="table table-condensed" name="payment_line_table">
+                        <thead class="bg-div--header-color">
+                            <tr>
+                                <th>No. Parcialidad</th>
+                                <th>Documento relacionado</th>
+                                <th class="text-right">Moneda</th>
+                                <!--th class="text-right">T/C</th-->
+                                <th class="text-right">Método de pago</th>
+                                <th class="text-right">Saldo pendiente</th>
+                                <th class="text-right">Monto pagado</th>
+                                <th class="text-right">Saldo restante</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <tr t-foreach="related_documents" t-as="related_document">
+                                <td>
+                                    <span t-esc="related_document.get('NumParcialidad')"/>
+                                </td>
+                                <td>
+                                    <span t-esc="related_document.get('IdDocumento')"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="related_document.get('MonedaDR')"/>
+                                </td>
+                                <!--td class="text-right">
+                                    <span t-esc="related_document.get('TipoCambioDR')"/>
+                                </td-->
+                                <td class="text-right">
+                                    <span t-esc="related_document.get('MetodoDePagoDR')"/>
+                                </td>
+
+                                <td class="text-right">
+                                    <span t-esc="float(related_document.get('ImpSaldoAnt'))"
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="float(related_document.get('ImpPagado'))"
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-esc="float(related_document.get('ImpSaldoInsoluto'))"
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- end payment details -->
+
+                    <t t-set="cfdi_related"
+                       t-value="doc_xml.get('{http://www.sat.gob.mx/cfd/3}CfdiRelacionados', False)"/>
+                    <table t-if="cfdi_related" class="table table-condensed" name="cfdi-related">
+                        <thead class="bg-div--header-color">
+                            <tr>
+                                <th>
+                                    Tipo de relación
+                                </th>
+                                <th>
+                                    Uuid
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <tr>
+                                <td>
+                                    <span t-esc="cfdi_related.get('TipoRelacion')"/>
+                                </td>
+                                <td>
+                                    <span t-esc="cfdi_related.get('{http://www.sat.gob.mx/cfd/3}CfdiRelacionado').get('UUID')"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <t t-set="stamp"
+                       t-value="doc_xml.get('{http://www.sat.gob.mx/cfd/3}Complemento').get('{http://www.sat.gob.mx/TimbreFiscalDigital}TimbreFiscalDigital')"/>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <br/>
+                            <div>
+                                <span class="field-main">Folio fiscal:</span>
+                                <span t-esc="str(stamp.get('UUID')).upper()"/>
+                            </div>
+                            <br/>
+                            <div>
+                                <span class="field-main">Fecha de certificación:</span>
+                                <span t-esc="stamp.get('FechaTimbrado')"/>
+                            </div>
+                            <br/>
+                            <div>
+                                <span class="field-main">Certificado SAT:</span>
+                                <span t-esc="stamp.get('NoCertificadoSAT')"/>
+                            </div>
+                            <br/>
+                            <div>
+                                <span class="field-main">R.F.C PAC:</span>
+                                <span t-esc="stamp.get('RfcProvCertif')"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a class="list-group-item" target="_blank"
+                               t-attf-href="{{o.get_url_validate_uuid(doc_xml)}}">
+                                <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.get_url_qr(doc_xml),'600','600')"
+                                     style="height: 200px; width: 200px;"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xs-12 bg-div--header">
+                            sello digital del cfdi
+                        </div>
+                        <div class="col-xs-12">
+                            <span t-esc="stamp.get('SelloCFD')"/>
+                        </div>
+                        <div class="col-xs-12 bg-div--header">
+                            sello digital del sat
+                        </div>
+                        <div class="col-xs-12">
+                            <span t-esc="stamp.get('SelloSAT')"/>
+                        </div>
+                        <t t-if="o.get_chain_tfd()">
+                            <div class="col-xs-12 bg-div--header">
+                                cadena original del complemento de certificaión digital del sat
+                            </div>
+                            <div class="col-xs-12">
+                                <span t-esc="o.chain_tfd"/>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="templ_it_innovt_payment_cfdi_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="innovt_payment.templ_it_innovt_payment_cfdi_document" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+        <report
+                id="repo_it_innovt_invoice_cfdi_report"
+                model="account.payment"
+                string="Payment CFDI"
+                report_type="qweb-pdf"
+                name="innovt_payment.templ_it_innovt_payment_cfdi_report"
+                file="innovt_payment.templ_it_innovt_payment_cfdi_report"
+                print_report_name="(object._get_report_cfdi_name())"
+                groups="account.group_account_invoice"
+                attachment="(object._get_report_cfdi_name()+'.pdf')"
+        />
+    </data>
+
+
+</odoo>

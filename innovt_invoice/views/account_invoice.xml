@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2018 Yonn Xyz. All rights reserved. -->
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="msc_iuv_account_invoice_settings_form">
+            <field name="name">Account invoice settings from</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='type']" position="before">
+                    <div attrs="{'invisible':[('uuid','=',False)]}">
+                        <h2>
+                            <field name="uuid"/>
+                        </h2>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='date_invoice']" position="after">
+                    <field name="datetime_stamp" attrs="{'invisible':[('datetime_stamp','=',False)]}"/>
+                    <field name="datetime_stamp_cancelled" attrs="{'invisible':[('datetime_stamp_cancelled','=',False)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="payment_form_id" attrs="{'readonly': [('state_invoice','!=',False)]}"/>
+                    <field name="payment_method_id" attrs="{'readonly': [('state_invoice','!=',False)]}"/>
+                    <field name="cfdi_use_id" attrs="{'readonly': [('state_invoice','!=',False)]}"/>
+                </xpath>
+                <xpath expr="//page[@name='other_info']/group" position="after">
+                    <page string="Settings">
+                        <group>
+                            <group string="Invoice">
+                                <field name="state_invoice"/>
+                                <field name="document_type"/>
+                                <field name="version"/>
+                            </group>
+                            <group string="Relationship">
+                                <field name="type_relationship_id"
+                                       attrs="{'readonly': [('state_invoice','!=',False)]}"/>
+                                <field name="uuid_relationship" attrs="{'readonly': [('state_invoice','!=',False)]}"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//header/button[@name='action_invoice_open']" position="after">
+                    <button type="object" class="oe_highlight"
+                            confirm="Are you sure you want to do this?"
+                            attrs="{'invisible':[ '|',('state','in',['draft','cancel']),('state_invoice','!=',False) ]}"
+                            name="invoice_stamp" string="Stamp"/>
+                    <button type="object" class="oe_highlight"
+                            confirm="Are you sure you want to do this?"
+                            attrs="{'invisible':['|',('state_invoice','=','cancelled'),('uuid','=',False)]}"
+                            name="invoice_stamp_cancel" string="Stamp cancel"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2017 Google Inc. All rights reserved. -->
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="msc_iuv_res_country_code3_form">
+            <field name="name">Country code 3 from</field>
+            <field name="model">res.country</field>
+            <field name="inherit_id" ref="base.view_country_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='code']" position="after">
+                    <field name="code3"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

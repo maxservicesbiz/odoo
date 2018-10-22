@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- © Yonn, Xyz. All rights reserved. -->
+<odoo>
+    <data noupdate="1">
+        <record id="cfdi_use_G01" model="cfdi.use">
+            <field name="name">Adquisición de mercancías</field>
+            <field name="code">G01</field>
+        </record>
+
+        <record id="cfdi_use_G02" model="cfdi.use">
+            <field name="name">Devoluciones</field>
+            <field name="code">G02</field>
+        </record>
+
+        <record id="cfdi_use_G03" model="cfdi.use">
+            <field name="name">Gastos en general</field>
+            <field name="code">G03</field>
+        </record>
+
+        <record id="cfdi_use_I01" model="cfdi.use">
+            <field name="name">Construcciones</field>
+            <field name="code">I01</field>
+        </record>
+
+        <record id="cfdi_use_I02" model="cfdi.use">
+            <field name="name">Mobiliario y equipo de oficina por inversiones</field>
+            <field name="code">I02</field>
+        </record>
+
+        <record id="cfdi_use_I03" model="cfdi.use">
+            <field name="name">Equipo de transporte</field>
+            <field name="code">I03</field>
+        </record>
+
+        <record id="cfdi_use_I04" model="cfdi.use">
+            <field name="name">Equipo de cómputo y accesorios</field>
+            <field name="code">I04</field>
+        </record>
+
+        <record id="cfdi_use_I05" model="cfdi.use">
+            <field name="name">Dados</field>
+            <field name="code">I05</field>
+        </record>
+
+        <record id="cfdi_use_I06" model="cfdi.use">
+            <field name="name">Comunicacion telefónica</field>
+            <field name="code">I06</field>
+        </record>
+
+        <record id="cfdi_use_I07" model="cfdi.use">
+            <field name="name">Comunicación Satelital</field>
+            <field name="code">I07</field>
+        </record>
+
+        <record id="cfdi_use_I08" model="cfdi.use">
+            <field name="name">Otra maquinaria y equipo</field>
+            <field name="code">I08</field>
+        </record>
+
+        <record id="cfdi_use_D01" model="cfdi.use">
+            <field name="name">Honorarios médicos</field>
+            <field name="code">D01</field>
+        </record>
+
+        <record id="cfdi_use_D02" model="cfdi.use">
+            <field name="name">Gastos médicos por incapacidad o discapacidad</field>
+            <field name="code">D02</field>
+        </record>
+
+        <record id="cfdi_use_D03" model="cfdi.use">
+            <field name="name">Gastos funerales</field>
+            <field name="code">D03</field>
+        </record>
+
+        <record id="cfdi_use_D04" model="cfdi.use">
+            <field name="name">Donativos</field>
+            <field name="code">D04</field>
+        </record>
+
+        <record id="cfdi_use_D07" model="cfdi.use">
+            <field name="name">Primas por seguros de gastos médicos</field>
+            <field name="code">D07</field>
+        </record>
+
+        <record id="cfdi_use_D08" model="cfdi.use">
+            <field name="name">Gastos de transportación escolar obligatoria</field>
+            <field name="code">D08</field>
+        </record>
+
+        <record id="cfdi_use_D10" model="cfdi.use">
+            <field name="name">Pagos por servicios educativos (colegiaturas)</field>
+            <field name="code">D10</field>
+        </record>
+
+        <record id="cfdi_use_P01" model="cfdi.use">
+            <field name="name">Por definir</field>
+            <field name="code">P01</field>
+        </record>
+
+    </data>
+</odoo>
+    
