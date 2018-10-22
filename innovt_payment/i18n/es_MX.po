@@ -1,0 +1,573 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-18 20:12+0000\n"
+"PO-Revision-Date: 2018-10-18 20:24+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Spanish (Mexico)\n"
+"Language: es-MX\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"X-Loco-Source-Locale: es_MX\n"
+"X-Loco-Parser: loco_parse_po\n"
+"X-Generator: Loco https://localise.biz/"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "&amp;nbsp;"
+msgstr "&amp;nbsp;"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Banco ordenante:</span>"
+msgstr "<span class=\"field-main\">Banco ordenante:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Certificado SAT:</span>"
+msgstr "<span class=\"field-main\">Certificado SAT:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Clave producto:</span>"
+msgstr "<span class=\"field-main\">Clave producto:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Clave unidad:</span>"
+msgstr "<span class=\"field-main\">Clave unidad:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Cliente:</span>"
+msgstr "<span class=\"field-main\">Cliente:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Cuenta beneficiario:</span>"
+msgstr "<span class=\"field-main\">Cuenta beneficiario:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Cuenta ordenante:</span>"
+msgstr "<span class=\"field-main\">Cuenta ordenante:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Fecha de certificación:</span>"
+msgstr "<span class=\"field-main\">Fecha de certificación:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Fecha:</span>"
+msgstr "<span class=\"field-main\">Fecha:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Folio fiscal:</span>"
+msgstr "<span class=\"field-main\">Folio fiscal:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Folio:</span>"
+msgstr "<span class=\"field-main\">Folio:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Forma de pago:</span>"
+msgstr "<span class=\"field-main\">Forma de pago:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document_external_layout
+msgid "<span class=\"field-main\">Lugar de expedición:</span>"
+msgstr "<span class=\"field-main\">Lugar de expedición:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Moneda:</span>"
+msgstr "<span class=\"field-main\">Moneda:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Monto:</span>"
+msgstr "<span class=\"field-main\">Monto:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Número de operación:</span>"
+msgstr "<span class=\"field-main\">Número de operación:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">R.F.C PAC:</span>"
+msgstr "<span class=\"field-main\">R.F.C PAC:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">R.F.C:</span>"
+msgstr "<span class=\"field-main\">R.F.C:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">RFC Banco beneficiario:</span>"
+msgstr "<span class=\"field-main\">RFC Banco beneficiario:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">RFC Banco ordenante:</span>"
+msgstr "<span class=\"field-main\">RFC Banco ordenante:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document_external_layout
+msgid "<span class=\"field-main\">Serie:</span>"
+msgstr "<span class=\"field-main\">Serie:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document_external_layout
+msgid "<span class=\"field-main\">Tipo de comprobate:</span>"
+msgstr "<span class=\"field-main\">Tipo de comprobate:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<span class=\"field-main\">Uso CFDI:</span>"
+msgstr "<span class=\"field-main\">Uso CFDI:</span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document_external_layout
+msgid ""
+"<span style=\"text-transform: uppercase\">\n"
+"                            Este documento es una representación impresa de "
+"un cfdi\n"
+"                        </span>"
+msgstr ""
+"<span style=\"text-transform: uppercase\">\n"
+"                            Este documento es una representación impresa de "
+"un cfdi\n"
+"                        </span>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<strong>Subtotal</strong>"
+msgstr "<strong>Subtotal</strong>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "<strong>Total</strong>"
+msgstr "<strong>Total</strong>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.iuv_it_innovt_payment_account_payment_cfdi33_form
+msgid "Are you sure you want to do this?"
+msgstr "¿Seguro que quieres hacer esto?"
+
+#. module: innovt_payment
+#: model:ir.model,name:innovt_payment.model_res_bank
+msgid "Bank"
+msgstr "Banco"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document_external_layout
+msgid "CANCELADO"
+msgstr "CANCELADO"
+
+#. module: innovt_payment
+#: selection:account.payment,state_payment:0 
+#: code:addons/innovt_payment/models/account_payment.py:35
+#, python-format
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "Cantidad"
+msgstr "Cantidad"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:194
+#, python-format
+msgid "Capture the transaction number as a payment reference."
+msgstr "Capture el número de transacción como una referencia de pago."
+
+#. module: innovt_payment
+#: model:ir.model,name:innovt_payment.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document_external_layout
+msgid "Complemento de pago"
+msgstr "Complemento de pago"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:38 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_confirmation
+#, python-format
+msgid "Confirmation"
+msgstr "Confirmation"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "Datos del cliente"
+msgstr "Datos del cliente"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:24 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_deposit_date
+#, python-format
+msgid "Deposit date"
+msgstr "Fecha de depósito"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "Descripción"
+msgstr "Descripción"
+
+#. module: innovt_payment
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_doc_pdf_id
+msgid "Doc Pdf"
+msgstr "Documento PDF"
+
+#. module: innovt_payment
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_doc_xml_id
+msgid "Doc Xml"
+msgstr "Documento XML"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:19 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_document_type
+#, python-format
+msgid "Document type"
+msgstr "Tipo de Documento"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "Documento relacionado"
+msgstr "Documento relacionado"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "Impuesto"
+msgstr "Impuesto"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.iuv_it_innovt_payment_account_payment_cfdi33_form
+msgid "Issuer"
+msgstr "Emisor"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:26 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_issuer_bank_id
+#, python-format
+msgid "Issuer bank"
+msgstr "Banco del emisor"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:27 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_issuer_bank_account_id
+#, python-format
+msgid "Issuer bank account"
+msgstr "Cuenta bancaria del emisor"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:28 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_issuer_bank_vat
+#, python-format
+msgid "Issuer bank vat"
+msgstr "RFC del banco emisor"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "Moneda"
+msgstr "Moneda"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "Monto pagado"
+msgstr "Monto pagado"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "Método de pago"
+msgstr "Método de pago"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "No. Parcialidad"
+msgstr "No. Parcialidad"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:30 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_operation_number
+#, python-format
+msgid "Operation number"
+msgstr "Número de operación"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:48 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_chain_tfd
+#, python-format
+msgid "Original chain tdf"
+msgstr "Cadena original TFD"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.iuv_it_innovt_payment_account_payment_cfdi33_form
+msgid "Other information"
+msgstr "Otra información"
+
+#. module: innovt_payment
+#: selection:account.payment,document_type:0 
+#: code:addons/innovt_payment/models/account_payment.py:9
+#, python-format
+msgid "Payment"
+msgstr "Pago"
+
+#. module: innovt_payment
+#: model:ir.actions.report,name:innovt_payment.repo_it_innovt_invoice_cfdi_report
+msgid "Payment CFDI"
+msgstr "Pago CFDI"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:16 
+#: code:addons/innovt_payment/models/account_payment.py:17 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_payment_form_code
+#:  
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_payment_form_id
+#, python-format
+msgid "Payment form"
+msgstr "Forma de pago"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/res_company.py:9 
+#: model:ir.model.fields,field_description:innovt_payment.field_res_company_payment_series
+#, python-format
+msgid "Payment series"
+msgstr "Serie de pago"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:25 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_stamp_date
+#, python-format
+msgid "Payment stamp date"
+msgstr "Fecha del timbrado de pago"
+
+#. module: innovt_payment
+#: model:ir.model,name:innovt_payment.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:184
+#, python-format
+msgid "Please capture payment deposit date."
+msgstr "Por favor captura la fecha de depósito de pago."
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "Precio unitario"
+msgstr "Precio unitario"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document_external_layout
+msgid ""
+"Página:\n"
+"                        <span class=\"page\"/>\n"
+"                        /\n"
+"                        <span class=\"topage\"/>"
+msgstr ""
+"Página:\n"
+"                        <span class=\"page\"/>\n"
+"                        /\n"
+"                        <span class=\"topage\"/>"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.iuv_it_innovt_payment_account_payment_cfdi33_form
+msgid "Receiver"
+msgstr "Receptor"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:31 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_receiver_bank_id
+#, python-format
+msgid "Receiver bank"
+msgstr "Banco del receptor"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:32 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_receiver_bank_account_id
+#, python-format
+msgid "Receiver bank account"
+msgstr "Cuenta bancaria del receptor"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:33 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_receiver_bank_vat
+#, python-format
+msgid "Receiver bank vat"
+msgstr "RFC del banco receptor"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.iuv_it_innovt_payment_account_payment_cfdi33_form
+msgid "Relationship"
+msgstr "Relación"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "Saldo pendiente"
+msgstr "Saldo pendiente"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "Saldo restante"
+msgstr "Saldo restante"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:189
+#, python-format
+msgid "Select a payment form."
+msgstr "Seleccione una forma de pago."
+
+#. module: innovt_payment
+#: selection:account.payment,state_payment:0 
+#: code:addons/innovt_payment/models/account_payment.py:35
+#, python-format
+msgid "Signed"
+msgstr "Timbrado"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.iuv_it_innovt_payment_account_payment_cfdi33_form
+msgid "Stamp"
+msgstr "Timbrar CFDI"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:36 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_state_payment
+#, python-format
+msgid "State Payment"
+msgstr "Estado del pago"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:148
+#, python-format
+msgid "The RFC company is not registered, please register for continue"
+msgstr ""
+"El RFC de la empresa no está registrada, por favor registrar para continuar"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:129
+#, python-format
+msgid "The RFC customer is not registered, please register for continue."
+msgstr ""
+"El RFC del cliente no está registrado, por favor registrar para continuar."
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:139
+#, python-format
+msgid "The company has not defined the fiscal regime"
+msgstr "La empresa no ha definido el régimen fiscal."
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:144
+#, python-format
+msgid ""
+"The fiscal name of the company has not been captured, please write to "
+"continue."
+msgstr ""
+"El nombre fiscal de la empresa no ha sido capturado, por favor escriba para "
+"continuar."
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:112
+#, python-format
+msgid ""
+"The payment series is not captured in the company configuration, capture to "
+"continue."
+msgstr ""
+"La serie del pago no se a capturado en la configuración de la empresa, "
+"captura para continuar."
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:117
+#, python-format
+msgid ""
+"The postal code of the place of expedition was not captured, capture to "
+"continue."
+msgstr ""
+"El código postal del lugar de expedición no fue capturado, captura para "
+"continuar.\n"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:64
+#, python-format
+msgid "This document has already been stamped!"
+msgstr "Este documento ya ha sido timbrado!"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:93
+#, python-format
+msgid "This document was stamped correctly."
+msgstr "Este documento fue timbrado correctamente."
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "Tipo de relación"
+msgstr "Tipo de relación"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:41 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_type_relationship_id
+#, python-format
+msgid "Type of relationship"
+msgstr "Tipo de relación"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:37 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_uuid
+#:  
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+#, python-format
+msgid "Uuid"
+msgstr "Uuid"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:43 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_uuid_relationship
+#, python-format
+msgid "Uuid relationship"
+msgstr "Uuid relacionado"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/res_bank.py:9 
+#: model:ir.model.fields,field_description:innovt_payment.field_res_bank_vat
+#, python-format
+msgid "VAT"
+msgstr "RFC"
+
+#. module: innovt_payment
+#: code:addons/innovt_payment/models/account_payment.py:39 
+#: model:ir.model.fields,field_description:innovt_payment.field_account_payment_version
+#, python-format
+msgid "Version"
+msgstr "Versión"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "cadena original del complemento de certificaión digital del sat"
+msgstr "cadena original del complemento de certificaión digital del sat"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "sello digital del cfdi"
+msgstr "sello digital del cfdi"
+
+#. module: innovt_payment
+#: model:ir.ui.view,arch_db:innovt_payment.templ_it_innovt_payment_cfdi_document
+msgid "sello digital del sat"
+msgstr "sello digital del sat"

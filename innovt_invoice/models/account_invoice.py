@@ -128,8 +128,8 @@ class AccountInvoice(models.Model):
             cfdi.update(dict(Serie=company.invoice_series))
         else:
             raise Exception(_("It's necessary to write the series of the invoice."))
-        if company.currency_id or False:
-            cfdi.update(dict(Currency=company.currency_id.name))
+        if self.currency_id or False:
+            cfdi.update(dict(Currency=self.currency_id.name))
         else:
             raise Exception(_("It's necessary to define the currency of the company."))
         if company.zip or False:
@@ -316,7 +316,7 @@ class AccountInvoice(models.Model):
 
     @api.model
     def get_xml(self, xmldata64=None):
-        self.ensure_one()
+        #self.ensure_one() is necessary when is used other class
         if not xmldata64:
             xmldata64 = self.doc_xml_id.datas
         if not xmldata64:
@@ -430,7 +430,6 @@ class AccountInvoice(models.Model):
             self.configure_innov()
             data = {'ContentXml': self.doc_xml_id.datas.decode('utf-8')}
             result = innov.Cfdi.chain_tfd(data=data)
-            print(result)
             if result.get('Success'):
                 self.chain_tfd = result.get('Payload').get('ChainTfd')
         return self.chain_tfd
