@@ -51,7 +51,7 @@
                             <span t-if="o.payment_type == 'inbound' and o.state_payment == 'signed'">
                                 Complemento de pago
                             </span>
-                            <span t-if="o.payment_type == 'outbound' and o.state_invoice == 'signed'">
+                            <span t-if="o.payment_type == 'outbound' and o.state_payment == 'signed'">
                                 Complemento de pago
                             </span>
                         </div>
