@@ -63,7 +63,7 @@
         'views/account_fiscal_position.xml',
         #'data/catalogs/account_fiscal_position_data.xml',
         'views/reports/cfdi.xml',
-
+        'data/mail_template_cfdi_invoice_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
