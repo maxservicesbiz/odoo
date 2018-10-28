@@ -9,15 +9,16 @@
             <field name="arch" type="xml">
                 <data>
                     <button name="post" position="after">
+                        <button name="action_payment_sent" type="object" string="Send by Email"
+                                attrs="{'invisible':['|',('state_payment','=',False)]}"
+                                class="oe_highlight o_invoice_send" groups="base.group_user"/>
+                        <button name="payment_print" string="Print Payment" type="object"
+                                attrs="{'invisible':['|',('state_payment','=',False)]}"
+                                class="oe_highlight" groups="base.group_user"/>
                         <button name="payment_stamp" class="oe_highlight" states="posted"
                                 confirm="Are you sure you want to do this?"
                                 attrs="{'invisible':['|',('state_payment','=','signed')]}"
-                                string="Stamp" type="object"/>
-                        <!--
-                        <button name="send_payment" class="oe_highlight"
-                                attrs="{'invisible':[('estado_pago','!=','pago_correcto')]}" string="Send by Email"
-                                type="object"/>-->
-
+                                string="Stamp" type="object" groups="base.group_user" />
                     </button>
                     <xpath expr="//sheet" position="inside">
                         <notebook>
@@ -68,7 +69,7 @@
                                     </group-->
                                     <group string="Relationship">
                                         <field name="type_relationship_id" attrs="{'readonly': [('state_payment','!=',False)]}"/>
-                                        <field name="uuid_relationship" attrsattrs="{'readonly': [('state_payment','!=',False)]}"/>
+                                        <field name="uuid_relationship" attrs="{'readonly': [('state_payment','!=',False)]}"/>
                                     </group>
                                 </group>
                             </page>

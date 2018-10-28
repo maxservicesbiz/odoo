@@ -28,7 +28,8 @@
         'views/res_company.xml',
         'views/res_bank.xml',
         'views/account_payment.xml',
-        'views/reports/cfdi.xml'
+        'views/reports/cfdi.xml',
+        'data/mail_template_cfdi_payment_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
