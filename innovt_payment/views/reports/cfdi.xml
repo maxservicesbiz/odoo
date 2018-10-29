@@ -570,7 +570,7 @@
             </t>
         </template>
         <report
-                id="repo_it_innovt_invoice_cfdi_report"
+                id="repo_it_innovt_payment_cfdi_report"
                 model="account.payment"
                 string="Payment CFDI"
                 report_type="qweb-pdf"

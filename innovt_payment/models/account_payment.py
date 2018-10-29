@@ -3,7 +3,7 @@
 
 from odoo import models, fields, api, _, exceptions
 import innov
-import uuid
+import base64
 
 DOCUMENT_TYPE = [
     ('P', _("Payment")),
@@ -13,6 +13,8 @@ DOCUMENT_TYPE = [
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
 
+    user_id = fields.Many2one('res.users', string='Salesperson', readonly=True,
+                              default=lambda self: self.env.user, copy=False)
     payment_form_id = fields.Many2one(comodel_name='payment.form', string=_("Payment form"))
     payment_form_code = fields.Char(string=_("Payment form"), related='payment_form_id.code')
     document_type = fields.Selection(selection=DOCUMENT_TYPE, default='P', readonly=True, store=True,
@@ -89,10 +91,9 @@ class AccountPayment(models.Model):
                     xml = cfdi_stamped.get('Payload').get('ContentXml')
                     self.doc_xml_id = self.env['ir.attachment'].create({
                         'name': '{}.xml'.format(self.uuid),
+                        'datas_fname': '{}.pdf'.format(self.uuid),
                         'type': 'binary',
                         'datas': xml,
-                        #'res_model': 'account.payment',
-                        #'res_id': self.id,
                         'mimetype': 'application/xml'
                     })
                     self.message_post(body=_("This document was stamped correctly."),
@@ -277,7 +278,7 @@ class AccountPayment(models.Model):
 
     @api.model
     def _get_report_cfdi_name(self):
-        return str(uuid.uuid4())
+        return str(self.uuid)
 
     @api.model
     def get_payments(self, doc):
@@ -290,3 +291,52 @@ class AccountPayment(models.Model):
         if isinstance(related_documents, dict):
             return [related_documents]
         return related_documents
+
+    @api.multi
+    def payment_cfdi2pdf(self):
+        self.ensure_one()
+        doc, doc_type = self.env.ref('innovt_payment.repo_it_innovt_payment_cfdi_report').render_qweb_pdf(self.ids)
+        if not self.doc_pdf_id:
+            doc_pdf_id = self.env['ir.attachment'].create({
+                'name': '{}.pdf'.format(self.uuid),
+                'datas_fname': '{}.pdf'.format(self.uuid),
+                'type': 'binary',
+                'datas': base64.encodebytes(doc),
+                'mimetype': 'application/pdf'
+            })
+            self.doc_pdf_id = doc_pdf_id
+        else:
+            self.doc_pdf_id.datas = base64.encodebytes(doc)
+
+    @api.multi
+    def payment_print(self):
+        if self.state_payment:
+            return self.env.ref('innovt_payment.repo_it_innovt_payment_cfdi_report').report_action(self)
+
+    @api.multi
+    def action_payment_sent(self):
+        template = self.env.ref('innovt_payment.email_template_cfdi_payment', False)
+        compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
+        self.payment_cfdi2pdf()
+        ctx = dict(
+                default_model='account.payment',
+                default_res_id=self.id,
+                default_use_template=bool(template),
+                default_template_id=template and template.id or False,
+                default_composition_mode='comment',
+                mark_invoice_as_sent=True,
+                default_attachment_ids=[self.doc_xml_id.id, self.doc_pdf_id.id],
+                #custom_layout="innovt_payment.mail_template_cfdi_payment_notification",
+                force_email=True
+            )
+        return {
+                'name': _('Compose Email'),
+                'type': 'ir.actions.act_window',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'mail.compose.message',
+                'views': [(compose_form.id, 'form')],
+                'view_id': compose_form.id,
+                'target': 'new',
+                'context': ctx,
+            }
