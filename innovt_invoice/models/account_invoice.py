@@ -99,6 +99,7 @@ class AccountInvoice(models.Model):
                 xml = cfdi_stamped.get('Payload').get('ContentXml')
                 self.doc_xml_id = self.env['ir.attachment'].create({
                     'name': '{}.xml'.format(self.uuid),
+                    'datas_fname': '{}.xml'.format(self.uuid),
                     'type': 'binary',
                     # 'datas': base64.encodestring(pdf),
                     'datas': xml,
@@ -305,14 +306,19 @@ class AccountInvoice(models.Model):
     @api.multi
     def invoice_cfdi2pdf(self):
         self.ensure_one()
-        doc, doc_type = self.env.ref('innovt_invoice.templ_it_innovt_invoice_cfdi_report').render_qweb_pdf(self.ids)
-        doc_pdf_id = self.env['ir.attachment'].create({
-            'name': '{}.pdf'.format(self.uuid),
-            'type': 'binary',
-            'datas': base64.encodebytes(doc),
-            'mimetype': 'application/html'
-        })
-        self.message_post(body=_("Pdf Ok"), attachment_ids=[doc_pdf_id.id])
+        doc, doc_type = self.env.ref('innovt_invoice.repo_it_innovt_invoice_cfdi_report').render_qweb_pdf(self.ids)
+        if not self.doc_pdf_id:
+            doc_pdf_id = self.env['ir.attachment'].create({
+                'name': '{}.pdf'.format(self.uuid),
+                'datas_fname': '{}.pdf'.format(self.uuid),
+                'type': 'binary',
+                'datas': base64.encodebytes(doc),
+                'mimetype': 'application/pdf'
+            })
+            self.doc_pdf_id = doc_pdf_id
+        else:
+            self.doc_pdf_id.datas = base64.encodebytes(doc)
+        #self.message_post(body=_("Pdf Ok"), attachment_ids=[doc_pdf_id.id])
 
     @api.model
     def get_xml(self, xmldata64=None):
@@ -453,3 +459,41 @@ class AccountInvoice(models.Model):
             'amount': doc.get('Total'),
             'stamp-cfd': stamp.get('SelloCFD')
         }
+
+    @api.multi
+    def invoice_print(self):
+        original_pdf = super(AccountInvoice, self).invoice_print()
+        if self.state_invoice:
+            return self.env.ref('innovt_invoice.repo_it_innovt_invoice_cfdi_report').report_action(self)
+        return original_pdf
+
+    @api.multi
+    def action_invoice_sent(self):
+        original_mail = super(AccountInvoice, self).action_invoice_sent()
+        if self.state_invoice:
+            template = self.env.ref('innovt_invoice.email_template_cfdi_invoice', False)
+            compose_form = self.env.ref('mail.email_compose_message_wizard_form', False)
+            self.invoice_cfdi2pdf()
+            ctx = dict(
+                default_model='account.invoice',
+                default_res_id=self.id,
+                default_use_template=bool(template),
+                default_template_id=template and template.id or False,
+                default_composition_mode='comment',
+                mark_invoice_as_sent=True,
+                default_attachment_ids=[self.doc_xml_id.id, self.doc_pdf_id.id],
+                custom_layout="innovt_invoice.mail_template_cfdi_invoice_notification",
+                force_email=True
+            )
+            return {
+                'name': _('Compose Email'),
+                'type': 'ir.actions.act_window',
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'mail.compose.message',
+                'views': [(compose_form.id, 'form')],
+                'view_id': compose_form.id,
+                'target': 'new',
+                'context': ctx,
+            }
+        return original_mail
