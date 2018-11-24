@@ -1,12 +1,14 @@
-# Innov Biz + Odoo 
+# Max Solutions Co + Odoo 
 ## Summary 
-The official website [innov.biz](https://innov.biz)
+The official website [max-solutions.co](https://max-solutions.co)
 ## Modules 
 
 * innovt_client
     * Controller SaaS Innov Biz
 * innovt_invoice 
     * Location l10n_MX support Cfdi 3.3 
+* innovt_payment
+    * Location l10n_MX support Payment 3.3
 
 ## Installation
 * code Odoo
@@ -25,4 +27,4 @@ git checkout f9737d7
 * [GPL 3.0](LICENSE)
 
 ## Authors 
-* [Yonn, Xyz](<https://yonn.xyz>)
+* [Max Solutions, Co](<https://max-solutions.co>)
