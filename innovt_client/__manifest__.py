@@ -23,7 +23,8 @@
 
     # always loaded
     'data': [
-        'views/res_company.xml',
+        #'views/res_company.xml',
+        'views/res_config_settings_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
