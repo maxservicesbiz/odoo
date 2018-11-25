@@ -10,3 +10,4 @@ class ResCompany(models.Model):
     client_id = fields.Char(string=_("Client Id"))
     client_secret = fields.Char(string=_("Client secret"))
     mode = fields.Boolean(string=_("Test mode"))
+

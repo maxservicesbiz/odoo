@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © Yonn, Xyz. All rights reserved.
 {
-    'name': "Innov Client",
+    'name': "Innovt Client",
 
     'summary': """
         Controller Innov <--> Client, is mandatory install and 
@@ -9,8 +9,8 @@
         resposability the futures problems or damage in the db.
         """,
 
-    'author': "Yonn, Xyz",
-    'website': "https://innov.biz",
+    'author': "Max Solutions, Co",
+    'website': "https://max-solutions.co",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
@@ -23,7 +23,8 @@
 
     # always loaded
     'data': [
-        'views/res_company.xml',
+        #'views/res_company.xml',
+        'views/res_config_settings_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

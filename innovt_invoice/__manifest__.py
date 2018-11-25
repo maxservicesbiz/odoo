@@ -1,12 +1,12 @@
 {
-    'name': "Innov Invoice",
+    'name': "Innovt Invoice",
 
     'summary': """
         This module use  guidelines or rules 
         issued by SAT, begin rules 3.3...""",
 
-    'author': "Yonn, Xyz",
-    'website': "https://innov.biz",
+    'author': "Max Solutions, Co",
+    'website': "https://max-solutions.co",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
