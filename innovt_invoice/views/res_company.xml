@@ -34,6 +34,18 @@
 
                     </page>
                 </xpath>
+
+            </field>
+        </record>
+
+        <record id="it_innovt_invoice_iuv_string_vat_to_rfc" model="ir.ui.view">
+            <field name="name">Res Company string VAT to RFC</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base_vat_autocomplete.res_company_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="string">RFC</attribute>
+                </xpath>
             </field>
         </record>
     </data>

@@ -158,7 +158,7 @@ class AccountInvoice(models.Model):
     def get_receiver(self):
         receiver = {}
         if self.partner_id.vat or False:
-            receiver.update(dict(Rfc=self.partner_id.vat[2:]))
+            receiver.update(dict(Rfc=self.partner_id.vat))
         else:
             raise Exception(_("The customer's RFC has not been captured."))
         if self.partner_id.name or False:
