@@ -3,7 +3,7 @@
 
 from odoo.exceptions import MissingError
 from odoo import models, fields, api, _
-import uuid
+import logging
 import innov
 from urllib.parse import quote
 import base64
@@ -16,6 +16,7 @@ DOCUMENT_TYPE = [
     ('E', _("Outgoing")),
     ('T', _("Transfer"))
 ]
+_logger = logging.getLogger(__name__)
 
 
 class AccountInvoice(models.Model):
@@ -41,8 +42,9 @@ class AccountInvoice(models.Model):
     datetime_stamp_cancelled = fields.Datetime(string=_("Datetime stamp cancelled"), readonly=True, copy=False)
 
     state_invoice = fields.Selection(
-        selection=[('signed', _("Signed")), ('cancelled', _("Cancelled"))],
-        string=_("State invoice"), readonly=True, copy=False)
+        selection=[('signed', _("Signed")), ('cancelled', _("Cancelled")),
+                   ('cancellation_process', _("Cancellation process"))], string=_("State invoice"), readonly=True,
+        copy=False)
     # Is replaced by document_type type selection
     # type_document_id = fields.Many2one(comodel_name='type.document', string=_("Type document"))
     document_type = fields.Selection(selection=DOCUMENT_TYPE, default=_default_document_type, readonly=True, store=True,
@@ -286,8 +288,13 @@ class AccountInvoice(models.Model):
             date_invoice = fields.Datetime.now()
             rq = innov.Cfdi.cancel(rfc_issuer=self.env.user.company_id.vat, uuid=self.uuid)
             if rq.get('Success'):
-                self.datetime_stamp_cancelled = date_invoice
-                self.state_invoice = 'cancelled'
+                _state = rq.get('Payload').get('State', 'cancelled')
+                if _state == 'cancelled':
+                    self.datetime_stamp_cancelled = date_invoice
+                    self.state_invoice = 'cancelled'
+                elif _state == 'cancellation_process':
+                    self.state_invoice = 'cancellation_process'
+                    self.message_post(body=_("Cancellation process was requested."))
             else:
                 raise MissingError(rq.get('Message'))
         except Exception as e:
@@ -312,11 +319,11 @@ class AccountInvoice(models.Model):
             self.doc_pdf_id = doc_pdf_id
         else:
             self.doc_pdf_id.datas = base64.encodebytes(doc)
-        #self.message_post(body=_("Pdf Ok"), attachment_ids=[doc_pdf_id.id])
+        # self.message_post(body=_("Pdf Ok"), attachment_ids=[doc_pdf_id.id])
 
     @api.model
     def get_xml(self, xmldata64=None):
-        #self.ensure_one() is necessary when is used other class
+        # self.ensure_one() is necessary when is used other class
         if not xmldata64:
             xmldata64 = self.doc_xml_id.datas
         if not xmldata64:
@@ -491,3 +498,24 @@ class AccountInvoice(models.Model):
                 'context': ctx,
             }
         return original_mail
+
+    @api.model
+    def check_invoice_cancellation_process(self):
+        mode = self.env['res.config.settings'].sudo().get_innov_settings_api()
+        if mode.get('mode') == 'live':
+            self.configure_innov()
+            invoice_ids = self.search([
+                ('type', '=', 'out_invoice'),
+                ('state_invoice', '=', 'cancellation_process')
+            ])
+            for invoice_id in invoice_ids:
+                try:
+                    result = innov.Cfdi.status(rfc_issuer=invoice_id.company_id.vat, uuid=invoice_id.uuid)
+                    if result.get('Success', False):
+                        payload = result.get('Payload', {})
+                        if payload.get('State') == 'cancelled':
+                            invoice_id.invoice_stamp_cancel()
+                        else:
+                            _logger.warning(str(payload))
+                except Exception as e:
+                    _logger.error(str(e))
