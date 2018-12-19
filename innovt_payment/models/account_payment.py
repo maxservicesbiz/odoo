@@ -85,7 +85,7 @@ class AccountPayment(models.Model):
                     xml = cfdi_stamped.get('Payload').get('ContentXml')
                     self.doc_xml_id = self.env['ir.attachment'].create({
                         'name': '{}.xml'.format(self.uuid),
-                        'datas_fname': '{}.pdf'.format(self.uuid),
+                        'datas_fname': '{}.xml'.format(self.uuid),
                         'type': 'binary',
                         'datas': xml,
                         'mimetype': 'application/xml'
@@ -124,7 +124,7 @@ class AccountPayment(models.Model):
             'CfdiUse': 'P01'
         }
         if self.partner_id.vat:
-            receiver.update(dict(Rfc=self.partner_id.vat[2:]))
+            receiver.update(dict(Rfc=self.partner_id.vat))
         else:
             raise exceptions.ValidationError(_("The RFC customer is not registered, please register for continue."))
         return receiver
