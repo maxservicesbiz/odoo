@@ -22,6 +22,7 @@
         'innovt_client',
         'account_invoicing',
         'l10n_mx',
+        'base_vat_autocomplete'
     ],
 
     # always loaded
