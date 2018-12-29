@@ -22,13 +22,7 @@ class ResCompany(models.Model):
 
     @api.model
     def configure_innov_biz(self):
-        innov.configure(
-            {
-                'mode': 'sandbox' if self.mode else 'live',
-                'client_id': self.client_id,
-                'client_secret': self.client_secret
-            }
-        )
+        innov.configure(self.env['res.config.settings'].sudo().get_innov_settings_api())
 
     @api.multi
     def sync_csd(self):
