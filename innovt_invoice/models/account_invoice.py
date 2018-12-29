@@ -286,7 +286,7 @@ class AccountInvoice(models.Model):
         try:
             self.configure_innov()
             date_invoice = fields.Datetime.now()
-            rq = innov.Cfdi.cancel(rfc_issuer=self.env.user.company_id.vat, uuid=self.uuid)
+            rq = innov.Cfdi.cancel(rfc_issuer=self.company_id.vat, uuid=self.uuid)
             if rq.get('Success'):
                 _state = rq.get('Payload').get('State', 'cancelled')
                 if _state == 'cancelled':
