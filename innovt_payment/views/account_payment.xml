@@ -45,7 +45,6 @@
                                         <field name="issuer_bank_id"
                                                attrs="{'invisible':[('payment_form_code','!=','03')],'readonly': [('state_payment','!=',False)]}"/>
                                         <field name="issuer_bank_account_id"
-                                               domain="[('partner_id','=', partner_id)]"
                                                attrs="{'invisible':[('payment_form_code','!=','03')],'readonly': [('state_payment','!=',False)]}"/>
                                         <field name="issuer_bank_vat"
                                                attrs="{'invisible':[('payment_form_code','!=','03')],'readonly': [('state_payment','!=',False)]}"/>
