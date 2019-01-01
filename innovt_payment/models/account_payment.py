@@ -53,6 +53,68 @@ class AccountPayment(models.Model):
     def configure_innov_biz(self):
         innov.configure(self.env['res.config.settings'].sudo().get_innov_settings_api())
 
+    @api.depends('payment_form_code','partner_id')
+    @api.onchange('payment_form_id')
+    def _onchange_payment_form(self):
+        domain = {
+            'domain': {
+                'issuer_bank_account_id':[('id','in',[])],
+                'receiver_bank_account_id':[('id','in',[])],
+                'issuer_bank_id':[],
+                'receiver_bank_id':[]
+            }
+        }
+        if self.payment_form_code == '03' and self.partner_id:
+            issuer_bank_account = self.env['res.partner.bank'].search(
+                [('partner_id', '=',self.partner_id.id)]
+            )
+            receiver_bank_account = self.env['res.partner.bank'].search(
+                [('partner_id', '=',self.company_id.partner_id.id)]
+            )
+            domain.get('domain').update({
+                'issuer_bank_id': [('id','in',[r.bank_id.id for r in issuer_bank_account])],
+                'receiver_bank_id': [('id','in',[r.bank_id.id for r in receiver_bank_account])],
+            })
+        else:
+            self.issuer_bank_id = False
+            self.issuer_bank_account_id=False
+            self.receiver_bank_id = False
+            self.receiver_bank_account_id = False
+
+        return domain
+
+    @api.onchange('issuer_bank_id')
+    def _onchange_issuer_bank(self):
+        if self.issuer_bank_id:
+            return {'domain':{'issuer_bank_account_id':
+                [('id','in',self.get_partner_back_account(
+                self.partner_id,
+                self.issuer_bank_id
+            )
+            )]}}
+
+    @api.onchange('receiver_bank_id')
+    def _onchange_receiver_bank(self):
+        if self.receiver_bank_id:
+            return {'domain':{'receiver_bank_account_id':
+                [('id','in',self.get_partner_back_account(
+                    self.company_id.partner_id,
+                    self.receiver_bank_id
+                    )
+                )]}}
+    
+    @api.model
+    def get_partner_back_account(self, partner, bank):
+        bank_account = self.env['res.partner.bank'].search(
+            [('partner_id', '=',partner.id)]
+        )
+        bank_account_ids = []
+        for account in bank_account:
+            if account.bank_id.id == bank.id:
+                bank_account_ids.append(account.id)
+        return bank_account_ids
+
+
     @api.multi
     def payment_stamp(self):
         self.ensure_one()
