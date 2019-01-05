@@ -374,7 +374,7 @@ class AccountInvoice(models.Model):
     def get_taxes(self, taxes):
         taxes_retencion = []
         taxes_traslados = []
-        for taxes_key in taxes:
+        for taxes_key in taxes or []:
             tax_type = taxes.get(taxes_key)
             if isinstance(tax_type, dict):
                 for tax_type_key in tax_type.keys():
