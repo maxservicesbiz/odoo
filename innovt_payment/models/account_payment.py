@@ -324,13 +324,17 @@ class AccountPayment(models.Model):
                 self.chain_tfd = result.get('Payload').get('ChainTfd')
         return self.chain_tfd
 
-    @api.model
+    """ @api.model
     def get_url_validate_uuid(self, doc):
         return self.env['account.invoice'].sudo().get_url_validate_uuid(doc=doc)
-
+    """
     @api.model
     def get_params_cfdi_validate(self, doc):
         return self.env['account.invoice'].sudo().get_params_cfdi_validate(doc=doc)
+
+    @api.model
+    def get_qr_invoice(self, doc):
+        return self.env['account.invoice'].sudo().get_qr_invoice(doc)
 
     @api.model
     def _get_report_cfdi_name(self):

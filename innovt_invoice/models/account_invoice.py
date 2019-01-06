@@ -5,7 +5,7 @@ from odoo.exceptions import MissingError
 from odoo import models, fields, api, _
 import logging
 import innov
-from urllib.parse import quote
+from reportlab.graphics.barcode import createBarcodeDrawing
 import base64
 from xmljson import yahoo
 from xml.etree.ElementTree import fromstring
@@ -342,7 +342,7 @@ class AccountInvoice(models.Model):
             data.get('uuid'), data.get('rfc-issuer'), data.get('rfc-receiver'), data.get('amount'),
             data.get('stamp-cfd')[-8:]
         )
-        return quote(url)
+        return url
 
     @api.model
     def get_product_taxes(self, taxes):
@@ -441,13 +441,13 @@ class AccountInvoice(models.Model):
                 self.chain_tfd = result.get('Payload').get('ChainTfd')
         return self.chain_tfd
 
-    @api.model
+    """@api.model
     def get_url_validate_uuid(self, doc):
         data = self.get_params_cfdi_validate(doc=doc)
         url = "https://innov.biz/cfdi-validate-uuid?uuid={}&rfc_issuer={}&rfc_receiver={}&amount={}".format(
             data.get('uuid'), data.get('rfc-issuer'), data.get('rfc-receiver'), data.get('amount')
         )
-        return url
+        return url"""
 
     @api.model
     def get_params_cfdi_validate(self, doc):
@@ -526,3 +526,13 @@ class AccountInvoice(models.Model):
             _document_type = self.with_context(type=vals.get('type'))._default_document_type()
             vals.update({'document_type': _document_type})
         return super(AccountInvoice, self).create(vals)
+
+    @api.model
+    def get_qr_invoice(self, doc):
+        url = self.get_url_qr(doc=doc)
+        barcode = createBarcodeDrawing(
+            "QR", value=url, format='png', width=600, height=100,
+            humanReadable=1
+        )
+        img = barcode.asString('png')
+        return base64.b64encode(img).decode('utf-8')
