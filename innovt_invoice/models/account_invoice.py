@@ -519,3 +519,10 @@ class AccountInvoice(models.Model):
                             _logger.warning(str(payload))
                 except Exception as e:
                     _logger.error(str(e))
+
+    @api.model
+    def create(self, vals):
+        if vals.get('type') and not self._context.get('type', False):
+            _document_type = self.with_context(type=vals.get('type'))._default_document_type()
+            vals.update({'document_type': _document_type})
+        return super(AccountInvoice, self).create(vals)
