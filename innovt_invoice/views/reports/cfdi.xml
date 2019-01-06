@@ -110,6 +110,9 @@
                         </span>
                         <span t-esc="doc_xml.get('Version')"/>
                     </div>
+                    <div>
+                        Powered by <a target="_blank" href="https://max-solutions.co">Max Solutions Co</a>
+                    </div>
                     <div class="text-muted">
                         Página:
                         <span class="page"/>
@@ -425,8 +428,8 @@
                             </div>
                         </div>
                         <div class="col-xs-4 text-center">
-                            <a class="list-group-item" target="_blank" t-attf-href="{{o.get_url_validate_uuid(doc_xml)}}">
-                                 <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', o.get_url_qr(doc_xml),'600','600')"
+                            <a class="list-group-item" target="_blank" t-attf-href="{{o.get_url_qr(doc_xml)}}">
+                                 <img t-att-src="'data:image/png;base64,%s' % o.get_qr_invoice(doc_xml)"
                                  style="height: 200px; width: 200px;"/>
                             </a>
                         </div>
