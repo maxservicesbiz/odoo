@@ -40,7 +40,6 @@ class ResConfigSettings(models.TransientModel):
     def get_innov_api_settings(self):
         values = self.get_values()
         res = {}
-        print(values)
         for item in INNOVT_INNOV_API_KEYS:
             _field = self.key2field(item)
             _value = values[_field]
@@ -49,6 +48,7 @@ class ResConfigSettings(models.TransientModel):
                     _value = 'sandbox'
                 else:
                     _value = 'live'
+            _field = _field.replace('msc_api_', '')
             res.update({_field: _value})
         return res
 
