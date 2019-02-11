@@ -66,6 +66,7 @@
         'views/reports/cfdi.xml',
         'data/mail_template_cfdi_invoice_data.xml',
         'data/cron_check_invoice_cancellation_process_data.xml',
+        'wizard/import_cfdi_to_invoice_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
