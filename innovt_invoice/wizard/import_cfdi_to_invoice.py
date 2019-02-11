@@ -137,7 +137,7 @@ class ImportCfdiToInvoice(models.TransientModel):
 
         for product in products:
             product_id = False
-            if self.create_product:
+            if self.create_products:
                 product_id = self.create_product(product).id or False
             invoice_lines.append([0, 'virtual_' + str(1), {
                 # 'account_analytic_id': False,
