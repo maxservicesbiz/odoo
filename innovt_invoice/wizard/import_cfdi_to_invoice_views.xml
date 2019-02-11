@@ -39,6 +39,6 @@
                 parent="account.menu_finance_payables_documents"
                 sequence="20"
                 action="iaa_it_innovt_invoice_import_cifd_to_invoice_act_window"
-                groups="account.group_account_user"/>
+                groups="account.group_account_invoice"/>
     </data>
 </odoo>
