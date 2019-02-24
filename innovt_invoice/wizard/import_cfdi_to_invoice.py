@@ -37,7 +37,7 @@ class ImportCfdiToInvoice(models.TransientModel):
         stamp = self.get_stamp(doc)
 
         data = {
-            'reference': doc.get('Serie') + '-' + doc.get('Folio'),
+            'reference': doc.get('Serie', '') + '-' + doc.get('Folio'),
             # 'partner_bank_id': 2,
             # 'payment_term_id': False,
             'invoice_line_ids': self.get_invoice_line(doc),
