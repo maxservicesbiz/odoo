@@ -179,7 +179,9 @@ class ImportCfdiToInvoice(models.TransientModel):
 
     @api.model
     def get_invoice_line_tax(self, product):
-        taxes = product.get('{http://www.sat.gob.mx/cfd/3}Impuestos')
+        taxes = product.get('{http://www.sat.gob.mx/cfd/3}Impuestos', False)
+        if not taxes:
+            return []
         tax_traslados = taxes.get('{http://www.sat.gob.mx/cfd/3}Traslados', {}).get(
             '{http://www.sat.gob.mx/cfd/3}Traslado', {})
         if isinstance(tax_traslados, dict) and len(tax_traslados):
