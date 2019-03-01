@@ -37,7 +37,7 @@ class ImportCfdiToInvoice(models.TransientModel):
         stamp = self.get_stamp(doc)
 
         data = {
-            'reference': doc.get('Serie') + '-' + doc.get('Folio'),
+            'reference': doc.get('Serie', '') + '-' + doc.get('Folio'),
             # 'partner_bank_id': 2,
             # 'payment_term_id': False,
             'invoice_line_ids': self.get_invoice_line(doc),
@@ -179,7 +179,9 @@ class ImportCfdiToInvoice(models.TransientModel):
 
     @api.model
     def get_invoice_line_tax(self, product):
-        taxes = product.get('{http://www.sat.gob.mx/cfd/3}Impuestos')
+        taxes = product.get('{http://www.sat.gob.mx/cfd/3}Impuestos', False)
+        if not taxes:
+            return []
         tax_traslados = taxes.get('{http://www.sat.gob.mx/cfd/3}Traslados', {}).get(
             '{http://www.sat.gob.mx/cfd/3}Traslado', {})
         if isinstance(tax_traslados, dict) and len(tax_traslados):
