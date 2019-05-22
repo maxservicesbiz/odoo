@@ -1,28 +1,44 @@
-# Max Solutions Co + Odoo 
+# Max Solutions Co + Odoo
+### Community edition
+
 ## Summary 
 The official website [max-solutions.co](https://max-solutions.co)
+
 ## Modules 
 
-* innovt_client
-    * Controller SaaS Innov Biz
-* innovt_invoice 
+* ```innovt_client```
+    * SaaS Controller for Max Solutions Co API
+* ```innovt_invoice``` 
     * Location l10n_MX support Cfdi 3.3 
-* innovt_payment
+* ```innovt_payment```
     * Location l10n_MX support Payment 3.3
 
 ## Installation
-* code Odoo
-```bash 
-git clone https://github.com/odoo/odoo.git -b 11.0 
-cd odoo 
-# Message: [I18N] Update translation terms from Transifex
-git checkout f9737d7
+
+* Build image 
+```
+    sudo docker build -t innov:11.0-ce .
 ```
 
-* Install requirements innov-client
-```bash
-    pip install -r requirements.txt
+* Using mode prodouction 
 ```
+    sudo docker-compose -f docker-compose.yml up --build
+```
+
+* Using mode development (external db)
+
+    * Is mandatory change the next  environment variables on `docker-compose-dev.yml`
+    ```
+      USER: user
+      PASSWORD: password 
+      HOST: host
+      PORT: port
+    ```
+    * run 
+    ```
+        sudo docker-compose -f docker-compose-dev.yml up --build
+    ```
+
 ## License
 * [GPL 3.0](LICENSE)
 
