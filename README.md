@@ -34,6 +34,10 @@ The official website [max-solutions.co](https://max-solutions.co)
       HOST: host
       PORT: port
     ```
+    * Change local data on volumes, default is located `~/.local/share/Odoo` on linux.
+    ```
+      - path :/var/lib/odoo
+    ```
     * run 
     ```
         sudo docker-compose -f docker-compose-dev.yml up --build

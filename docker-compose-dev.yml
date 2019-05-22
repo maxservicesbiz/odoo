@@ -14,4 +14,4 @@ services:
     volumes:
       - ./:/mnt/extra-addons
       - ./config:/etc/odoo
-      - /home/mac/.local/share/Odoo:/var/lib/odoo
+      - path:/var/lib/odoo
