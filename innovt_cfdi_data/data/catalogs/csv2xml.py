@@ -2,8 +2,8 @@
 import csv
 
 
-model = 'type.tax'
-with open('type.tax.csv') as csv_file:
+model = 'res.bank'
+with open('res.bank.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     i = 0
     data =""
@@ -16,8 +16,8 @@ with open('type.tax.csv') as csv_file:
         name = str(row[2]).strip().decode('utf-8')
         data += """
         <record id="${id}" model="${model}">
-            <filed name="name">${name}</filed>
-            <filed name="code">${code}</filed>
+            <field name="name">${name}</field>
+            <field name="code">${code}</field>
         </record>
         """.replace('${id}', id).replace('${model}', model).replace('${name}', name).replace('${code}', code)
     template = """
