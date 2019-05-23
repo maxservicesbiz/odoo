@@ -4,6 +4,8 @@
 from odoo import models, fields, api, _, exceptions
 import innov
 import base64
+from odoo.addons import decimal_precision as dp
+
 
 DOCUMENT_TYPE = [
     ('P', _("Payment")),
@@ -274,6 +276,19 @@ class AccountPayment(models.Model):
     def _get_related_documents(self):
         related_documents = []
         for invoice_id in self.invoice_ids:
+            if not invoice_id.uuid:
+                raise exceptions.ValidationError(_("Para Timbrar un Pago" \
+                                                   " necesita timbrar primero la(s) Factura(s) reladionada(s)." \
+                                                   " Factura: {}.".format(invoice_id.number)))
+            payment_vals = invoice_id._get_payments_vals() or []
+            amount = False
+            for payment_val in payment_vals:
+                if self.id == payment_val['account_payment_id']:
+                    amount = round(payment_val['amount']*100)/100
+                    break
+            if amount is False:
+                raise exceptions.ValidationError(_("El pago no esta registrado en " \
+                                                   "la factura {}".format(invoice_id.number)))
             related_document = {
                 'Uuid': invoice_id.uuid,
                 'Serie': invoice_id.company_id.invoice_series,
@@ -281,8 +296,8 @@ class AccountPayment(models.Model):
                 'Currency': invoice_id.currency_id.name,
                 'PaymentMethod': 'PPD',
                 'BiasNumber': len(invoice_id.payment_ids),
-                'PreviousBalanceAmount': self.amount + invoice_id.residual,
-                'AmountPaid': self.amount,
+                'PreviousBalanceAmount': amount + invoice_id.residual,
+                'AmountPaid': amount,
                 'UnpaidBalanceAmount': invoice_id.residual
 
             }
