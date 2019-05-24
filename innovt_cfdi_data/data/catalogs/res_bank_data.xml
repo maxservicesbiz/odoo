@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- © Yonn, Xyz. All rights reserved. -->
+<odoo>
+    <data noupdate="1">
+            
+        <record id="res_bank_002" model="res.bank">
+            <field name="name">BANAMEX</field>
+            <field name="bic">002</field>
+        </record>
+        
+        <record id="res_bank_006" model="res.bank">
+            <field name="name">BANCOMEXT</field>
+            <field name="bic">006</field>
+        </record>
+        
+        <record id="res_bank_009" model="res.bank">
+            <field name="name">BANOBRAS</field>
+            <field name="bic">009</field>
+        </record>
+        
+        <record id="res_bank_012" model="res.bank">
+            <field name="name">BBVA BANCOMER</field>
+            <field name="bic">012</field>
+        </record>
+        
+        <record id="res_bank_014" model="res.bank">
+            <field name="name">SANTANDER</field>
+            <field name="bic">014</field>
+        </record>
+        
+        <record id="res_bank_019" model="res.bank">
+            <field name="name">BANJERCITO</field>
+            <field name="bic">019</field>
+        </record>
+        
+        <record id="res_bank_021" model="res.bank">
+            <field name="name">HSBC</field>
+            <field name="bic">021</field>
+        </record>
+        
+        <record id="res_bank_030" model="res.bank">
+            <field name="name">BAJIO</field>
+            <field name="bic">030</field>
+        </record>
+        
+        <record id="res_bank_032" model="res.bank">
+            <field name="name">IXE</field>
+            <field name="bic">032</field>
+        </record>
+        
+        <record id="res_bank_036" model="res.bank">
+            <field name="name">INBURSA</field>
+            <field name="bic">036</field>
+        </record>
+        
+        <record id="res_bank_037" model="res.bank">
+            <field name="name">INTERACCIONES</field>
+            <field name="bic">037</field>
+        </record>
+        
+        <record id="res_bank_042" model="res.bank">
+            <field name="name">MIFEL</field>
+            <field name="bic">042</field>
+        </record>
+        
+        <record id="res_bank_044" model="res.bank">
+            <field name="name">SCOTIABANK</field>
+            <field name="bic">044</field>
+        </record>
+        
+        <record id="res_bank_058" model="res.bank">
+            <field name="name">BANREGIO</field>
+            <field name="bic">058</field>
+        </record>
+        
+        <record id="res_bank_059" model="res.bank">
+            <field name="name">INVEX</field>
+            <field name="bic">059</field>
+        </record>
+        
+        <record id="res_bank_060" model="res.bank">
+            <field name="name">BANSI</field>
+            <field name="bic">060</field>
+        </record>
+        
+        <record id="res_bank_062" model="res.bank">
+            <field name="name">AFIRME</field>
+            <field name="bic">062</field>
+        </record>
+        
+        <record id="res_bank_072" model="res.bank">
+            <field name="name">BANORTE/IXE</field>
+            <field name="bic">072</field>
+        </record>
+        
+        <record id="res_bank_102" model="res.bank">
+            <field name="name">THE ROYAL BANK</field>
+            <field name="bic">102</field>
+        </record>
+        
+        <record id="res_bank_103" model="res.bank">
+            <field name="name">AMERICAN EXPRESS</field>
+            <field name="bic">103</field>
+        </record>
+        
+        <record id="res_bank_106" model="res.bank">
+            <field name="name">BAMSA</field>
+            <field name="bic">106</field>
+        </record>
+        
+        <record id="res_bank_108" model="res.bank">
+            <field name="name">TOKYO</field>
+            <field name="bic">108</field>
+        </record>
+        
+        <record id="res_bank_110" model="res.bank">
+            <field name="name">JP MORGAN</field>
+            <field name="bic">110</field>
+        </record>
+        
+        <record id="res_bank_112" model="res.bank">
+            <field name="name">BMONEX</field>
+            <field name="bic">112</field>
+        </record>
+        
+        <record id="res_bank_113" model="res.bank">
+            <field name="name">VE POR MAS</field>
+            <field name="bic">113</field>
+        </record>
+        
+        <record id="res_bank_116" model="res.bank">
+            <field name="name">ING</field>
+            <field name="bic">116</field>
+        </record>
+        
+        <record id="res_bank_124" model="res.bank">
+            <field name="name">DEUTSCHE</field>
+            <field name="bic">124</field>
+        </record>
+        
+        <record id="res_bank_126" model="res.bank">
+            <field name="name">CREDIT SUISSE</field>
+            <field name="bic">126</field>
+        </record>
+        
+        <record id="res_bank_127" model="res.bank">
+            <field name="name">AZTECA</field>
+            <field name="bic">127</field>
+        </record>
+        
+        <record id="res_bank_128" model="res.bank">
+            <field name="name">AUTOFIN</field>
+            <field name="bic">128</field>
+        </record>
+        
+        <record id="res_bank_129" model="res.bank">
+            <field name="name">BARCLAYS</field>
+            <field name="bic">129</field>
+        </record>
+        
+        <record id="res_bank_130" model="res.bank">
+            <field name="name">COMPARTAMOS</field>
+            <field name="bic">130</field>
+        </record>
+        
+        <record id="res_bank_131" model="res.bank">
+            <field name="name">BANCO FAMSA</field>
+            <field name="bic">131</field>
+        </record>
+        
+        <record id="res_bank_132" model="res.bank">
+            <field name="name">BMULTIVA</field>
+            <field name="bic">132</field>
+        </record>
+        
+        <record id="res_bank_133" model="res.bank">
+            <field name="name">ACTINVER</field>
+            <field name="bic">133</field>
+        </record>
+        
+        <record id="res_bank_134" model="res.bank">
+            <field name="name">WAL-MART</field>
+            <field name="bic">134</field>
+        </record>
+        
+        <record id="res_bank_135" model="res.bank">
+            <field name="name">NAFIN</field>
+            <field name="bic">135</field>
+        </record>
+        
+        <record id="res_bank_136" model="res.bank">
+            <field name="name">INTERCAM BANCO</field>
+            <field name="bic">136</field>
+        </record>
+        
+        <record id="res_bank_137" model="res.bank">
+            <field name="name">BANCOPPEL</field>
+            <field name="bic">137</field>
+        </record>
+        
+        <record id="res_bank_138" model="res.bank">
+            <field name="name">ABC CAPITAL</field>
+            <field name="bic">138</field>
+        </record>
+        
+        <record id="res_bank_139" model="res.bank">
+            <field name="name">UBS BANK</field>
+            <field name="bic">139</field>
+        </record>
+        
+        <record id="res_bank_140" model="res.bank">
+            <field name="name">CONSUBANCO</field>
+            <field name="bic">140</field>
+        </record>
+        
+        <record id="res_bank_141" model="res.bank">
+            <field name="name">VOLKSWAGEN</field>
+            <field name="bic">141</field>
+        </record>
+        
+        <record id="res_bank_143" model="res.bank">
+            <field name="name">CIBANCO</field>
+            <field name="bic">143</field>
+        </record>
+        
+        <record id="res_bank_145" model="res.bank">
+            <field name="name">BBASE</field>
+            <field name="bic">145</field>
+        </record>
+        
+        <record id="res_bank_147" model="res.bank">
+            <field name="name">BANKAOOL</field>
+            <field name="bic">147</field>
+        </record>
+        
+        <record id="res_bank_148" model="res.bank">
+            <field name="name">PAGATODO</field>
+            <field name="bic">148</field>
+        </record>
+        
+        <record id="res_bank_149" model="res.bank">
+            <field name="name">FORJADORES</field>
+            <field name="bic">149</field>
+        </record>
+        
+        <record id="res_bank_150" model="res.bank">
+            <field name="name">INMOBILIARIO</field>
+            <field name="bic">150</field>
+        </record>
+        
+        <record id="res_bank_151" model="res.bank">
+            <field name="name">DONDÉ</field>
+            <field name="bic">151</field>
+        </record>
+        
+        <record id="res_bank_152" model="res.bank">
+            <field name="name">BANCREA</field>
+            <field name="bic">152</field>
+        </record>
+        
+        <record id="res_bank_153" model="res.bank">
+            <field name="name">PROGRESO</field>
+            <field name="bic">153</field>
+        </record>
+        
+        <record id="res_bank_154" model="res.bank">
+            <field name="name">BANCO FINTERRA</field>
+            <field name="bic">154</field>
+        </record>
+        
+        <record id="res_bank_155" model="res.bank">
+            <field name="name">ICBC</field>
+            <field name="bic">155</field>
+        </record>
+        
+        <record id="res_bank_156" model="res.bank">
+            <field name="name">SABADELL</field>
+            <field name="bic">156</field>
+        </record>
+        
+        <record id="res_bank_157" model="res.bank">
+            <field name="name">SHINHAN</field>
+            <field name="bic">157</field>
+        </record>
+        
+        <record id="res_bank_158" model="res.bank">
+            <field name="name">MIZUHO BANK</field>
+            <field name="bic">158</field>
+        </record>
+        
+        <record id="res_bank_159" model="res.bank">
+            <field name="name">BANK OF CHINA</field>
+            <field name="bic">159</field>
+        </record>
+        
+        <record id="res_bank_160" model="res.bank">
+            <field name="name">BANCO S3</field>
+            <field name="bic">160</field>
+        </record>
+        
+        <record id="res_bank_166" model="res.bank">
+            <field name="name">BANSEFI</field>
+            <field name="bic">166</field>
+        </record>
+        
+        <record id="res_bank_168" model="res.bank">
+            <field name="name">HIPOTECARIA FEDERAL</field>
+            <field name="bic">168</field>
+        </record>
+        
+        <record id="res_bank_600" model="res.bank">
+            <field name="name">MONEXCB</field>
+            <field name="bic">600</field>
+        </record>
+        
+        <record id="res_bank_601" model="res.bank">
+            <field name="name">GBM</field>
+            <field name="bic">601</field>
+        </record>
+        
+        <record id="res_bank_602" model="res.bank">
+            <field name="name">MASARI</field>
+            <field name="bic">602</field>
+        </record>
+        
+        <record id="res_bank_605" model="res.bank">
+            <field name="name">VALUE</field>
+            <field name="bic">605</field>
+        </record>
+        
+        <record id="res_bank_606" model="res.bank">
+            <field name="name">ESTRUCTURADORES</field>
+            <field name="bic">606</field>
+        </record>
+        
+        <record id="res_bank_607" model="res.bank">
+            <field name="name">TIBER</field>
+            <field name="bic">607</field>
+        </record>
+        
+        <record id="res_bank_608" model="res.bank">
+            <field name="name">VECTOR</field>
+            <field name="bic">608</field>
+        </record>
+        
+        <record id="res_bank_610" model="res.bank">
+            <field name="name">B B</field>
+            <field name="bic">610</field>
+        </record>
+        
+        <record id="res_bank_614" model="res.bank">
+            <field name="name">ACCIVAL</field>
+            <field name="bic">614</field>
+        </record>
+        
+        <record id="res_bank_615" model="res.bank">
+            <field name="name">MERRILL LYNCH</field>
+            <field name="bic">615</field>
+        </record>
+        
+        <record id="res_bank_616" model="res.bank">
+            <field name="name">FINAMEX</field>
+            <field name="bic">616</field>
+        </record>
+        
+        <record id="res_bank_617" model="res.bank">
+            <field name="name">VALMEX</field>
+            <field name="bic">617</field>
+        </record>
+        
+        <record id="res_bank_618" model="res.bank">
+            <field name="name">UNICA</field>
+            <field name="bic">618</field>
+        </record>
+        
+        <record id="res_bank_619" model="res.bank">
+            <field name="name">MAPFRE</field>
+            <field name="bic">619</field>
+        </record>
+        
+        <record id="res_bank_620" model="res.bank">
+            <field name="name">PROFUTURO</field>
+            <field name="bic">620</field>
+        </record>
+        
+        <record id="res_bank_621" model="res.bank">
+            <field name="name">CB ACTINVER</field>
+            <field name="bic">621</field>
+        </record>
+        
+        <record id="res_bank_622" model="res.bank">
+            <field name="name">OACTIN</field>
+            <field name="bic">622</field>
+        </record>
+        
+        <record id="res_bank_623" model="res.bank">
+            <field name="name">SKANDIA</field>
+            <field name="bic">623</field>
+        </record>
+        
+        <record id="res_bank_626" model="res.bank">
+            <field name="name">CBDEUTSCHE</field>
+            <field name="bic">626</field>
+        </record>
+        
+        <record id="res_bank_627" model="res.bank">
+            <field name="name">ZURICH</field>
+            <field name="bic">627</field>
+        </record>
+        
+        <record id="res_bank_628" model="res.bank">
+            <field name="name">ZURICHVI</field>
+            <field name="bic">628</field>
+        </record>
+        
+        <record id="res_bank_629" model="res.bank">
+            <field name="name">SU CASITA</field>
+            <field name="bic">629</field>
+        </record>
+        
+        <record id="res_bank_630" model="res.bank">
+            <field name="name">CB INTERCAM</field>
+            <field name="bic">630</field>
+        </record>
+        
+        <record id="res_bank_631" model="res.bank">
+            <field name="name">CI BOLSA</field>
+            <field name="bic">631</field>
+        </record>
+        
+        <record id="res_bank_632" model="res.bank">
+            <field name="name">BULLTICK CB</field>
+            <field name="bic">632</field>
+        </record>
+        
+        <record id="res_bank_633" model="res.bank">
+            <field name="name">STERLING</field>
+            <field name="bic">633</field>
+        </record>
+        
+        <record id="res_bank_634" model="res.bank">
+            <field name="name">FINCOMUN</field>
+            <field name="bic">634</field>
+        </record>
+        
+        <record id="res_bank_636" model="res.bank">
+            <field name="name">HDI SEGUROS</field>
+            <field name="bic">636</field>
+        </record>
+        
+        <record id="res_bank_637" model="res.bank">
+            <field name="name">ORDER</field>
+            <field name="bic">637</field>
+        </record>
+        
+        <record id="res_bank_638" model="res.bank">
+            <field name="name">AKALA</field>
+            <field name="bic">638</field>
+        </record>
+        
+        <record id="res_bank_640" model="res.bank">
+            <field name="name">CB JPMORGAN</field>
+            <field name="bic">640</field>
+        </record>
+        
+        <record id="res_bank_642" model="res.bank">
+            <field name="name">REFORMA</field>
+            <field name="bic">642</field>
+        </record>
+        
+        <record id="res_bank_646" model="res.bank">
+            <field name="name">STP</field>
+            <field name="bic">646</field>
+        </record>
+        
+        <record id="res_bank_647" model="res.bank">
+            <field name="name">TELECOMM</field>
+            <field name="bic">647</field>
+        </record>
+        
+        <record id="res_bank_648" model="res.bank">
+            <field name="name">EVERCORE</field>
+            <field name="bic">648</field>
+        </record>
+        
+        <record id="res_bank_649" model="res.bank">
+            <field name="name">SKANDIA</field>
+            <field name="bic">649</field>
+        </record>
+        
+        <record id="res_bank_651" model="res.bank">
+            <field name="name">SEGMTY</field>
+            <field name="bic">651</field>
+        </record>
+        
+        <record id="res_bank_652" model="res.bank">
+            <field name="name">ASEA</field>
+            <field name="bic">652</field>
+        </record>
+        
+        <record id="res_bank_653" model="res.bank">
+            <field name="name">KUSPIT</field>
+            <field name="bic">653</field>
+        </record>
+        
+        <record id="res_bank_655" model="res.bank">
+            <field name="name">SOFIEXPRESS</field>
+            <field name="bic">655</field>
+        </record>
+        
+        <record id="res_bank_656" model="res.bank">
+            <field name="name">UNAGRA</field>
+            <field name="bic">656</field>
+        </record>
+        
+        <record id="res_bank_659" model="res.bank">
+            <field name="name">OPCIONES EMPRESARIALES DEL NOROESTE</field>
+            <field name="bic">659</field>
+        </record>
+        
+        <record id="res_bank_670" model="res.bank">
+            <field name="name">LIBERTAD</field>
+            <field name="bic">670</field>
+        </record>
+        
+        <record id="res_bank_901" model="res.bank">
+            <field name="name">CLS</field>
+            <field name="bic">901</field>
+        </record>
+        
+        <record id="res_bank_902" model="res.bank">
+            <field name="name">INDEVAL</field>
+            <field name="bic">902</field>
+        </record>
+        
+    </data>
+</odoo>

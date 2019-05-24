@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    environment:
+      USER: user
+      PASSWORD: password 
+      HOST: host
+      PORT: 5432
+    ports:
+      - "8069:8069"
+      - "8071:8071"
+    volumes:
+      - ./:/mnt/extra-addons
+      - ./config:/etc/odoo
+      - path:/var/lib/odoo
