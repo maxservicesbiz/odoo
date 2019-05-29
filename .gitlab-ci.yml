@@ -1,0 +1,22 @@
+variables:
+  WORK_DIR: ${CI_PROJECT_NAME}
+  BRANCH: ${CI_COMMIT_REF_NAME}
+  CI_REGISTRY_EE: registry.gitlab.com/maxsolutionsco/innov/innov-server
+stages:
+  - build
+#  - test
+#  - deploy
+
+build_project:
+    stage: build
+    script:
+        - echo $CI_PROJECT_NAME
+        - echo $CI_COMMIT_REF_NAME
+        - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD registry.gitlab.com
+        - docker build -f Dockerfile-EE -t $CI_REGISTRY_EE .
+        - docker push $CI_REGISTRY_EE
+    tags:
+     - build_l1_max_solutions_co
+    only:
+      - deploy
+    when: manual
