@@ -18,7 +18,7 @@ COPY innovt_client ${path_addons}/innovt_client
 COPY innovt_invoice ${path_addons}/innovt_invoice
 COPY innovt_payment ${path_addons}/innovt_payment
 
-COPY requirements.txt ${innov_client_path_addons}requirements.txt
+COPY requirements.txt ${innov_client_path_addons}/requirements.txt
 
 RUN pip3 install --no-cache-dir --upgrade pip -r ${innov_client_path_addons}/requirements.txt
 
