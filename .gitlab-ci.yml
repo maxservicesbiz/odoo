@@ -42,6 +42,7 @@ deploy_staging:
         - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD registry.gitlab.com
         - docker pull $CI_REGISTRY:$BRANCH 
         - docker-compose -f docker-compose-staging.yml up -d
+        - cp docker-compose-staging.yml /mnt/customer_msc_data/build/
     tags:
      - sandbox_max_solutions_co
     only:
