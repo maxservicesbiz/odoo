@@ -14,7 +14,7 @@ build_development:
     script:
         - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD registry.gitlab.com
         - docker build -f Dockerfile -t $CI_REGISTRY:$BRANCH .
-        - docker push $CI_REGISTRY
+        - docker push $CI_REGISTRY:$BRANCH
     tags:
      - l1_max_solutions_co
     except:
@@ -30,7 +30,7 @@ build_staging:
     script:
         - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD registry.gitlab.com
         - docker build -f Dockerfile -t $CI_REGISTRY:$BRANCH .
-        - docker push $CI_REGISTRY
+        - docker push $CI_REGISTRY:$BRANCH
     tags:
      - l1_max_solutions_co
     only:
