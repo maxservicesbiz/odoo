@@ -40,3 +40,4 @@ setup/win32/static/postgresql*.exe
 /src/
 /p1labs/
 */tests/*
+x-files

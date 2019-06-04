@@ -1,22 +1,79 @@
 variables:
-  WORK_DIR: ${CI_PROJECT_NAME}
+  REPO_NAME: ${CI_PROJECT_NAME}
   BRANCH: ${CI_COMMIT_REF_NAME}
-  CI_REGISTRY_EE: registry.gitlab.com/maxsolutionsco/innov/innov-server
+  CI_REGISTRY: registry.gitlab.com/maxsolutionsco/innov/innov-client
+
 stages:
   - build
-#  - test
-#  - deploy
-
-build_project:
+  - build staging
+  - staging
+  - build deploy
+  - deploy
+build_development:
     stage: build
     script:
-        - echo $CI_PROJECT_NAME
-        - echo $CI_COMMIT_REF_NAME
         - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD registry.gitlab.com
-        - docker build -f Dockerfile-EE -t $CI_REGISTRY_EE .
-        - docker push $CI_REGISTRY_EE
+        - docker build -f Dockerfile -t $CI_REGISTRY:$BRANCH .
+        - docker push $CI_REGISTRY
     tags:
-     - build_l1_max_solutions_co
+     - l1_max_solutions_co
+    except:
+      - staging
+      - master
+    environment:
+      name: review/*
+      url: https://$CI_ENVIRONMENT_SLUG.sandbox.max-solutions.co
+    when: manual
+
+build_staging:
+    stage: build staging
+    script:
+        - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD registry.gitlab.com
+        - docker build -f Dockerfile -t $CI_REGISTRY:$BRANCH .
+        - docker push $CI_REGISTRY
+    tags:
+     - l1_max_solutions_co
     only:
-      - deploy
+      - staging
+
+deploy_staging:
+    stage: staging
+    script:
+        - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD registry.gitlab.com
+        - docker pull $CI_REGISTRY:$BRANCH 
+        - docker-compose -f docker-compose-staging.yml up -d
+    tags:
+     - sandbox_max_solutions_co
+    only:
+      - staging
+    environment:
+      name: staging
+      url: https://sandbox.max-solutions.co
+    when: manual
+
+build_production:
+    stage: build deploy
+    script:
+        - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD registry.gitlab.com
+        - docker build -f Dockerfile -t $CI_REGISTRY .
+        - docker push $CI_REGISTRY
+    tags:
+     - l1_max_solutions_co
+    only:
+      - master
+
+deploy_production:
+    stage: deploy
+    script:
+        - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD registry.gitlab.com
+        - docker pull $CI_REGISTRY 
+#        - source /mnt/api_msc_data/config/api/environment        
+        - docker-compose -f docker-compose.yml up -d
+    tags:
+     - api_msc
+    only:
+      - master
+    environment:
+      name: production
+      url: https://max-solutions.co
     when: manual
