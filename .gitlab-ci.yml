@@ -21,7 +21,7 @@ build_development:
       - staging
       - master
     environment:
-      name: review/*
+      name: review/$CI_COMMIT_REF_NAME
       url: https://$CI_ENVIRONMENT_SLUG.sandbox.max-solutions.co
     when: manual
 
