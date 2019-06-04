@@ -16,7 +16,7 @@ services:
       - "6069:8069"
     volumes:
 #     Comment line mnt for use local o development environment
-#      - /mnt/api_msc_data/config/web:/etc/odoo
+      - /mnt/customer_msc_data/config/web:/etc/odoo
       - msc-customer-web-data:/var/lib/odoo
   customer-db:
     image: postgres:10
