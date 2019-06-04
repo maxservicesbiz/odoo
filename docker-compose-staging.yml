@@ -2,8 +2,7 @@ version: "3.7"
 
 services:
   customer-web:
-    build: .
-    #image: registry.gitlab.com/maxsolutionsco/innov/innov-client:staging
+    image: registry.gitlab.com/maxsolutionsco/innov/innov-client:staging
     container_name: msc-customer-web
     networks:
       - msc-customer-network
