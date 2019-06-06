@@ -16,3 +16,4 @@ COPY . ${addons}/
 COPY requirements.txt ${addons}/requirements-innov-client.txt
 
 RUN pip3 install --no-cache-dir --upgrade pip -r ${addons}/requirements-innov-client.txt
+RUN pip3 install git+https://github.com/MaxSolutionsCo/innov-python
