@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_delivery_carrier_form_with_provider_srenvio" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.provider.srenvio</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='destination']" position='before'>
+                <page string="SrEnvio Configuration" attrs="{'invisible': [('delivery_type', '!=', 'srenvio')]}">
+                    <group>
+                        <group>
+                            <field name="srenvio_token" attrs="{'required': [('delivery_type', '=', 'srenvio')]}"/>
+                            <field name="srenvio_default_packaging_id" attrs="{'required': [('delivery_type', '=', 'srenvio')]}" domain="[('package_carrier_type', '=', 'srenvio')]"/>
+                        </group>
+                    </group>                    
+                    <group string='SrEnvio Tutorial' attrs="{'invisible': [('delivery_type', '!=', 'srenvio')]}">
+                        <ul>
+                            <li>
+                                <b>Go to SrEnvio Website to create a SrEnvio account of the following type:</b>
+                                <br/><a href="https://srenvio.github.io/api-doc/?shell#developer-testing">Test</a>
+                                <br/> <a href="https://app.srenvio.com/users/sign_up">Production</a>
+                            </li>
+
+                            <li>
+                                <b/>Once your account is created, go to 
+                                <a href='https://srenvio.github.io/api-doc/?shell#authentication' target='_blank'>and Get Production Token or Test Token. </a>
+                            </li>
+                        </ul>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

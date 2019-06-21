@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="srenvio_assets_frontend" inherit_id="website.assets_frontend" name="Srenvio Assets">
+      <xpath expr="." position="inside">
+        <script type="text/javascript" src="/innovt_srenvio/static/src/js/website_sale_srenvio_delivery.js"></script>
+      </xpath>
+    </template>
+
+    <template id="payment_srenvio_delivery" name="SrEnvio Delivery Costs" inherit_id="website_sale_delivery.payment_delivery">
+        <xpath expr="//div[@id='delivery_method']/ul[@class='list-group']/t/li/label[@class='label-optional']" position="after">
+            <ul id="srenvio-list-group-subitem" class="list-group" t-if ="delivery.delivery_type == 'srenvio'">
+                <!-- <li class="list-group-item">
+                   <input 
+                        t-att-value="delivery.id"
+                        t-att-id="'srenvio_delivery_%i' % delivery.id" 
+                        type="radio" 
+                        name="srenvio_delivery_type" 
+                        t-att-checked="order.carrier_id and order.carrier_id.id == delivery.id and 'checked' or False" 
+                        t-att-class="'hidden' if delivery_nb == 1 else ''"/>
+
+                    <label class="label-optional" t-field="delivery.name" t-att-for="'delivery_%i' % delivery.id"/>
+                </li>  -->
+            </ul>
+        </xpath>
+    </template>
+</odoo>
