@@ -1,50 +1,24 @@
-# Max Solutions Co + Odoo
-### Community edition
+# PROJECT INNOV + ODOO 11
 
 ## Summary 
-The official website [max-solutions.co](https://max-solutions.co)
+Website [maxs.biz](https://www.maxs.biz)
 
-## Modules 
+## Modules
 
-* ```innovt_client```
-    * SaaS Controller for Max Solutions Co API
-* ```innovt_invoice``` 
-    * Location l10n_MX support Cfdi 3.3 
-* ```innovt_payment```
-    * Location l10n_MX support Payment 3.3
+* `innovt_client`
+    * SAAS controller for [MAXS API]()
+* `innovt_srenvio`
+    * [SrEnvio](https://srenvio.com) shipping management
 
 ## Installation
 
-* Build image 
-```
-    sudo docker build -t innov:11.0-ce .
-```
-
 * Using mode prodouction 
 ```
-    sudo docker-compose -f docker-compose.yml up --build
+docker-compose up --build
 ```
-
-* Using mode development (external db)
-
-    * Is mandatory change the next  environment variables on `docker-compose-dev.yml`
-    ```
-      USER: user
-      PASSWORD: password 
-      HOST: host
-      PORT: port
-    ```
-    * Change local data on volumes, default is located `~/.local/share/Odoo` on linux.
-    ```
-      - path :/var/lib/odoo
-    ```
-    * run 
-    ```
-        sudo docker-compose -f docker-compose-dev.yml up --build
-    ```
 
 ## License
 * [GPL 3.0](LICENSE)
 
 ## Authors 
-* [Max Solutions, Co](<https://max-solutions.co>)
+* [MAXS](<https://www.maxs.biz>)
