@@ -20,6 +20,7 @@ import pprint
 import base64
 _logger = logging.getLogger(__name__)
 from odoo.exceptions import  ValidationError
+from odoo import _
 
 class SrenvioProvider(object):
     
@@ -38,7 +39,7 @@ class SrenvioProvider(object):
         if 'errors' in result or \
          'error_message' in result.get('data',{}).get('attributes', {}) or \
           result.get('data',{}).get('attributes', {}).get('status',"") == 'ERROR':
-            raise Exception("Los datos de la peticion son incrrectos")
+            raise Exception(_("Los datos de la peticion son incrrectos"))
             
     def _srenvio_request(self, url, data, **kwargs):
 
@@ -59,7 +60,7 @@ class SrenvioProvider(object):
         except Exception as e :
             _logger.info('Exception msg: %s ', e)
             _logger.info('Response text: %s %s', status, pprint.pformat(response.text))
-            msg  = "Estatus: %s Msg: Fallo la petición intente de nuevo por favor." % status
+            msg  = _("Estatus: %s Msg: Fallo la petición intente de nuevo por favor." % status)
             if 600 > status < 500:
                 msg =  response.text
             return False, msg
@@ -153,12 +154,13 @@ class SrenvioProvider(object):
         ok, label = self._srenvio_request(url, data)
         if ok:
             label = label['data']
-            url = label['attributes']['label_url']
-            response = requests.get(url)
-            if response.status_code == 200:
-                label_base64 = base64.b64encode(response.content)
-            else:
-                label_base64 = None
+            # TODO - Where is  attached  does fail to open file. 
+            #url = label['attributes']['label_url']
+            #response = requests.get(url)
+            #if response.status_code == 200:
+            #    label_base64 = base64.b64encode(response.content)
+            #else:
+            label_base64 = None
             label['attributes'].update({ 'label_base64': label_base64})
             return label
         
@@ -174,8 +176,6 @@ class SrenvioProvider(object):
         if ok: 
             return cancel_label['data']
         raise ValidationError(_("Fallo al cancelar la guia, intente de nuevo por favor. \n %s" % cancel_label))
-    
-        # 
     
     def srenvio_cal_package(self, order):
         max_weight = self._srenvio_convert_weight(
@@ -201,15 +201,10 @@ class SrenvioProvider(object):
             package.update({'weight':weight,'total_package':total_package })
         else:
             package.update({'weight':weight,'total_package':1 })
-        print(package)
         return package 
         
     def _srenvio_convert_weight(self, weight, unit='KG'):
         if unit == 'KG':
             return weight
-            """return self.carrier.env.ref('uom.product_uom_kgm')._compute_quantity(
-                weight, 
-                self.carrier.env.ref('uom.product_uom_kgm'), 
-                round=False)"""
         else:
             raise ValueError

@@ -23,7 +23,9 @@ odoo.define('website_sale_srenvio_delivery.checkout', function (require) {
 
     /* Handle interactive carrier choice + cart update */
     var $pay_button = $('#o_payment_form_pay');
-
+    /*
+        TODO: Update parent  price label  when is changed shipping
+     */
     var _onCarrierUpdateAnswer = function(result) {
         var $amount_delivery = $('#order_delivery span.oe_currency_value');
         var $amount_untaxed = $('#order_total_untaxed span.oe_currency_value');

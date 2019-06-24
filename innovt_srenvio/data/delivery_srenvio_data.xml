@@ -40,9 +40,9 @@
 
         <record id="product_product_delivery_srenvio_natio" model="product.product">
             <field name="name">SrEnvio Nacional</field>
-            <!--<field name="default_code">Delivery_006</field>-->
+            <!--<field name="default_code"></field>-->
             <field name="type">service</field>
-            <!--<field name="categ_id" ref="delivery.product_category_deliveries"/> -->
+            <!--<field name="categ_id" ref="id.category_deliveries"/> -->
             <field name="sale_ok" eval="False"/>
             <field name="purchase_ok" eval="False"/>
             <field name="list_price">0.0</field>
