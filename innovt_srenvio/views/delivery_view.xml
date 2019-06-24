@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 
+   Copyright (C) 2019  MAXS
+   
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
 <odoo>
 
     <record id="view_delivery_carrier_form_with_provider_srenvio" model="ir.ui.view">
@@ -13,17 +29,20 @@
                             <field name="srenvio_token" attrs="{'required': [('delivery_type', '=', 'srenvio')]}"/>
                             <field name="srenvio_default_packaging_id" attrs="{'required': [('delivery_type', '=', 'srenvio')]}" domain="[('package_carrier_type', '=', 'srenvio')]"/>
                         </group>
-                    </group>                    
+                    </group>
                     <group string='SrEnvio Tutorial' attrs="{'invisible': [('delivery_type', '!=', 'srenvio')]}">
                         <ul>
                             <li>
                                 <b>Go to SrEnvio Website to create a SrEnvio account of the following type:</b>
-                                <br/><a href="https://srenvio.github.io/api-doc/?shell#developer-testing">Test</a>
-                                <br/> <a href="https://app.srenvio.com/users/sign_up">Production</a>
+                                <br/>
+                                <a href="https://srenvio.github.io/api-doc/?shell#developer-testing">Test</a>
+                                <br/>
+                                <a href="https://app.srenvio.com/users/sign_up">Production</a>
                             </li>
 
                             <li>
-                                <b/>Once your account is created, go to 
+                                <b/>
+Once your account is created, go to 
                                 <a href='https://srenvio.github.io/api-doc/?shell#authentication' target='_blank'>and Get Production Token or Test Token. </a>
                             </li>
                         </ul>

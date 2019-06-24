@@ -1,43 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 
+   Copyright (C) 2019  MAXS
+   
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
 <odoo>
-<data noupdate="1">
+    <data noupdate="1">
 
-    <record id="srenvio_packaging_SRENVIO_5KG_BOX" model="product.packaging">
-        <field name="name">SRENVIO_5KG_BOX</field>
-        <field name="shipper_package_code">SRENVIO_5KG_BOX</field>
-        <field name="package_carrier_type">srenvio</field>
-        <field name="height">21</field>
-        <field name="width">20</field>
-        <field name="length">30</field>
-        <field name="max_weight">5</field>
-    </record>
+        <record id="srenvio_packaging_SRENVIO_5KG_BOX" model="product.packaging">
+            <field name="name">SRENVIO_5KG_BOX</field>
+            <field name="shipper_package_code">SRENVIO_5KG_BOX</field>
+            <field name="package_carrier_type">srenvio</field>
+            <field name="height">21</field>
+            <field name="width">20</field>
+            <field name="length">30</field>
+            <field name="max_weight">5</field>
+        </record>
 
-    <record id="srenvio_packaging_SRENVIO_11KG_BOX" model="product.packaging">
-        <field name="name">SRENVIO_11KG_BOX</field>
-        <field name="shipper_package_code">SRENVIO_11KG_BOX</field>
-        <field name="package_carrier_type">srenvio</field>
-        <field name="height">28</field>
-        <field name="width">25</field>
-        <field name="length">34</field>
-        <field name="max_weight">11</field>
-    </record>
+        <record id="srenvio_packaging_SRENVIO_11KG_BOX" model="product.packaging">
+            <field name="name">SRENVIO_11KG_BOX</field>
+            <field name="shipper_package_code">SRENVIO_11KG_BOX</field>
+            <field name="package_carrier_type">srenvio</field>
+            <field name="height">28</field>
+            <field name="width">25</field>
+            <field name="length">34</field>
+            <field name="max_weight">11</field>
+        </record>
 
-    <record id="product_product_delivery_srenvio_natio" model="product.product">
-      <field name="name">SrEnvio Nacional</field>
-      <!--<field name="default_code">Delivery_006</field>-->
-      <field name="type">service</field>
-      <!--<field name="categ_id" ref="delivery.product_category_deliveries"/> -->
-      <field name="sale_ok" eval="False"/>
-      <field name="purchase_ok" eval="False"/>
-      <field name="list_price">0.0</field>
-    </record>
+        <record id="product_product_delivery_srenvio_natio" model="product.product">
+            <field name="name">SrEnvio Nacional</field>
+            <!--<field name="default_code">Delivery_006</field>-->
+            <field name="type">service</field>
+            <!--<field name="categ_id" ref="delivery.product_category_deliveries"/> -->
+            <field name="sale_ok" eval="False"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="list_price">0.0</field>
+        </record>
 
-    <record id="delivery_carrier_srenvio_natio" model="delivery.carrier">
-        <field name="name">SrEnvio Nacional</field>
-        <field name="product_id" ref="innovt_srenvio.product_product_delivery_srenvio_natio"/>
-        <field name="delivery_type">srenvio</field>
-        <field name="srenvio_default_packaging_id" ref="srenvio_packaging_SRENVIO_5KG_BOX"/>
-    </record>
+        <record id="delivery_carrier_srenvio_natio" model="delivery.carrier">
+            <field name="name">SrEnvio Nacional</field>
+            <field name="product_id" ref="innovt_srenvio.product_product_delivery_srenvio_natio"/>
+            <field name="delivery_type">srenvio</field>
+            <field name="srenvio_default_packaging_id" ref="srenvio_packaging_SRENVIO_5KG_BOX"/>
+        </record>
 
-</data>
+    </data>
 </odoo>
