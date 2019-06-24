@@ -33,11 +33,8 @@
                     <group string='SrEnvio Tutorial' attrs="{'invisible': [('delivery_type', '!=', 'srenvio')]}">
                         <ul>
                             <li>
-                                <b>Vaya al sitio web de Sr Envio para crear una cuenta:</b>
-                                <br/>
-                                <a href="https://demo.srenvio.com/users/sign_up" target='_blank'Pruebas, ó</a>
-                                <br/>
-                                <a href="https://app.srenvio.com/users/sign_up" target='_blank'>Producción</a>
+                                <b>Vaya al sitio web de Sr Envio para crear una cuenta de <a href="https://demo.srenvio.com/users/sign_up" target='_blank'>Pruebas</a>
+                                ó <a href="https://app.srenvio.com/users/sign_up" target='_blank'>Producción</a>.
                             </li>
 
                             <li>
