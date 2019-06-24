@@ -1,4 +1,18 @@
 # -*- coding: utf-8 -*-
+#   Copyright (C) 2019  MAXS
+#   
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#   
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#   
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from odoo import models, fields, api, _
 import logging
@@ -13,15 +27,15 @@ class ProviderSrenvio(models.Model):
 
     delivery_type = fields.Selection(selection_add=[('srenvio', "SrEnvio")])
 
-    srenvio_token = fields.Char(string="Token")
+    srenvio_token = fields.Char(string=_("Token"))
     srenvio_package_dimension_unit = fields.Selection([('CM', 'Centimeters')],
                                                   default='CM',
-                                                  string='Package Dimension Unit')
+                                                  string=_('Unidad de dimensión del paquete'))
     srenvio_package_weight_unit = fields.Selection([('KG', 'Kilograms')],
                                                default='KG',
-                                               string="Package Weight Unit")
+                                               string=_("Unidad de peso del paquete"))
     srenvio_default_packaging_id = fields.Many2one('product.packaging', 
-                                                   string="Default Package Type")
+                                                   string=_("Tipo de paquete predeterminado"))
              
     def srenvio_rate_shipment(self, order):
         se = SrenvioProvider(self)
@@ -29,13 +43,13 @@ class ProviderSrenvio(models.Model):
         service_level_code = self._context.get('service_level_code', order.srenvio_service_level_code)
         success = False
         price =  False
-        error_message = "Provider and Service level code missing context."
+        error_message = _("Falta el contexto del código de nivel de Servicio y Proveedor.")
         warning_message = False
         if provider and service_level_code:
             quotations = se.srenvio_quotations(order)
-            error_message = _("Fallo al generar la cotización, intente de nuevo o cambie de paqueteria.")
+            error_message = _("Fallo al generar la cotización, intente de nuevo o cambie de paquetería.")
             if len(quotations):
-                error_message = "Provider and Service level code not fond in the quotations, Select other provider please."
+                error_message = _("El código de nivel de servicio y  proveedor no se encuentra en las cotizacion solicitada, seleccione otro proveedor, por favor.")
                 for quotation in quotations: 
                     if quotation['provider'] == provider and quotation['service_level_code'] == service_level_code:
                         price = quotation['total_pricing']
