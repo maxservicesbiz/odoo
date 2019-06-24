@@ -26,7 +26,7 @@ class SrenvioProvider(object):
     
     def __init__(self, carrier):
         if carrier.prod_environment: 
-            self.url =  ""
+            self.url =  "https://api.srenvio.com/v1/"
         else:
             self.url = "https://api-demo.srenvio.com/v1/"
         self.token = carrier.srenvio_token
