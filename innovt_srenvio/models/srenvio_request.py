@@ -1,4 +1,18 @@
-
+# -*- coding: utf-8 -*-
+#   Copyright (C) 2019  MAXS
+#   
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#   
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#   
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import werkzeug
 import requests
 import logging
@@ -6,12 +20,13 @@ import pprint
 import base64
 _logger = logging.getLogger(__name__)
 from odoo.exceptions import  ValidationError
+from odoo import _
 
 class SrenvioProvider(object):
     
     def __init__(self, carrier):
         if carrier.prod_environment: 
-            self.url =  ""
+            self.url =  "https://api.srenvio.com/v1/"
         else:
             self.url = "https://api-demo.srenvio.com/v1/"
         self.token = carrier.srenvio_token
@@ -24,7 +39,7 @@ class SrenvioProvider(object):
         if 'errors' in result or \
          'error_message' in result.get('data',{}).get('attributes', {}) or \
           result.get('data',{}).get('attributes', {}).get('status',"") == 'ERROR':
-            raise Exception("Los datos de la peticion son incrrectos")
+            raise Exception(_("Los datos de la peticion son incrrectos"))
             
     def _srenvio_request(self, url, data, **kwargs):
 
@@ -45,7 +60,7 @@ class SrenvioProvider(object):
         except Exception as e :
             _logger.info('Exception msg: %s ', e)
             _logger.info('Response text: %s %s', status, pprint.pformat(response.text))
-            msg  = "Estatus: %s Msg: Fallo la petición intente de nuevo por favor." % status
+            msg  = _("Estatus: %s Msg: Fallo la petición intente de nuevo por favor." % status)
             if 600 > status < 500:
                 msg =  response.text
             return False, msg
@@ -139,12 +154,13 @@ class SrenvioProvider(object):
         ok, label = self._srenvio_request(url, data)
         if ok:
             label = label['data']
-            url = label['attributes']['label_url']
-            response = requests.get(url)
-            if response.status_code == 200:
-                label_base64 = base64.b64encode(response.content)
-            else:
-                label_base64 = None
+            # TODO - Where is  attached  does fail to open file. 
+            #url = label['attributes']['label_url']
+            #response = requests.get(url)
+            #if response.status_code == 200:
+            #    label_base64 = base64.b64encode(response.content)
+            #else:
+            label_base64 = None
             label['attributes'].update({ 'label_base64': label_base64})
             return label
         
@@ -160,8 +176,6 @@ class SrenvioProvider(object):
         if ok: 
             return cancel_label['data']
         raise ValidationError(_("Fallo al cancelar la guia, intente de nuevo por favor. \n %s" % cancel_label))
-    
-        # 
     
     def srenvio_cal_package(self, order):
         max_weight = self._srenvio_convert_weight(
@@ -187,15 +201,10 @@ class SrenvioProvider(object):
             package.update({'weight':weight,'total_package':total_package })
         else:
             package.update({'weight':weight,'total_package':1 })
-        print(package)
         return package 
         
     def _srenvio_convert_weight(self, weight, unit='KG'):
         if unit == 'KG':
             return weight
-            """return self.carrier.env.ref('uom.product_uom_kgm')._compute_quantity(
-                weight, 
-                self.carrier.env.ref('uom.product_uom_kgm'), 
-                round=False)"""
         else:
             raise ValueError

@@ -8,12 +8,8 @@ RUN set -x; \
             git \ 
             vim \
             python3-setuptools
-
-ARG addons=/mnt/extra-addons
-
-COPY . ${addons}/
-
-COPY requirements.txt ${addons}/requirements-innov-client.txt
-
-RUN pip3 install --no-cache-dir --upgrade pip -r ${addons}/requirements-innov-client.txt
+COPY requirements.txt /tmp/requirements.txt
+RUN pip3 install --no-cache-dir --upgrade pip -r /tmp/requirements.txt
 RUN pip3 install git+https://github.com/MaxSolutionsCo/innov-python
+
+USER odoo
