@@ -26,7 +26,10 @@
     'category': 'Warehouse',
     'version': '0.1',
 
-    'depends': ['delivery', 'mail','website_sale_delivery'],
+    'depends': ['innovt_client',
+                'delivery',
+                 'mail',
+                 'website_sale_delivery'],
 
     'data': [
         
