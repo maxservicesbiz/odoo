@@ -21,7 +21,7 @@
     'website': "https://maxs.biz",
     'category': 'Accounting',
     'version': '0.1',
-    'depends': ['payment'],
+    'depends': ['payment','innovt_client'],
     'data': [
         # 'security/ir.model.access.csv',
         'views/payment_mercadopago_templates.xml',
