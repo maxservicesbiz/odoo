@@ -28,20 +28,23 @@
                         <group>
                             <field name="srenvio_token" attrs="{'required': [('delivery_type', '=', 'srenvio')]}"/>
                             <field name="srenvio_default_packaging_id" attrs="{'required': [('delivery_type', '=', 'srenvio')]}" domain="[('package_carrier_type', '=', 'srenvio')]"/>
+                            <field name="srenvio_provider_allowed" />
                         </group>
                     </group>
                     <group string='SrEnvio Tutorial' attrs="{'invisible': [('delivery_type', '!=', 'srenvio')]}">
                         <ul>
                             <li>
-                                <b>Vaya al sitio web de Sr Envio para crear una cuenta de <a href="https://demo.srenvio.com/users/sign_up" target='_blank'>Pruebas</a>
+                                <b/>
+                                Vaya al sitio web de Sr Envio para crear una cuenta de 
+                                <a href="https://demo.srenvio.com/users/sign_up" target='_blank'>Pruebas</a>
                                 ó <a href="https://app.srenvio.com/users/sign_up" target='_blank'>Producción</a>.
                             </li>
 
                             <li>
                                 <b/>
                                 Una vez creado su cuenta, solicite
-                                <a href='https://srenvio.github.io/api-doc/?shell#authentication' target='_blank'>
-                                    el token de pruebas o de producción.
+                                <a href='https://srenvio.github.io/api-doc/?shell#authentication' target='_blank'> 
+                                el token de pruebas o de producción.
                                 </a>
                             </li>
                         </ul>
