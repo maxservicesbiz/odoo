@@ -1,11 +1,25 @@
+# Mercadopago
 
-SANDBOX 
+## Module
+![](static/src/img/mercadopago-02.png)
 
+## Config
+![](static/src/img/mercadopago-03.png)
 
-Public key: TEST-e02108bb-1b82-4cfc-9270-48bed09b3561
-Access token: TEST-5514659920102526-061418-03a2f9c6888037c73a2f38db2a10d604-396501523
-CLIENT_ID: 5514659920102526
-CLIENT_SECRET: dPQa61Xj5IoGFqL7rTqzgm9EYFqTChzn
+## Step 1 (Select payment)
+![](static/src/img/mercadopago-04.png)
 
-/payment/mercadopago/notify?id=1118062804&topic=merchant_order
-/payment/mercadopago/notify?data.id=20185627&type=payment
+## Step 2 (Select payment type Mercadopago)
+![](static/src/img/mercadopago-04-1.png)
+
+## Step 1 (Payment type fill data)
+![](static/src/img/mercadopago-04-2.png)
+
+## Step 1 (Success payment)
+![](static/src/img/mercadopago-04-3.png)
+
+## Step 1 (SO confirmed)
+![](static/src/img/mercadopago-05.png)
+
+## Step 1 (Payment transaction)
+![](static/src/img/mercadopago-07.png)
