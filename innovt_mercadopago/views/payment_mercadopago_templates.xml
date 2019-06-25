@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <template id="mercadopago_form">
+            <div>
+                <input type="hidden" name="data_set" data-action-url="/payment/mercadopago"/>
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <!-- Url -->
+                <input type='hidden' name='mp_url_success' t-att-value="mp_url_success"/>
+                <input type='hidden' name='mp_url_failure' t-att-value="mp_url_failure"/>
+                <input type='hidden' name='mp_url_pending' t-att-value="mp_url_pending"/>
+                <input type='hidden' name='mp_url_notify' t-att-value="mp_url_notify"/>
+
+                <input type='hidden' name='mp_acquirer_id' t-att-value="mp_acquirer_id"/>
+                <input type='hidden' name='mp_environment' t-att-value="mp_environment"/>
+
+                <!-- Item-->
+                <input type='hidden' name='mp_item_name' t-att-value="mp_item_name"/>
+                <input type='hidden' name='mp_item_number' t-att-value="mp_item_number"/>
+                <input type='hidden' name='mp_amount' t-att-value="mp_amount"/>
+                <input type='hidden' name='mp_currency' t-att-value="mp_currency"/>
+                
+                  <!-- Billing Information-->
+                <input type='hidden' name='mp_billing_first_name' t-att-value="mp_billing_first_name"/>
+                <input type='hidden' name='mp_billing_last_name' t-att-value="mp_billing_last_name"/>
+                <input type="hidden" name="mp_billing_company" t-att-value="mp_billing_partner_commercial_company_name"/>
+                <input type='hidden' name='mp_billing_address' t-att-value="mp_billing_address"/>
+                <input type='hidden' name='mp_billing_city' t-att-value="mp_billing_city"/>
+                <input type='hidden' name='mp_billing_zip' t-att-value="mp_billing_zip_code"/>
+                <input type='hidden' name='mp_billing_country' t-att-value="mp_billing_country"/>
+                <input type='hidden' name='mp_billing_phone' t-att-value='mp_billing_phone'/>
+                <input type='hidden' name='mp_billing_email' t-att-value="mp_billing_email"/>
+                <input type='hidden' name='mp_billing_state' t-att-value="mp_billing_state"/>
+                <!-- Shipping Information-->
+                <input type='hidden' name='mp_ship_first_name' t-att-value="mp_ship_first_name"/>
+                <input type='hidden' name='mp_ship_last_name' t-att-value="mp_ship_last_name"/>
+                <input type='hidden' name='mp_ship_address' t-att-value="mp_ship_address"/>
+                <input type='hidden' name='mp_ship_city' t-att-value="mp_ship_city"/>
+                <input type='hidden' name='mp_ship_zip' t-att-value="mp_ship_zip_code"/>
+                <input type='hidden' name='mp_ship_country' t-att-value="mp_ship_country"/>
+                <input type='hidden' name='mp_ship_phone' t-att-value='mp_ship_phone'/>
+                <input type='hidden' name='mp_ship_email' t-att-value="mp_ship_email"/>
+                <input type='hidden' name='mp_ship_state' t-att-value="mp_ship_state"/>
+            </div>
+        </template>
+    </data>
+</odoo>
