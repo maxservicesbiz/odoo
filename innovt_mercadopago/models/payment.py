@@ -24,7 +24,7 @@ class InnovtAcquirerMercadopago(models.Model):
     def mercadopago_form_generate_values(self, values):
         self.ensure_one()
         mercadopago_tx_values = dict(values)
-        base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
+        base_url = "https://c95ad0f3.ngrok.io" #self.env['ir.config_parameter'].sudo().get_param('web.base.url')
         
         mercadopago_tx_values.update({
             
@@ -110,6 +110,7 @@ class TxMercadopago(models.Model):
         """
         status = data.get('collection_status')
         _data = {}
+        _data.update({'mercadopago_tx_type': data.get('payment_type', False)})
         if status in ['approved', 'processed']:
             _logger.info('Validated MercadoPago payment for tx %s: set as done' % (self.reference))
             _data.update(state='done', date_validate=data.get('payment_date', fields.datetime.now()))

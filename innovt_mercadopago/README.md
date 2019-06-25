@@ -6,3 +6,6 @@ Public key: TEST-e02108bb-1b82-4cfc-9270-48bed09b3561
 Access token: TEST-5514659920102526-061418-03a2f9c6888037c73a2f38db2a10d604-396501523
 CLIENT_ID: 5514659920102526
 CLIENT_SECRET: dPQa61Xj5IoGFqL7rTqzgm9EYFqTChzn
+
+/payment/mercadopago/notify?id=1118062804&topic=merchant_order
+/payment/mercadopago/notify?data.id=20185627&type=payment

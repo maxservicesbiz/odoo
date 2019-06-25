@@ -2,9 +2,9 @@
 import pprint
 import logging
 from werkzeug import urls, utils
+import threading
 
 from odoo import http, _ , fields
-from odoo.http import request
 
 from odoo.addons.payment.models.payment_acquirer import ValidationError
 
@@ -31,8 +31,7 @@ class InnovtMercadopagoController(http.Controller):
     def mercadopago_validate_data(self, data):
         res = http.request.env['payment.transaction'].sudo().form_feedback( data, 'mercadopago')
         return res
-            
-            
+        
     @http.route(['/payment/mercadopago'], type='http', auth='public')
     def mercadopago(self, **post):
         
@@ -99,7 +98,6 @@ class InnovtMercadopagoController(http.Controller):
             raise ValidationError(error_msg)
         return utils.redirect(url_pay)
 
-
     @http.route(['/payment/mercadopago/failure'], type='http', auth='public')
     def mercadopago_failure(self, **post):
         _logger.info('Beginning MercadoPago route failure with post data %s', pprint.pformat(post))
@@ -113,15 +111,55 @@ class InnovtMercadopagoController(http.Controller):
         res = self.mercadopago_validate_data(post)
         return utils.redirect('/shop/payment/validate')
     
-    
-    @http.route(['/payment/mercadopago/success'], type='http', auth='public')
+    @http.route(['/payment/mercadopago/success'], auth='public')
     def mercadopago_success(self, **post):
+        """
+        Method: GET 
+        Query: /payment/mercadopago/success?collection_id=20189415&collection_status=approved&preference_id=396501523-f63f152f-f081-4cb3-8dba-d098a8a0fc4f&external_reference=SO045&payment_type=debit_card&merchant_order_id=1118140280 
+        """
         _logger.info('Beginning MercadoPago route success with post data %s', pprint.pformat(post))
-
-    @http.route(['/payment/mercadopago/pending'], type='http', auth='public')
+        res = self.mercadopago_validate_data(post)
+        return utils.redirect('/shop/payment/validate')
+    
+    @http.route(['/payment/mercadopago/pending'], auth='public')
     def mercadopago_pending(self, **post):
-        _logger.info('Beginning MercadoPago route pending with post data %s', pprint.pformat(post))        
+        """
+        Method: GET
+        Query: /payment/mercadopago/pending?collection_id=20189619&collection_status=pending&preference_id=396501523-552a7d2d-e458-415d-b754-8fb6bcad8c7f&external_reference=SO049&payment_type=bank_transfer&merchant_order_id=1118149111
+        """
+        _logger.info('Beginning MercadoPago route pending with post data %s', pprint.pformat(post))
+        res = self.mercadopago_validate_data(post)
+        return utils.redirect('/shop/payment/validate')
         
-    @http.route(['/payment/mercadopago/notify'], type='http', auth='public')
+    @http.route(['/payment/mercadopago/notify'], type='json', auth='public', csrf=False)
     def mercadopago_notify(self, **post):
-        _logger.info('Beginning MercadoPago route notify with post data %s', pprint.pformat(post))     
+        """
+        Method: GET
+        Query: 
+            /payment/mercadopago/notify?id=1118062804&topic=merchant_order
+            /payment/mercadopago/notify?data.id=20185627&type=payment
+        """
+        params = http.request.httprequest.args.to_dict()
+        _logger.info('Beginning MercadoPago route notify with post data %s', pprint.pformat(post))
+        _logger.info('Beginning MercadoPago route notify with post params %s', pprint.pformat(params))
+        topic = params.get('topic', params.get('type', '')) 
+        id = params.get('id', params.get('data.id', ''))
+        pa = http.request.env['payment.acquirer'].sudo().search([('provider','=','mercadopago')])
+        if len(pa):
+            mp =mercadopago.MP(pa.mercadopago_client_id, pa.mercadopago_client_secret)
+            if pa.environment == 'test':
+                mp.sandbox_mode(enable=True)
+            data = {}
+            if topic == 'merchant_order':
+                merchant_order =mp.get("/merchant_orders/"+id)
+                if merchant_order.get('status', 0) == 200:
+                    merchant_response = merchant_order.get('response')
+                    data.update({
+                        'preference_id': merchant_response.get('preference_id'),
+                        'external_reference': merchant_response.get('external_reference')
+                    })
+                logging.info(pprint.pformat(merchant_order, indent=2))
+            elif topic == 'payment':
+                payment = mp.get("/v1/payments/"+id)
+                logging.info(pprint.pformat(payment, indent=2))
+        return ''
