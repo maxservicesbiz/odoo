@@ -26,7 +26,7 @@
                 <page string="SrEnvio Configuration" attrs="{'invisible': [('delivery_type', '!=', 'srenvio')]}">
                     <group>
                         <group>
-                            <field name="srenvio_token" attrs="{'required': [('delivery_type', '=', 'srenvio')]}"/>
+                            <field name="srenvio_token" password="True" attrs="{'required': [('delivery_type', '=', 'srenvio')]}"/>
                             <field name="srenvio_default_packaging_id" attrs="{'required': [('delivery_type', '=', 'srenvio')]}" domain="[('package_carrier_type', '=', 'srenvio')]"/>
                             <field name="srenvio_provider_allowed" />
                         </group>
