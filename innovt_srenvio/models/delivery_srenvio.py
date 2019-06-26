@@ -36,7 +36,8 @@ class ProviderSrenvio(models.Model):
                                                string=_("Unidad de peso del paquete"))
     srenvio_default_packaging_id = fields.Many2one('product.packaging', 
                                                    string=_("Tipo de paquete predeterminado"))
-             
+    srenvio_provider_allowed = fields.Char(string=_("Paqueterias permitidas"), help=_("provider-service_level_code. ex. ESTAFETA-ESTAFETA_NEXT_DAY,UPS-EXPRESS_SAVER ..."))
+    
     def srenvio_rate_shipment(self, order):
         se = SrenvioProvider(self)
         provider = self._context.get('provider', order.srenvio_provider)

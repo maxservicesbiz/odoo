@@ -82,7 +82,19 @@ class SrenvioProvider(object):
         }
         ok, quotations = self._srenvio_request(url, data)
         if ok:
-            return quotations
+            providers_list = []
+            if self.carrier.srenvio_provider_allowed:
+                providers = str(self.carrier.srenvio_provider_allowed).split(",")
+                providers_list = [ str(i).strip() for i in providers]
+            quotation_list = []
+            if len(providers_list):
+                for quotation in quotations:
+                    provider_service_level_code = quotation.get("provider", "")+"-"+quotation.get("service_level_code", "")
+                    if provider_service_level_code in providers_list:
+                        quotation_list.append(quotation)
+            else:
+                quotation_list  = quotations
+            return quotation_list
         return []
       
     def srenvio_shipments(self, order):
