@@ -2,3 +2,4 @@
 # © Yonn, Xyz. All rights reserved.
 
 from . import models
+from . import controllers
