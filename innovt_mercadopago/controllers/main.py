@@ -58,10 +58,10 @@ class InnovtMercadopagoController(http.Controller):
         mp =mercadopago.MP(ptx.acquirer_id.mercadopago_client_id, ptx.acquirer_id.mercadopago_client_secret)
         if post.get("mp_environment") == 'test':
             mp.sandbox_mode(enable=True)
-        tz = ptx.env.context.get('tz') or  'America/Mexico_City'
+        tz = "UTC" #ptx.env.context.get('tz') #or  'America/Mexico_City'
         dt  = datetime.utcnow()
         expiration_date_from = self.datetime_iso_8601(dt, tz)
-        expiration_date_to =   self.datetime_iso_8601(dt + timedelta(days=1), tz)
+        expiration_date_to =   self.datetime_iso_8601(dt + timedelta(days=6), tz)
         
         preference = {
             "external_reference": post.get("mp_item_number"),
@@ -99,6 +99,7 @@ class InnovtMercadopagoController(http.Controller):
         }
         _logger.info('MercadoPago preference %s', pprint.pformat(preference))
         preferenceResult = mp.create_preference(preference)
+        _logger.info('MercadoPago preferenceResult %s', pprint.pformat(preferenceResult))
         if 'status' in preferenceResult and  preferenceResult.get('status') == 201:
             preferenceResponse = preferenceResult.get('response')
             if post.get("mp_environment") == 'prod':
