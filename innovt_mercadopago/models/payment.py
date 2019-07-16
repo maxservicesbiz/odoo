@@ -14,7 +14,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from odoo import models, fields, api
+from odoo import models, fields, api,_
 from odoo.addons.innovt_mercadopago.controllers.main import InnovtMercadopagoController
 from werkzeug import urls
 import logging
