@@ -23,25 +23,71 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="action_declared" string="Confirmar declaración" type="object"/>
+                        <button name="action_diot" 
+                            states="draft" 
+                            string="Generar DIOT" type="object"/>
+
+                        <button name="action_acknowledgment_receipt"
+                            states="draft,diot"  
+                            string="Genearar Acuse de Recibo" type="object"/>
+
+                        <button name="action_payment_format" 
+                            states="acknowledgment_receipt" 
+                            string="Generar Formato de Pago" type="object"/>
+
+                        <button name="action_payment_ticket" 
+                            states="payment_format" 
+                            string="Generar Comprobante de pago" type="object"/>
+
+                        <button name="action_repayment_format" 
+                            states="payment_ticket" 
+                            string="Regenerar Formato de pago" type="object"/>
+
+                        <button name="action_declared" 
+                            states="payment_ticket"
+                            string="Finalizar declaración" type="object"/>
+
                         <field name="state" widget="statusbar"/>
                     </header>                    
                     <sheet>
                         <group>
-                            <field name='month' attrs="{'readonly':[('state','=','declared')]}"/>
+                            <group>
+                                <field name='month' 
+                                attrs="{'readonly':[('state','=','declared')]}"/>
+                            </group>
+                            <group>
+                                <field name='declared_date' readonly="True" attrs="{'invisible':[('declared_date','=','')] }" />
+                            </group>
                         </group>
                         <group>
-                            <field name='declared_date' readonly="True"/>
+                            <field name='payment_date' attrs="{'invisible':[('payment_date','=',False),('state','!=','payment_format')],'readonly':[('state','!=','payment_format')]}"/>
+                            <field name='payment_amount' attrs="{'invisible':[('payment_amount','=',0),('state','!=','payment_format')], 'readonly':[('state','!=','payment_format')]}"/>
                         </group>
-                         <notebook>
+                        
+                         <notebook attrs="{'invisible':[('state','=','draft')]}">
                             <page name="files" string="Archivos">
                                 <group>
-                                    <field name="declaration_request_fname" invisible="True"/>
-                                    <field name='declaration_request' 
-                                        filename="declaration_request_fname" 
-                                        attrs="{'readonly':[('state','=','declared')]}"/>
-                                    
+                                    <field name="fdiot_name" invisible="True"/>
+                                    <field name='fdiot' 
+                                        filename="fdiot_name" 
+                                        attrs="{'readonly':[('state','!=','diot')], 'invisible':[('state','!=','diot'),('fdiot_name','=','') ]}"/>
+
+                                    <field name="facknowledgment_receipt_name" invisible="True"/>
+                                    <field name='facknowledgment_receipt' 
+                                        filename="facknowledgment_receipt_name" 
+                                        attrs="{'readonly':[('state','!=','acknowledgment_receipt')], 'invisible':[('state','!=','acknowledgment_receipt'),('facknowledgment_receipt_name','=','')]}"/>
+
+                                    <field name="fpayment_format_name" invisible="True"/>
+                                    <field name='fpayment_format' 
+                                        filename="fpayment_format_name" 
+                                        attrs="{'readonly':[('state','!=','payment_format')], 'invisible':[('state','!=','payment_format'),('fpayment_format_name','=','') ]}"/>
+
+                                    <field name="fpayment_ticket_name" invisible="True"/>
+                                    <field name='fpayment_ticket' 
+                                        filename="fpayment_ticket_name" 
+                                        attrs="{'readonly':[('state','!=','payment_ticket')], 'invisible':[('state','!=','payment_ticket'),('fpayment_ticket_name','=','')]}"/>
                                 </group>
+                                
                             </page>
                         </notebook>
                     </sheet>

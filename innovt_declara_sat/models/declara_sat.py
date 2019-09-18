@@ -30,16 +30,40 @@ class InnovtDeclaraSAT(models.Model):
     
     state = fields.Selection(
         string=_("Estatus"), 
-        selection=[('draft', _("Borrador")),('declared',_("Declarado"))],
+        selection=[
+            ('draft', _("Borrador")),
+            ('diot', _("DIOT")),
+            ('acknowledgment_receipt', _("A. Recibo")),
+            ('payment_format', _("F. Pago")),
+            ('payment_ticket', _("C. Pago")),
+            ('declared',_("Declarado")),
+        ],
         default='draft',
-        tracking_visibility='onchange',
+        track_visibility='onchange',
         )
-    # Files
-    declaration_request_fname = fields.Char(string="File Name")
     
-    declaration_request = fields.Binary(string=_("Solicitud"))
     
     display_name = fields.Char(string=_("Display name"), compute="_compute_display_name", store=True)    
+    
+    # Payment data    
+    payment_date = fields.Datetime(string=_("Fecha de pago"))
+    payment_amount = fields.Float(string=_("Monto de pago"))
+    
+    # Files
+    fdiot_name = fields.Char(string="File Name")
+    fdiot = fields.Binary(string=_("DIOT"))
+    
+    facknowledgment_receipt_name = fields.Char(string="File Name")
+    facknowledgment_receipt = fields.Binary(string=_("Acuse de Recibo"))
+    
+    fpayment_format_name = fields.Char(string="File Name")
+    fpayment_format = fields.Binary(string=_("Formato de pago"))
+    
+    fpayment_ticket_name = fields.Char(string="File Name")
+    fpayment_ticket = fields.Binary(string=_("Comprobante de pago"))
+    
+    
+    
     
     @api.multi
     @api.depends('month')
@@ -48,7 +72,34 @@ class InnovtDeclaraSAT(models.Model):
             date = datetime.datetime.strptime(row.month, "%Y-%m")
             row.display_name = date.strftime("%Y %B")
 
+    @api.multi
+    def action_diot(self):
+        self.ensure_one()
+        self.state = 'diot'
+        
+    @api.multi
+    def action_acknowledgment_receipt(self):
+        self.ensure_one()
+        self.state = 'acknowledgment_receipt'
+    
+    @api.multi
+    def action_payment_format(self):
+        self.ensure_one()
+        self.state = 'payment_format'
+    
+    @api.multi
+    def action_payment_ticket(self):
+        self.ensure_one()
+        self.state = 'payment_ticket'
 
+    @api.multi
+    def action_repayment_format(self):
+        self.ensure_one()
+        self.state = 'payment_format'
+        self.message_post(body="Se regerara el formato de pago por fecha de vencimiento de pago.")
+
+
+        
     @api.multi
     def action_declared(self,):
         self.ensure_one()
