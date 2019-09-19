@@ -3,6 +3,7 @@
 
 from odoo import models, fields, api, _
 import datetime
+import base64
 
 class InnovtDeclaraSAT(models.Model):
     _name = 'innovt.declara_sat'
@@ -33,9 +34,9 @@ class InnovtDeclaraSAT(models.Model):
         selection=[
             ('draft', _("Borrador")),
             ('diot', _("DIOT")),
-            ('acknowledgment_receipt', _("A. Recibo")),
-            ('payment_format', _("F. Pago")),
-            ('payment_ticket', _("C. Pago")),
+            ('acknowledgment_receipt', _("Acuse de Recibo")),
+            ('payment_format', _("Formato de Pago")),
+            ('payment_ticket', _("Comprobante de Pago")),
             ('declared',_("Declarado")),
         ],
         default='draft',
@@ -46,7 +47,7 @@ class InnovtDeclaraSAT(models.Model):
     display_name = fields.Char(string=_("Display name"), compute="_compute_display_name", store=True)    
     
     # Payment data    
-    payment_date = fields.Datetime(string=_("Fecha de pago"))
+    payment_date = fields.Datetime(string=_("Fecha de vencimiento de pago"))
     payment_amount = fields.Float(string=_("Monto de pago"))
     
     # Files
@@ -96,7 +97,32 @@ class InnovtDeclaraSAT(models.Model):
     def action_repayment_format(self):
         self.ensure_one()
         self.state = 'payment_format'
-        self.message_post(body="Se regerara el formato de pago por fecha de vencimiento de pago.")
+        attachments = []
+        if self.fpayment_format and self.fpayment_format_name:
+            attachments=[(self.fpayment_format_name, base64.b64decode(self.fpayment_format))]
+        body = """
+            <p>
+                <font style="font-size:14px">Se regenerara el formato de pago por fecha de vencimiento de pago.&nbsp;</font>
+            </p>"""
+        if self.payment_date and self.payment_amount:
+            body += """
+            <ul>
+                <li>
+                    <p>
+                        <b style="font-weight:bold">Fecha de vencimiento de pago:</b>&nbsp; <font style="font-size:14px">{}</font> 
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <b style="font-weight:bold">Monto de pago:</b> <font style="font-size:14px">${}</font><br>
+                    </p>
+                </li>
+            </ul>
+            """.format(fields.Datetime.context_timestamp(self,fields.Datetime.from_string(self.payment_date)), self.payment_amount)
+        self.message_post(
+            body=body,
+            attachments = attachments
+            )
 
 
         

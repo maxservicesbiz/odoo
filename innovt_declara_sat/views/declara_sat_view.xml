@@ -8,7 +8,11 @@
             <field name="name">Innovt Declara SAT Tree</field>
             <field name="model">innovt.declara_sat</field>
             <field name='arch' type='xml'>
-                <tree default_order="month desc ">
+                <tree 
+                decoration-muted="state=='draft'"
+                decoration-success="state=='declared'"
+                decoration-danger="state=='payment_ticket'"
+                default_order="month desc ">
                     <field name='month'/>
                     <field name='declared_date'/>
                     <field name='state'/>
