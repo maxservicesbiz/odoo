@@ -1,14 +1,26 @@
-# PROJECT INNOV + ODOO 11
+# PROJECT INNOV + ODOO
 
 ## Summary 
 Website [maxs.biz](https://www.maxs.biz)
 
 ## Modules
 
+### CE
 * `innovt_client`
-    * SAAS controller for [MAXS API]()
+    * Api controller for Maxs.biz
+* `innovt_declara_sat`
+    * SAT MX declaration tracking
+
+### EE
+
 * `innovt_srenvio`
-    * [SrEnvio](https://srenvio.com) shipping management
+    * [Shipping management](https://maxs.biz/e-commerce) 
+* `innovt_mercadopago`
+    * [Payment management](https://maxs.biz/e-commerce) 
+* `innovt_invoice`
+    * [Stamp of invoices for MX location](https://maxs.biz/facturacion-electronica) 
+* `innovt_payment`
+    * [Stamp of payment for MX location ](https://maxs.biz/facturacion-electronica) 
 
 ## Installation
 
