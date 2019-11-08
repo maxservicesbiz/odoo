@@ -62,7 +62,9 @@ class InnovtDeclaraSAT(models.Model):
     
     fpayment_ticket_name = fields.Char(string="File Name")
     fpayment_ticket = fields.Binary(string=_("Comprobante de pago"))
-    
+
+    company_id = fields.Many2one('res.company', string='Compañia', required=True,
+     default=lambda self: self.env['res.company']._company_default_get('account.invoice'))
     
     
     
