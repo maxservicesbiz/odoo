@@ -1,0 +1,7 @@
+xmljson
+suds-jurko
+scrapy
+mercadopago
+PyQt5
+PythonQwt
+git+https://github.com/maxservicesbiz/sdk-python
