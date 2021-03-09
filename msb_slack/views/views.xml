@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="msb_slack_res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">MSB: Slack res.config.settings.view.form.inherit.account</field>
+            <field name="model">res.config.settings</field>            
+            <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='integration']" position="after">
+                    <h2>Slack</h2>
+                    <div class="row mt16 o_settings_container" id="msb_slack">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label for="msb_slack_slack_webhook_url" string="Slack Webhook URL"/>
+                                        <field name="msb_slack_slack_webhook_url"/>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="msb_slack_base_view_users_form" model="ir.ui.view">
+            <field name="name">MSB: Slack base.view_users_form</field>
+            <field name="model">res.users</field>            
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='messaging']" position="inside">                    
+                    <field name="slack_id"/>                    
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="msb_slack_mail_mail_channel_view_form" model="ir.ui.view">
+            <field name="name">MSB: Slack mail.mail_channel_view_form</field>
+            <field name="model">mail.channel</field>            
+            <field name="inherit_id" ref="mail.mail_channel_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='mail_channel_integrations']" position="inside">
+                    <group>
+                        <field name="slack_model_ids" widget="many2many_tags"/>
+                    </group>                    
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

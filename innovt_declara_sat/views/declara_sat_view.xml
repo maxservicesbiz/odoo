@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2019 Maxs Biz. All rights reserved. -->
+
+<odoo>
+    <data>
+
+        <record model='ir.ui.view' id='innovt_iuv_declara_sat_tree'>
+            <field name="name">Innovt Declara SAT Tree</field>
+            <field name="model">innovt.declara_sat</field>
+            <field name='arch' type='xml'>
+                <tree 
+                decoration-muted="state=='draft'"
+                decoration-success="state=='declared'"
+                decoration-danger="state=='payment_ticket'"
+                default_order="month desc ">
+                    <field name='company_id'/>
+                    <field name='month'/>
+                    <field name='declared_date'/>
+                    <field name='state'/>
+                    
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="innovt_iuv_declara_sat_form">
+            <field name="name">Innovt Declara SAT Form</field>
+            <field name="model">innovt.declara_sat</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_diot" 
+                            states="draft" 
+                            string="Generar DIOT" type="object"/>
+
+                        <button name="action_acknowledgment_receipt"
+                            states="draft,diot"  
+                            string="Genearar Acuse de Recibo" type="object"/>
+
+                        <button name="action_payment_format" 
+                            states="acknowledgment_receipt" 
+                            string="Generar Formato de Pago" type="object"/>
+
+                        <button name="action_payment_ticket" 
+                            states="payment_format" 
+                            string="Generar Comprobante de pago" type="object"/>
+
+                        <button name="action_repayment_format" 
+                            states="payment_ticket" 
+                            string="Regenerar Formato de pago" type="object"/>
+
+                        <button name="action_declared" 
+                            states="payment_ticket"
+                            string="Finalizar declaración" type="object"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>                    
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="company_id" options="{'no_create': True, 'no_open': True}" attrs="{'readonly':[('state','=','declared')]}"/>
+                                <field name='month' attrs="{'readonly':[('state','=','declared')]}"/>
+                            </group>
+                            <group>
+                                <field name='declared_date' readonly="True" attrs="{'invisible':[('declared_date','=','')] }" />
+                            </group>
+                        </group>
+                        <group>
+                            <field name='payment_date' attrs="{'invisible':[('payment_date','=',False),('state','!=','payment_format')],'readonly':[('state','!=','payment_format')]}"/>
+                            <field name='payment_amount' attrs="{'invisible':[('payment_amount','=',0),('state','!=','payment_format')], 'readonly':[('state','!=','payment_format')]}"/>
+                        </group>
+                        
+                         <notebook attrs="{'invisible':[('state','=','draft')]}">
+                            <page name="files" string="Archivos">
+                                <group>
+                                    <field name="fdiot_name" invisible="True"/>
+                                    <field name='fdiot' 
+                                        filename="fdiot_name" 
+                                        attrs="{'readonly':[('state','!=','diot')], 'invisible':[('state','!=','diot'),('fdiot_name','=','') ]}"/>
+
+                                    <field name="facknowledgment_receipt_name" invisible="True"/>
+                                    <field name='facknowledgment_receipt' 
+                                        filename="facknowledgment_receipt_name" 
+                                        attrs="{'readonly':[('state','!=','acknowledgment_receipt')], 'invisible':[('state','!=','acknowledgment_receipt'),('facknowledgment_receipt_name','=','')]}"/>
+
+                                    <field name="fpayment_format_name" invisible="True"/>
+                                    <field name='fpayment_format' 
+                                        filename="fpayment_format_name" 
+                                        attrs="{'readonly':[('state','!=','payment_format')], 'invisible':[('state','!=','payment_format'),('fpayment_format_name','=','') ]}"/>
+
+                                    <field name="fpayment_ticket_name" invisible="True"/>
+                                    <field name='fpayment_ticket' 
+                                        filename="fpayment_ticket_name" 
+                                        attrs="{'readonly':[('state','!=','payment_ticket')], 'invisible':[('state','!=','payment_ticket'),('fpayment_ticket_name','=','')]}"/>
+                                </group>
+                                
+                            </page>
+                        </notebook>
+                    </sheet>
+                     <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="innovt_iac_declara_sat_action" model="ir.actions.act_window">
+            <field name="name">Declara SAT</field>
+            <field name="res_model">innovt.declara_sat</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="innovt_mi_declara_sat" name="Declara SAT" parent="account.menu_finance_entries_actions"
+                  action="innovt_iac_declara_sat_action"/>
+
+    </data>
+</odoo>

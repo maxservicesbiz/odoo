@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- # Part of P1Labs. See LICENSE file for full copyright and licensing details. -->
+
+<odoo>
+    <data>
+        <record model="ir.ui.view"            
+            id="maxs_innovt_dropshipping_product_template_international_code_and_dimensions">
+            <field name="name">Product international code and dimensions</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="after">
+                    <field name="mpn"/>
+                    <field name="ean"/>
+                    <field name="upc"/>
+                </xpath>
+                <xpath expr="//field[@name='volume']" position="before">
+                    <field name="plong"/>
+                    <field name="phigh"/>
+                    <field name="pwidth"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="maxs_innovt_dropshipping_product_template_search" model="ir.ui.view">
+            <field name="name">Product search international code</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>            
+            <field name="arch" type="xml">
+                <xpath expr="/search/field[@name='categ_id']" position="after">
+                    <field name="mpn" string="Código" 
+                        filter_domain="['|','|',('mpn','ilike',self),('ean','ilike',self),('upc','ilike',self)]"/>
+                    <field name="seller_ids"
+                        string="Código proveedor" filter_domain="[('seller_ids.product_code','ilike',self)]"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- # Part of P1Labs. See LICENSE file for full copyright and licensing details. -->
+
+<odoo>
+    <data>
+        <record model="ir.ui.view"            
+            id="maxs_innovt_dropshipping_ct_product_template_features_data_sheet">
+            <field name="name">CT Product features and data sheet</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='description_picking']" position="after">                
+                    <group string="CT Característica">
+                        <field name="ct_features" nolabel="1" />
+                    </group>
+                    <group string="CT Ficha técnica">
+                        <field name="ct_data_sheet" nolabel="1" />
+                    </group>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button string="CT Des." type="object" name="action_ct_features_data_sheet"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

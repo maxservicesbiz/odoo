@@ -1,0 +1,67 @@
+<odoo>
+    <template id="maxs_innovt_dropshipping_ct_products_description" 
+        inherit_id="website_sale.product" 
+        name="CT Product Description">
+        <xpath expr="//div[@id='product_full_description']" position="before">
+
+        <section  t-if="product.ct_features or product.ct_data_sheet" class="s_faq_collapse">
+            <div class="container">
+                <!--
+                <h2 class="page-header o_default_snippet_text"> 
+                    Términos y condiciones generales / Políticas de servicio 
+                </h2>-->
+                <style type="text/css" >
+                #ct-features .panel-title, #ct-data-sheet .panel-title {
+                    text-transform: uppercase;
+                }
+                #ficha_tecnica h5{
+                    text-transform: uppercase;
+                }
+                #ficha_tecnica .ct-section:not(:last-child) {
+                    border-bottom: 1px solid #ccc;
+                }
+                </style>
+                <div class="panel-group" role="tablist" id="myCollapse1579327922854">
+                    
+                    <div t-if="product.ct_features" class="panel" id="ct-features">
+                        <div class="panel-heading bg-gray-lighter" 
+                            role="tab" data-toggle="collapse" 
+                            data-parent="#myCollapse1579327922854" 
+                            data-target="#myCollapseTab1579327922854">
+                            <h4 class="panel-title o_default_snippet_text">
+                                Características Principales
+                            </h4>
+                        </div>
+                        <div class="panel-collapse collapse" role="tabpanel" 
+                            id="myCollapseTab1579327922854">
+                            <div class="panel-body bg-white-50">
+                                <div t-field="product.ct_features"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div t-if="product.ct_data_sheet" class="panel" id="ct-data-sheet">
+                        <div class="panel-heading bg-gray-lighter" 
+                            role="tab" data-toggle="collapse" 
+                            data-parent="#myCollapse1579327922854" 
+                            data-target="#myCollapseTab1579327922855">
+                            <h4 class="panel-title o_default_snippet_text">
+                                Ficha Técnica
+                            </h4>
+                        </div>
+                        <div class="panel-collapse collapse" role="tabpanel" 
+                            id="myCollapseTab1579327922855">
+                            <div class="panel-body bg-white-50">
+                           <div  t-field="product.ct_data_sheet"/>
+                            </div>
+                        </div>
+                    </div>
+       
+                </div><!-- panel-group-->
+            </div>
+        </section>
+
+        </xpath>
+    </template>
+</odoo>

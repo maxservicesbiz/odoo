@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">    
+    <record id="innovt_dropshipping_ct_mayorista_product_sync" model="ir.cron">
+        <field name="name">Innovt: CT Dropshipping products sync</field>
+        <field name="model_id" ref="model_innovt_dropshipping_ct_mayorista_sync"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_do_task_product_sync()</field>
+        <field name='interval_number'>1</field>
+        <field name='interval_type'>days</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+    <record id="innovt_dropshipping_ct_mayorista_product_stock_price_sync" model="ir.cron">
+        <field name="name">Innovt: CT Dropshipping products stock and price sync</field>
+        <field name="model_id" ref="model_innovt_dropshipping_ct_mayorista_sync"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_do_task_product_stock_price()</field>
+        <field name='interval_number'>60</field>
+        <field name='interval_type'>minutes</field>
+        <field name="numbercall">-1</field>
+    </record>
+
+    <record id="innovt_dropshipping_ct_mayorista_product_features_data_sheet_sync" model="ir.cron">
+        <field name="name">Innovt: CT Dropshipping products features and data sheet sync</field>
+        <field name="model_id" ref="model_innovt_dropshipping_ct_mayorista_sync"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_do_task_product_feature_and_data_sheet()</field>
+        <field name='interval_number'>15</field>
+        <field name='interval_type'>days</field>
+        <field name="numbercall">-1</field>
+    </record>
+    
+
+</odoo>
